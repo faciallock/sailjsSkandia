@@ -43,12 +43,14 @@ module.exports = {
                 }
                 //console.log('Result STFC_STRUCTURE:', res);
                 if (response.EMESSAGE ==="Authentication failed"){
-                    return res.badRequest({ err: 'unauthorized'});
+                    res.status(401)
+                    return res.send({ err: 'unauthorized'});
+                    
 
                 }else{
                     const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
                     //return res.ok(token);
-                    return res.ok({ msg: response,token:token })
+                    return res.ok({ msg: response, token: token, currentAuthority: "admin" })
                 }
                 
             }); 
@@ -57,6 +59,25 @@ module.exports = {
             return res.serverError(err);
         }
        
+    },
+    currentUser: async function(req, res){
+        const payload = {
+            $desc: "",
+            $params: {
+                pageSize: {
+                    desc: '分页',
+                    exp: 2,
+                },
+            },
+            $body: {
+                name: 'Serati Ma',
+                avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+                userid: '00000001',
+                notifyCount: 12,
+            },
+        };
+        return res.ok(payload);
+
     }
   
 

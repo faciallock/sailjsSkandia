@@ -1,0 +1,38 @@
+{
+  "entry": "src/index.js",
+  "extraBabelPlugins": [
+    "transform-decorators-legacy",
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
+  ],
+  "env": {
+    "development": {
+      "extraBabelPlugins": [
+        "dva-hmr"
+      ]
+    }
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:1337/",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    },
+    "/skandia": {
+      "target": "http://localhost:9999/",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/skandia": ""
+      }
+    }
+  },
+  "ignoreMomentLocale": true,
+  "theme": "./src/theme.js",
+  "html": {
+    "template": "./src/index.ejs"
+  },
+  "publicPath": "/",
+  "disableDynamicImport": true,
+  "hash": true
+}

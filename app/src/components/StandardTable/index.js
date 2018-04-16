@@ -85,10 +85,10 @@ class StandardTable extends PureComponent {
           <Alert
             message={(
               <Fragment>
-                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
+                Chosen <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> Item&nbsp;&nbsp;
                 {
                   needTotalList.map(item => (
-                    <span style={{ marginLeft: 8 }} key={item.dataIndex}>{item.title}总计&nbsp;
+                    <span style={{ marginLeft: 8 }} key={item.dataIndex}>{item.title} Total&nbsp;
                       <span style={{ fontWeight: 600 }}>
                         {item.render ? item.render(item.total) : item.total}
                       </span>
@@ -96,7 +96,7 @@ class StandardTable extends PureComponent {
                     )
                   )
                 }
-                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
+                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>Empty</a>
               </Fragment>
             )}
             type="info"

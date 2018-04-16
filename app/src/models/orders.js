@@ -63,37 +63,45 @@ export default {
 };
  */
 
-import { getOrderDetail } from '../services/api';
+import { getOrders, getOrderDetail } from '../services/api';
 
 export default {
     namespace: 'orders',
 
     state: {
         orders: [],
+        orderDetail:{}
     },
 
     effects: {
         *fetch({ payload }, { call, put }) {
-            const response = yield call(getOrderDetail, payload);
+            const response = yield call(getOrders, payload);
             yield put({
                 type: 'queryOrders',
                 payload:response,
             });
-        }/* ,
-        *appendFetch({ payload }, { call, put }) {
-            const response = yield call(queryFakeList, payload);
+        },
+        *fetchDetail({ payload }, { call, put }) {
+            const response = yield call(getOrderDetail, payload);
             yield put({
-                type: 'appendList',
-                payload: Array.isArray(response) ? response : [],
+                type: 'queryOrderDetail',
+                payload: response,
             });
-        }, */
+        }
     },
 
     reducers: {
         queryOrders(state, action) {
             return {
                 ...state,
-                orders: action.payload,
+                orders: action.payload.msg.EX_ORDHDR,
+                orderDetail: { }
+            };
+        },
+        queryOrderDetail(state, action) {
+            return {
+                ...state,
+                orderDetail: action.payload.msg
             };
         }/* ,
         appendList(state, action) {

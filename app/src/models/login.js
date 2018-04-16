@@ -20,8 +20,14 @@ export default {
       });
       // Login successfully
       console.log(response);
-      if (response.token.length !==0) {
+
+      if(typeof response==="undefined"){
+        //reloadAuthorized();
+        //routerRedux.push('/')
+        yield put(routerRedux.push('/'));
+      }else if (response.token.length !==0) {
         console.log(response.token.length)
+        localStorage.setItem('userName', response.msg.USER_ID)
         reloadAuthorized();
         //routerRedux.push('/')
         yield put(routerRedux.push('/'));
@@ -51,12 +57,24 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
-      return {
-        ...state,
-        status: payload.status,
-        type: payload.type,
-      };
+      if(typeof payload !=="undefined"){
+        setAuthority(payload.currentAuthority);
+        return {
+          ...state,
+          status: payload.status,
+          type: payload.type,
+        };
+        
+      }
+      else{
+        return {
+          ...state,
+          status: false,
+          type: "",
+        };
+      }
+      
+      
     },
   },
 };

@@ -58,8 +58,8 @@ class OrderShippingForm extends Component {
         }; */
 
         let data = [];
-        if (this.props.data.length === 0) {
-            return <div>No Data ...</div>
+        if (JSON.stringify(this.props.data).length==2) {
+            return <div></div>
         } else {
             data = this.props.data;
             console.log(data.EX_SHIP_TO);

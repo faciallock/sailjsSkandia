@@ -40,7 +40,22 @@ module.exports = {
                 return res.ok({ msg: response })
             });  
         
+    },
+    findOrdersByUser: async function (req, res){
+        console.log(req.query.imInd);
+        console.log(req.query.userName);
+        client.invoke('ZGET_PENDING_SORDERS_CUSTOMER',
+            { IM_IND: req.query.imInd,IM_CUSTNO: '', IM_USERNAME: req.query.userName },
+            function (err, response) {
+                if (err) {
+                    return console.error('Error invoking STFC_STRUCTURE:', err);
+                    res.send({ error: "true :( " + err });
+                }
+                console.log('Result STFC_STRUCTURE:', response);
+                return res.ok({ msg: response })
+            });  
     }
+    
 
 };
 

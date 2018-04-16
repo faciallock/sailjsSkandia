@@ -109,7 +109,7 @@ class BasicLayout extends React.PureComponent {
       urlParams.searchParams.delete('redirect');
       window.history.replaceState(null, 'redirect', urlParams.href);
     } else {
-      return 'orders/view-order';
+      return 'orders';
     }
     return redirect;
   }
@@ -138,11 +138,11 @@ class BasicLayout extends React.PureComponent {
     }
   }
   handleNoticeVisibleChange = (visible) => {
-    if (visible) {
+    /* if (visible) {
       this.props.dispatch({
         type: 'global/fetchNotices',
       });
-    }
+    } */
   }
   render() {
     const {
@@ -168,6 +168,18 @@ class BasicLayout extends React.PureComponent {
             <GlobalHeader
               logo={logo}
               currentUser={currentUser}
+              notices={notices}
+              collapsed={collapsed}
+              isMobile={this.state.isMobile}
+              
+              onCollapse={this.handleMenuCollapse}
+              onMenuClick={this.handleMenuClick}
+              onNoticeVisibleChange={this.handleNoticeVisibleChange}
+            />
+
+            {/* <GlobalHeader
+              logo={logo}
+              currentUser={currentUser}
               fetchingNotices={fetchingNotices}
               notices={notices}
               collapsed={collapsed}
@@ -176,7 +188,7 @@ class BasicLayout extends React.PureComponent {
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
-            />
+            /> */}
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <Switch>

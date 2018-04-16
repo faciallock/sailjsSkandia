@@ -43,8 +43,8 @@ module.exports = {
                 }
                 //console.log('Result STFC_STRUCTURE:', res);
                 if (response.EMESSAGE ==="Authentication failed"){
-                    res.status(401)
-                    return res.send({ err: 'unauthorized'});
+                    res.status(401);
+                    return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
                     
 
                 }else{
@@ -65,7 +65,7 @@ module.exports = {
             $desc: "",
             $params: {
                 pageSize: {
-                    desc: '分页',
+                    desc: 'test',
                     exp: 2,
                 },
             },
@@ -75,6 +75,10 @@ module.exports = {
                 userid: '00000001',
                 notifyCount: 12,
             },
+            name: 'Skandia User',
+            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+            userid: '00000001',
+            notifyCount: 12
         };
         return res.ok(payload);
 

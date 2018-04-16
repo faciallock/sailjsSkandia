@@ -86,7 +86,7 @@ export default class GlobalHeader extends PureComponent {
           <HeaderSearch
             className={`${styles.action} ${styles.search}`}
             placeholder="Search"
-            dataSource={['one', 'two', 'three']}
+            dataSource={[]}
             onSearch={(value) => {
               console.log('input', value); // eslint-disable-line
             }}

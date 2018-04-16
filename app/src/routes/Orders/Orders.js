@@ -1,7 +1,14 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { List, Card, Row, Col, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar } from 'antd';
+import { List, Table, Card, Tabs, Row, Col, Spin, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar, Modal } from 'antd';
+import StandardTable from '../../components/StandardTable';
+import OrderDetail from './OrderDetail';
+import OrderShippingForm from './OrderShippingForm';
+import OrderFreightForm from './OrderFreightForm';
+import ViewOrderTable from './ViewOrderTable';
+
+
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
@@ -9,107 +16,126 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
+const TabPane = Tabs.TabPane;
 const { Search } = Input;
+const data = [
+    'Comment 1',
+    'comment 2',
+    'Comment 3'
+];
 
-@connect(({ orders, loading }) => ({
+@connect(({ orders, orderDetail,loading }) => ({
     orders,
-    loading: loading.models.orders,
+    orderDetail:orders.orderDetail,
+    loading: loading.models.orders
 }))
 export default class OrderView extends PureComponent {
+    
+    state = {
+        modalVisible: false,
+        expandForm: false,
+        selectedRows: [],
+        formValues: {},
+        visible: false,
+        currentOrder:0,
+        currentOrderDetail: {}
+    }
     componentDidMount() {
         this.props.dispatch({
             type: 'orders/fetch',
             payload: {
-                orderId: 2,
+                userName: localStorage.getItem('userName'),
+            },
+        });
+    }
+    hideModal = () => {
+        this.setState({
+            visible: false,
+        });
+    }
+    showModal = (record, orderDetail) =>{
+        this.openDetail(record.VBELN)
+        
+    }
+
+    openDetail = vbeln =>{
+        this.setState({
+            visible: true
+        });
+        this.props.dispatch({
+            type: 'orders/fetchDetail',
+            payload: {
+                orderId: vbeln,
             },
         });
     }
 
+
     handleClick = (value) => {
-        console.log(value);
-        this.props.dispatch({
-            type: 'orders/fetch',
-            payload: {
-                orderId: value,
-            },
-        });
-        /* axios.get('http://localhost:3000/salesOrders?orderId=' + value).then(res => {
-            const orderDetail = res.data;
-            console.log(res.data)
-            this.setState({ orderDetail });
-        }); */
+        this.openDetail(value);
 
 
     }
 
     render() {
-        const { orders: { orders }, loading } = this.props;
-        console.log(orders.msg);
-
-        const Info = ({ title, value, bordered }) => (
-            <div >
-                <span>{title}</span>
-                <p>{value}</p>
-                {bordered && <em />}
-            </div>
-        );
-
-        const extraContent = (
-            <div >
-                <RadioGroup defaultValue="all">
-                    <RadioButton value="all">全部</RadioButton>
-                    <RadioButton value="progress">进行中</RadioButton>
-                    <RadioButton value="waiting">等待中</RadioButton>
-                </RadioGroup>
-                <Search
+        console.log(this.props);
+        const { orders: { orders }, orderDetail, loading } = this.props;
+        //console.log(orders.orderDetail);
+        const { selectedRows, modalVisible } = this.state;
+        const columns = [
+            {
+                title: 'Order No',
+                dataIndex: 'VBELN',
+                key: 'VBELN',
+                fixed: 'left',
+                width: 140
+            },
+            {
+                title: 'Sidemark/PO',
+                dataIndex: 'BSTNK',
+                key: 'BSTNK'
+            },
+            {
+                title: 'Customer Account',
+                dataIndex: 'KUNNR',
+                key: 'KUNNR'
+            },
+            {
+                title: 'Name',
+                dataIndex: 'NAME1',
+                key: 'NAME1'
+            },
+            {
+                title: 'Product',
+                dataIndex: 'DESC',
+                key: 'DESC',
+                sorter: true
+            },
+            {
+                title: 'Total Price',
+                dataIndex: 'NETWR',
+                key: 'NETWR',
+                sorter: true
+            },
+            {
+                title: 'Status',
+                dataIndex: 'IND',
+                key: 'IND',
+            }, {
+                title: 'Action',
+                key: 'operation',
+                fixed: 'right',
+                width: 100,
+                render: (text, record) => {
                     
-                    placeholder="请输入"
-                    onSearch={() => ({})}
-                />
-            </div>
-        );
-
-        const paginationProps = {
-            showSizeChanger: true,
-            showQuickJumper: true,
-            pageSize: 5,
-            total: 50,
-        };
-
-        const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
-            <div >
-                <div >
-                    <span>Owner</span>
-                    <p>{owner}</p>
-                </div>
-                <div >
-                    <span>开始时间</span>
-                    <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
-                </div>
-                <div >
-                    <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
-                </div>
-            </div>
-        );
-
-        const menu = (
-            <Menu>
-                <Menu.Item>
-                    <a>编辑</a>
-                </Menu.Item>
-                <Menu.Item>
-                    <a>删除</a>
-                </Menu.Item>
-            </Menu>
-        );
-
-        const MoreBtn = () => (
-            <Dropdown overlay={menu}>
-                <a>
-                    更多 <Icon type="down" />
-                </a>
-            </Dropdown>
-        );
+                    return (
+                        <a onClick={() => this.showModal(record,orderDetail)}><Icon type="eye-o" /> Show</a>
+                    )
+                }
+            },
+        ];
+        
+        
 
         const actionInputSearch = (
             <div>
@@ -122,12 +148,65 @@ export default class OrderView extends PureComponent {
             </div>
         );
             
+        {
+            /* if (typeof orderDetail.IM_SALESDOCU !== "undefined" && loading==false) {
+                console.log("open modal");
+                this.setState({ currentOrder: orderDetail.IM_SALESDOCU});
+                this.showModal(null, orderDetail);
 
+            } */
+        }
         return (
-            <PageHeaderLayout action= { actionInputSearch}>
+            
+            <PageHeaderLayout title="Orders" action={actionInputSearch} >
                 <div >
+                    
+                    <Modal
+                        title="Order Detail"
+                        visible={this.state.visible}
+                        onOk={this.hideModal}
+                        closable={false}
+                        okText="OK"
+
+                        footer={[
+                            <Button key="submit" loading={loading} onClick={this.hideModal}>
+                                <Icon type="close" /> Close
+                            </Button>,
+                        ]}
+                        width='90%'
+                    >
+                        
+                        <Row gutter={16} type="flex" justify="center">
+                            <Col style={{ textAlign:'center'}} justify="center" span={24}><Spin size="large" spinning={loading} tip="Loading order detail..." /></Col>
+                        </Row>
+                        <Tabs defaultActiveKey="1">
+                            <TabPane tab={<span><Icon type="solution" /> Shipping Information</span>} key="1">
+                                <OrderShippingForm data={orderDetail} />
+                            </TabPane>
+                            <TabPane tab={<span><Icon type="inbox" />Freight</span>} key="2">
+                                <OrderFreightForm data={orderDetail} />
+                            </TabPane>
+                            <TabPane tab={<span><Icon type="table" />Items</span>} key="3">
+                                <ViewOrderTable data={orderDetail.EX_ITEMS} />
+                            </TabPane>
+                            <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
+                                <List
+                                    bordered
+                                    dataSource={data}
+                                    renderItem={item => (<List.Item>{item}</List.Item>)}
+                                />
+                            </TabPane>
+                        </Tabs>
+                        
+                    </Modal>
                     <Card bordered={false}>
-                        {console.log(orders.msg)}
+                        <Table
+                            loading={loading}
+                            dataSource={orders}
+                            columns={columns}
+                            scroll={{ x: 1200 }}
+                            rowKey={record => record.VBELN}
+                        />
                     </Card>
 
                     

@@ -117,15 +117,20 @@ import { isUrl } from '../utils/utils';
 }]; */
 
 
-const menuData = [ {
+const menuData = [{
+  name: 'Home',
+  icon: 'home',
+  path: 'home'
+},{
   name: 'Orders',
   icon: 'form',
-  path: 'orders',
-  children: [{
+  path: '/orders',
+  authority:'admin'
+  /* children: [{
     name: 'View Order',
     authority: 'admin',
     path: 'view-order',
-  }],
+  }], */
 }];
 
 /*

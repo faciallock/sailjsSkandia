@@ -23,7 +23,7 @@ const columns = [
     dataIndex: 'description',
   },
   {
-    title: '服务调用次数',
+    title: 'Service calls',
     dataIndex: 'callNo',
     sorter: true,
     align: 'right',

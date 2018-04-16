@@ -18,7 +18,6 @@ const dynamicWrapper = (app, models, component) => {
   // transformed by babel-plugin-dynamic-import-node-sync
   if (component.toString().indexOf('.then(') < 0) {
     models.forEach((model) => {
-      console.log(model);
       if (modelNotExisted(app, model)) {
         // eslint-disable-next-line
         app.model(require(`../models/${model}`).default);
@@ -107,7 +106,7 @@ export const getRouterData = (app) => {
     '/form/view-order': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/ViewOrder')),
     },
-    '/orders/view-order': {
+    '/orders': {
       component: dynamicWrapper(app, ['orders'], () => import('../routes/Orders/Orders')),
     },
     '/list/table-list': {

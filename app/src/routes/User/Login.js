@@ -73,7 +73,8 @@ export default class LoginPage extends Component {
             <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>Remember</Checkbox>
             <a style={{ float: 'right' }} href="">Forgot Password?</a>
           </div>
-          <Submit loading={submitting}>Login</Submit>
+          {/* <Submit loading={submitting}>Login</Submit> */}
+          <Submit loading={false}>Login</Submit>
           <div className={styles.other}>
             {/* Other login methods */}
             {/* <Icon className={styles.icon} type="alipay-circle" />

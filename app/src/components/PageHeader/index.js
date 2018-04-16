@@ -92,7 +92,7 @@ export default class PageHeader extends PureComponent {
           {
             [linkElement === 'a' ? 'href' : 'to']: '/',
           },
-          'Home',
+          'CSR',
         )}
       </Breadcrumb.Item>,
     );

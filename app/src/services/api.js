@@ -81,8 +81,10 @@ export async function queryNotices() {
 export async function getOrderDetail({ orderId }) {
   console.log(orderId);
   return request(`/api/order/findOne?orderId=${orderId}`);
-  
-
+}
+export async function getOrders({ userName }) {
+  console.log(userName);
+  return request(`/api/Orders?userName=${userName}&imInd=C`);
 }
 
 /* export async function getOrderDetail() {

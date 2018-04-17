@@ -7,6 +7,7 @@ import OrderDetail from './OrderDetail';
 import OrderShippingForm from './OrderShippingForm';
 import OrderFreightForm from './OrderFreightForm';
 import ViewOrderTable from './ViewOrderTable';
+import { routerRedux } from 'dva/router';
 
 
 
@@ -41,12 +42,18 @@ export default class OrderView extends PureComponent {
         currentOrderDetail: {}
     }
     componentDidMount() {
+        if(localStorage.getItem('userName') ===null){
+            //routerRedux.push("");
+            this.props.dispatch(routerRedux.push('/user/login'))
+        }
         this.props.dispatch({
             type: 'orders/fetch',
             payload: {
                 userName: localStorage.getItem('userName'),
             },
         });
+
+
     }
     hideModal = () => {
         this.setState({

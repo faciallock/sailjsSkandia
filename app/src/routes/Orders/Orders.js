@@ -154,14 +154,7 @@ export default class OrderView extends PureComponent {
             </div>
         );
             
-        {
-            /* if (typeof orderDetail.IM_SALESDOCU !== "undefined" && loading==false) {
-                console.log("open modal");
-                this.setState({ currentOrder: orderDetail.IM_SALESDOCU});
-                this.showModal(null, orderDetail);
-
-            } */
-        }
+       
         return (
             
             <PageHeaderLayout title="Orders" action={actionInputSearch} >
@@ -196,10 +189,11 @@ export default class OrderView extends PureComponent {
                                 <ViewOrderTable data={orderDetail.EX_ITEMS} />
                             </TabPane>
                             <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
+                               
                                 <List
                                     bordered
-                                    dataSource={data}
-                                    renderItem={item => (<List.Item>{item}</List.Item>)}
+                                    dataSource={orderDetail.EX_USERLOG}
+                                    renderItem={item => (<List.Item>{item.ZCOMMENT}</List.Item>)}
                                 />
                             </TabPane>
                         </Tabs>

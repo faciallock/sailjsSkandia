@@ -124,7 +124,6 @@ export default class OrderView extends PureComponent {
             }, {
                 title: 'Action',
                 key: 'operation',
-                fixed: 'right',
                 width: 100,
                 render: (text, record) => {
                     

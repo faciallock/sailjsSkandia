@@ -65,7 +65,6 @@ export default class ViewOrderTable extends PureComponent {
         {
             title: 'Comments',
             key: 'operation',
-            fixed: 'right',
             width: 120,
             render: () => <a href="#" > view </a>,
         },

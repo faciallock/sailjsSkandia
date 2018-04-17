@@ -45,6 +45,9 @@ export default class LoginPage extends Component {
       <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
     );
   }
+  componentWillMount = ()=> {
+    UserName.defaultValue="Test";
+  }
 
   render() {
     const { login, submitting } = this.props;
@@ -65,8 +68,8 @@ export default class LoginPage extends Component {
               !login.submitting &&
               this.renderMessage('Wrong account or password（admin/888888）')
             }
-            <UserName name="userId" placeholder="User" />
-            <Password name="password" placeholder="Password" />
+            <UserName name="userId" defaultValue="AMURUGESAN" disabled placeholder="User" />
+            <Password name="password" defaultValue="Initial1" disabled placeholder="Password" />
           </Tab>
          
           <div>
@@ -74,7 +77,7 @@ export default class LoginPage extends Component {
             <a style={{ float: 'right' }} href="">Forgot Password?</a>
           </div>
           {/* <Submit loading={submitting}>Login</Submit> */}
-          <Submit loading={false}>Login</Submit>
+          <Submit loading={false} className={styles.login}>Login</Submit>
           <div className={styles.other}>
             {/* Other login methods */}
             {/* <Icon className={styles.icon} type="alipay-circle" />

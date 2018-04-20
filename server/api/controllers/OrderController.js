@@ -28,7 +28,7 @@ client.connect(function (err) {
 });
 module.exports = {
     findOne: async function (req, res) {
-        
+        try{
         client.invoke('ZSD_GET_ORDER_DETAILS',
             { IM_SALESDOCU: req.query.orderId, IM_USER: 'CSR' },
             function (err, response) {
@@ -38,12 +38,16 @@ module.exports = {
                 }
                 console.log('Result STFC_STRUCTURE:', res);
                 return res.ok({ msg: response })
-            });  
+            });
+        }catch(e){
+            console.log(e);
+        }
         
     },
     findOrdersByUser: async function (req, res){
         console.log(req.query.imInd);
         console.log(req.query.userName);
+        try {
         client.invoke('ZGET_PENDING_SORDERS_CUSTOMER',
             { IM_IND: req.query.imInd,IM_CUSTNO: '', IM_USERNAME: req.query.userName },
             function (err, response) {
@@ -53,7 +57,10 @@ module.exports = {
                 }
                 console.log('Result STFC_STRUCTURE:', response);
                 return res.ok({ msg: response })
-            });  
+            });
+        }catch(e){
+            console.log(e);
+        } 
     }
     
 

@@ -41,6 +41,7 @@ module.exports = {
             });
         }catch(e){
             console.log(e);
+            return res.ok({ msg: e })
         }
         
     },
@@ -60,6 +61,7 @@ module.exports = {
             });
         }catch(e){
             console.log(e);
+            return res.ok({ msg: e })
         } 
     }
     

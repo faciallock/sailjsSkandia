@@ -29,8 +29,8 @@ export default class ViewOrderTable extends PureComponent {
         },
         {
             title: 'Category',
-            dataIndex: 'CATEGORY',
-            key: 'CATEGORY'
+            dataIndex: 'EX_DOCTYP',
+            key: 'EX_DOCTYP'
         },
         {
             title: 'Quantity',

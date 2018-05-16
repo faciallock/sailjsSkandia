@@ -4,11 +4,15 @@ import { connect } from 'dva';
 import { List, Table, Form, Divider, Card, Tabs, Row, Col, Spin, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar, Modal } from 'antd';
 
 import StandardTable from '../../components/StandardTable';
+import PageHeader from '../../components/PageHeader';
 import OrderDetail from './OrderDetail';
+
 import OrderShippingForm from './OrderShippingForm';
 import OrderFreightForm from './OrderFreightForm';
 import ViewOrderTable from './ViewOrderTable';
 import { routerRedux } from 'dva/router';
+import { IntlProvider,FormattedNumber } from 'react-intl';
+import _ from 'lodash';
 
 
 
@@ -26,7 +30,9 @@ const data = [
     'comment 2',
     'Comment 3'
 ];
-
+const breadcrumbList = [{
+    title: 'Order Number',
+}];
 @connect(({ orders, orderDetail,loading }) => ({
     orders,
     orderDetail:orders.orderDetail,
@@ -134,6 +140,12 @@ export default class OrderView extends PureComponent {
                 title: 'Status',
                 dataIndex: 'IND',
                 key: 'IND',
+                render: (text, record) => {
+                    let value= record ==='C'? "Confirmed":"Pending";
+                    return (
+                        <span>{value}</span>
+                    )
+                }
             }, {
                 title: 'Action',
                 key: 'operation',
@@ -160,13 +172,27 @@ export default class OrderView extends PureComponent {
                 />
             </div>
         );
+        let ZF00 = [{ COND_VAL: "" }], ZCOD = [{ COND_VAL: "" }], JR1 = [{ COND_VAL: "" }];
+        
+
+        if (orderDetail.EX_CONDITIONS !== undefined) {
+            ZF00 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "ZF00" });
+            ZCOD = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "ZCOD" });
+            JR1 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "JR1" });
+        }
+        
             
        
         return (
-            
+            <IntlProvider locale="en">
             <PageHeaderLayout title="Orders" action={actionInputSearch} >
-                <div >
+                
+                
+
                     
+                        
+                    
+                                    
                     <Modal
                         title="Order Detail"
                         visible={this.state.visible}
@@ -175,46 +201,81 @@ export default class OrderView extends PureComponent {
                         closable={false}
 
                         footer={[
-                            <Button key="submit" loading={loading} onClick={this.hideModal}>
+                            <Button key="submit" onClick={this.hideModal}>
                                 <Icon type="close" /> Close
                             </Button>,
                         ]}
                         width='90%'
                     >
                         <Spin size="large" spinning={loading} tip="Loading order detail..." >
-                        <Row gutter={16} type="flex" justify="center">
-                            
-                            <Card style={{ width: '100%' }}>
-                                <Row>
-                                    <Col style={{ 'text-align': 'right' }} justify="center" span={24}></Col>
-                                </Row>
-                                
-                                <Row gutter={12}>
-                                    <Col lg={8} md={24} sm={24}>
+                            <PageHeader
+                                title={<div className="title">{this.state.currentRecord.VBELN}</div>}
+                                action={
+                                    <div style={{textAlign:'left'}}>
+                                        <Row>
+                                            <Col lg={12} md={12} sm={24}>
+                                                <b>Order Type:</b> {orderDetail.EX_DOCTYP} 
+                                            </Col>
+                                            <Col lg={12} md={12} sm={24}>
+                                                <b>Order Status:</b> {orderDetail.EX_ORDSTATUS}
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col lg={12} md={12} sm={24}>
+                                                <b>Created By:</b> {orderDetail.EX_CSR}
+                                            </Col>
+                                            <Col lg={12} md={12} sm={24}>
+                                                <b>Last Modified By:</b> {orderDetail.EX_LASTCHANGE}
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                    }
+                                breadcrumbList={breadcrumbList}
+                                logo={<Icon style={{ fontSize: 48, color: '#08c' }}   type="file-text"/>}
+                                content={<div className="content">
                                     
-                                        <b>Order No:</b> {this.state.currentRecord.VBELN}
-                                    </Col>
-                                    <Col lg={8} md={24} sm={24}>
-                                        <b>Customer Account:</b> {this.state.currentRecord.KUNNR}
-                                    </Col>
-                                    <Col lg={8} md={24} sm={24}>
-                                        <b>Name:</b> {this.state.currentRecord.NAME1}<br/>
-                                    </Col>
-                                </Row>
-                                <Row gutter={12}>
-                                    <Col lg={8} md={24} sm={24}>
-                                        <b>Sales Org:</b> {orderDetail.EX_ORG}
-                                    </Col>
-                                    <Col lg={8} md={24} sm={24}>
-                                        <b>Desc:</b> {this.state.currentRecord.DESC}
-                                    </Col>
-                                </Row>
-                                
-                            </Card>
+                                    <Row gutter={12}>
+                                        <Col lg={5} md={8} sm={12}>
+                                            <b>Desc:</b> {this.state.currentRecord.DESC}  
+                                        </Col>
+                                        <Col lg={5} md={8} sm={12}>
+                                            <b>Customer Account:</b> {this.state.currentRecord.KUNNR}
+                                        </Col>
+                                        <Col lg={5} md={8} sm={12}>
+                                            <b>Name:</b> {this.state.currentRecord.NAME1}
+                                        </Col>
+                                        <Col lg={5} md={8} sm={12}>
+                                            
+                                            <b>Rush Charges Cat:</b> {orderDetail.EX_PRODRUSH}
+                                        </Col>
+                                        <Col lg={4} md={8} sm={12}>
+                                            <b>Sales Org:</b>{orderDetail.EX_ORG}
+                                        </Col>
+                                    </Row>
+                                    <Row gutter={12}>
+                                        
+                                        <Col lg={5} md={8} sm={12}>
+                                            <b>Net Value:</b>  <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/>
+                                        </Col>
+                                        <Col lg={5} md={8} sm={12}>
+                                            <b>S/H Charges:</b> {ZF00[0].COND_VAL}
+                                        </Col>
+                                        <Col lg={5} md={8} sm={12}>
+                                            <b>COD Charges:</b> {ZCOD[0].COND_VAL}
+                                            
+                                        </Col>
+                                        
+                                        <Col lg={5} md={8} sm={12}>
+                                            <b>Taxes:</b>{JR1[0].COND_VAL}
+                                        </Col>
+                                        <Col lg={4} md={8} sm={12}>
+
+                                        </Col>
+                                    </Row>
+                                </div>}
+                            />
+                        
                             
-                        </Row>
-                        <Row gutter={16} type="flex" justify="center">
-                            <Card style={{ width: '100%' }}>
                                 <Tabs defaultActiveKey="1">
                                     <TabPane tab={<span><Icon type="solution" /> Shipping Information</span>} key="1">
                                         <OrderShippingForm data={orderDetail} />
@@ -223,7 +284,7 @@ export default class OrderView extends PureComponent {
                                         <OrderFreightForm data={orderDetail} />
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="table" />Items</span>} key="3">
-                                        <ViewOrderTable data={orderDetail.EX_ITEMS} />
+                                        <ViewOrderTable data={orderDetail} />
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>
@@ -260,8 +321,8 @@ export default class OrderView extends PureComponent {
                                         
                                     </TabPane>
                                 </Tabs>
-                            </Card>
-                        </Row>
+                            
+                        
                         </Spin>
                         
                     </Modal>
@@ -276,8 +337,9 @@ export default class OrderView extends PureComponent {
                     </Card>
 
                     
-                </div>
+                
             </PageHeaderLayout>
+            </IntlProvider>
         );
     }
 }

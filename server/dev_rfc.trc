@@ -278,3 +278,132 @@ ERRNO       10054
 ERRNO TEXT  WSAECONNRESET: Connection reset by peer
 COUNTER     3
 
+
+**** Trace file opened at 2018-05-04, 16:00:54 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.16, IP address_v6: 192.168.254.16
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Fri May 04 16:00:54 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.16:53032
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-05-13, 22:17:46 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.1, IP address_v6: 192.168.254.1
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Sun May 13 22:17:46 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.1:50750
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-05-14, 16:29:21 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.9, IP address_v6: 192.168.254.9
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Mon May 14 16:29:21 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.9:54169
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-05-14, 21:16:59 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.9, IP address_v6: 192.168.254.9
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Mon May 14 21:16:59 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.9:57500
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-05-15, 10:46:31 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.9, IP address_v6: 192.168.254.9
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue May 15 10:46:31 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.9:65010
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-05-15, 21:28:19 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.9, IP address_v6: 192.168.254.9
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue May 15 21:28:19 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.9:52531
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+

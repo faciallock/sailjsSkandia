@@ -77,8 +77,8 @@ class OrderShippingForm extends Component {
             
         }
         return (
-            <Card title="Shipping Information" bordered={true}>
-                <Form layout="vertical" hideRequiredMark>
+            
+                <Form style={{padding:"0px 25px"}} layout="vertical" hideRequiredMark>
                     <Row gutter={12}>
                         <Col lg={8} md={24} sm={24}>
                             <Form.Item   label="House No."
@@ -207,7 +207,7 @@ class OrderShippingForm extends Component {
                     </Row>
 
                 </Form>
-            </Card>
+            
         );
     }
 }

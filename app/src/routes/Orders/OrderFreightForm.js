@@ -52,8 +52,8 @@ class OrderFreightForm extends Component {
             data = this.props.data;
         }
         return (
-            <Card title="Freight"  bordered={true}>
-                <Form layout="vertical" hideRequiredMark>
+            
+            <Form style={{ padding: "0px 25px" }} layout="vertical" hideRequiredMark>
                     <Row gutter={12}>
                         <Col lg={24} md={24} sm={24}>
                             <Form.Item label="Shippers Instruction">
@@ -116,7 +116,7 @@ class OrderFreightForm extends Component {
                         </Col>
                     </Row>
                 </Form>
-            </Card>
+            
         );
     }
 }

@@ -20,8 +20,7 @@ export default {
       });
       // Login successfully
       console.log(response);
-
-      if(typeof response==="undefined"){
+      if(typeof response==='undefined'){
         //reloadAuthorized();
         //routerRedux.push('/')
         yield put(routerRedux.push('/'));

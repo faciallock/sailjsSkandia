@@ -68,13 +68,13 @@ export default class LoginPage extends Component {
               !login.submitting &&
               this.renderMessage('Wrong account or password（admin/888888）')
             }
-            <UserName name="userId" defaultValue="AMURUGESAN" disabled placeholder="User" />
-            <Password name="password" defaultValue="Initial1" disabled placeholder="Password" />
+            <UserName name="userId" placeholder="User" />
+            <Password name="password" placeholder="Password" />
           </Tab>
          
           <div>
-            <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>Remember</Checkbox>
-            <a style={{ float: 'right' }} href="">Forgot Password?</a>
+            {/* <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>Remember</Checkbox>
+            <a style={{ float: 'right' }} href="">Forgot Password?</a> */}
           </div>
           {/* <Submit loading={submitting}>Login</Submit> */}
           <Submit loading={false} className={styles.login}>Login</Submit>
@@ -83,7 +83,7 @@ export default class LoginPage extends Component {
             {/* <Icon className={styles.icon} type="alipay-circle" />
             <Icon className={styles.icon} type="taobao-circle" />
             <Icon className={styles.icon} type="weibo-circle" /> */}
-            <Link className={styles.register} to="/user/login">Sign Up</Link>
+            {/* <Link className={styles.register} to="/user/login">Sign Up</Link> */}
           </div>
         </Login>
       </div>

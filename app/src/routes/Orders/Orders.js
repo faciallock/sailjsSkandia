@@ -209,6 +209,7 @@ export default class OrderView extends PureComponent {
                     >
                         <Spin size="large" spinning={loading} tip="Loading order detail..." >
                             <PageHeader
+                                style={{padding:'1px'}}
                                 title={<div className="title">{this.state.currentRecord.VBELN}</div>}
                                 action={
                                     <div style={{textAlign:'left'}}>

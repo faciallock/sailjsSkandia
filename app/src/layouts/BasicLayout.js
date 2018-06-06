@@ -168,8 +168,8 @@ class BasicLayout extends React.PureComponent {
           <Header style={{ padding: 0 }}>
             <GlobalHeader
               logo={logo}
-              currentUser={currentUser}
-              notices={notices}
+              currentUser={{ name: localStorage.getItem('userName'), notifyCount:10}}
+             
               collapsed={collapsed}
               isMobile={this.state.isMobile}
               

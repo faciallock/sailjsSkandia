@@ -104,7 +104,7 @@ export default class GlobalHeader extends PureComponent {
               <Icon type="question-circle-o" />
             </a >
           </Tooltip>
-          <NoticeIcon
+          {/* <NoticeIcon
             className={styles.action}
             count={currentUser.notifyCount}
             onItemClick={(item, tabProps) => {
@@ -127,7 +127,7 @@ export default class GlobalHeader extends PureComponent {
               emptyText="You have done all the rest"
               emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
             />
-          </NoticeIcon>
+          </NoticeIcon> */}
           {currentUser.name ? (
             <Dropdown overlay={menu}>
               <span className={`${styles.action} ${styles.account}`}>

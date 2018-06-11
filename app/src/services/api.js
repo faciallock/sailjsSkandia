@@ -87,6 +87,14 @@ export async function getOrders({ userName }) {
   return request(`/api/Orders?userName=${userName}&imInd=C`);
 }
 
+export async function addComment(params) {
+  return request('/api/orders/comment', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+
 /* export async function getOrderDetail() {
   console.log(orderId);
   return request(`/api/orderDetails?orderId=1`);

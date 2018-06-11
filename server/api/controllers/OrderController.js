@@ -29,7 +29,7 @@ client.connect(function (err) {
 module.exports = {
     findOne: async function (req, res) {
         try{
-        client.invoke('ZSD_GET_ORDER_DETAILS',
+        client.invoke('ZSD_GET_ORDER_DETAILSX',
             { IM_SALESDOCU: req.query.orderId, IM_USER: 'CSR' },
             function (err, response) {
                 if (err) {
@@ -45,11 +45,34 @@ module.exports = {
         }
         
     },
+    createComment: async function (req, res) {
+        console.log(req.query);
+        console.log(req.param('comment'));
+        try {
+            if (!req.param('orderId') && !req.param('comment') && !req.param('userName')) {
+                return res.badRequest({ err: 'bad request params missing' })
+
+            }
+            client.invoke('ZSD_MODIFY_SOLOG_REACT',
+                { IM_SALESDOCU: req.param('orderId'), IM_ZCOMMENT: req.param('comment'), IM_ERNAM: req.param('userName')  },
+                function (err, response) {
+                    if (err) {
+                        return console.error('Error invoking STFC_STRUCTURE:', err);
+                        res.send({ error: "true :( " + err });
+                    }
+                    console.log('Result STFC_STRUCTURE:', response);
+                    return res.ok({ msg: response })
+                });
+        } catch (e) {
+            console.log(e);
+            return res.ok({ msg: e })
+        }
+    },
     findOrdersByUser: async function (req, res){
         console.log(req.query.imInd);
         console.log(req.query.userName);
         try {
-        client.invoke('ZGET_PENDING_SORDERS_CUSTOMER',
+            client.invoke('ZGET_PENDING_SORDERS_CUSTOMERX',
             { IM_IND: req.query.imInd,IM_CUSTNO: '', IM_USERNAME: req.query.userName },
             function (err, response) {
                 if (err) {

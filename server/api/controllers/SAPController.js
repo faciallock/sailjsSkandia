@@ -33,7 +33,7 @@ module.exports = {
             return res.badRequest({ err: 'bad request params missing' })
 
         }
-        client.invoke('ZSDJ_USER_VALIDATION',
+            client.invoke('ZSDJ_USER_VALIDATION_REACT',
             { USER_ID: req.param('userId'), PASSWORD: req.param('password'), IM_CSR: req.param('type') },
             //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
             function (err, response) {

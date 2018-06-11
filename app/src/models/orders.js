@@ -63,7 +63,7 @@ export default {
 };
  */
 
-import { getOrders, getOrderDetail } from '../services/api';
+import { getOrders, getOrderDetail, addComment } from '../services/api';
 
 export default {
     namespace: 'orders',
@@ -80,6 +80,39 @@ export default {
                 type: 'queryOrders',
                 payload:response,
             });
+        },
+        *addComment({ payload }, { call, put }) {
+            const response = yield call(addComment, payload);
+
+
+            const responseFetch = yield call(getOrderDetail, payload);
+            yield put({
+                type: 'queryOrderDetail',
+                payload: responseFetch,
+            });
+            //console.log(payload);
+            /* yield put({
+                type: 'queryOrderDetail',
+                payload: response,
+            }); */
+            
+            // yield put({
+            //     type: 'changeLoginStatus',
+            //     payload: response,
+            // });
+            // // Login successfully
+            // console.log(response);
+            // if (typeof response === 'undefined') {
+            //     //reloadAuthorized();
+            //     //routerRedux.push('/')
+            //     yield put(routerRedux.push('/'));
+            // } else if (response.token.length !== 0) {
+            //     console.log(response.token.length)
+            //     localStorage.setItem('userName', response.msg.USER_ID)
+            //     reloadAuthorized();
+            //     //routerRedux.push('/')
+            //     yield put(routerRedux.push('/'));
+            // }
         },
         *fetchDetail({ payload }, { call, put }) {
             const response = yield call(getOrderDetail, payload);

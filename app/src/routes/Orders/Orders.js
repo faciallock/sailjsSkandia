@@ -10,6 +10,7 @@ import OrderDetail from './OrderDetail';
 import OrderShippingForm from './OrderShippingForm';
 import OrderFreightForm from './OrderFreightForm';
 import ViewOrderTable from './ViewOrderTable';
+import ModalNewComment from './ModalNewComment';
 import { routerRedux } from 'dva/router';
 import { IntlProvider,FormattedNumber } from 'react-intl';
 import _ from 'lodash';
@@ -19,6 +20,7 @@ import _ from 'lodash';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
 //import styles from './BasicList.less';
+import styles from './css/Orders.css';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -46,7 +48,8 @@ export default class OrderView extends PureComponent {
         selectedRows: [],
         formValues: {},
         visible: false,
-        currentRecord: {}
+        currentRecord: {},
+        visibleNewComment:false
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -88,6 +91,71 @@ export default class OrderView extends PureComponent {
             },
         });
     }
+    saveFormRefComment = (formRef) => {
+        this.formRefComment = formRef;
+    }
+
+    openModalComment = () => {
+        this.setState({ visibleNewComment:true})
+        
+    }
+    onCancelNewComment=() =>{
+        this.setState({ visibleNewComment: false })
+    }
+    handleOkNewComment =(documentId)=>{
+        const form = this.formRefComment.props.form;
+        form.validateFields((err, values) => {
+            if (err) {
+                return;
+            }
+            form.resetFields();
+
+            this.props.dispatch({
+                type: 'orders/addComment',
+                payload: {
+                    comment: values.comments,
+                    orderId: documentId,
+                    userName: localStorage.getItem('userName')
+                    
+                },
+            });
+            form.resetFields();
+            this.setState({ visibleNewComment: false });
+            /* this.props.dispatch({
+                type: 'orders/fetchDetail',
+                payload: {
+                    orderId: documentId,
+                }
+            }); */
+
+            /* console.log('Received values of form: ', values);
+
+
+            this.props.dispatch({
+                type: 'comments/insertComment',
+                payload: {
+                    comment: values.comments,
+                    commentCompany: this.state.companyId,
+                    commentUser: localStorage.getItem('userId'),
+                    commentStep: this.state.current + 1,
+                    commentType: parseInt(this.state.currentTab)
+                },
+            });
+
+
+            form.resetFields();
+            this.setState({ visibleComment: false });
+            this.props.dispatch({
+                type: 'steps/fetchDetail',
+                payload: {
+                    companyId: this.state.companyId
+                },
+            }); */
+
+
+        });
+            
+    }
 
 
     handleClick = (value) => {
@@ -100,7 +168,7 @@ export default class OrderView extends PureComponent {
         console.log(this.props);
         const { orders: { orders }, orderDetail, loading } = this.props;
         //console.log(orders.orderDetail);
-        const { selectedRows, modalVisible } = this.state;
+        const { selectedRows, modalVisible, visibleNewComment } = this.state;
         const columns = [
             {
                 title: 'Order No',
@@ -186,13 +254,14 @@ export default class OrderView extends PureComponent {
         return (
             <IntlProvider locale="en">
             <PageHeaderLayout title="Orders" action={actionInputSearch} >
-                
-                
-
-                    
-                        
-                    
-                                    
+                    <ModalNewComment
+                        wrappedComponentRef={this.saveFormRefComment}
+                        visible={visibleNewComment}
+                        onCancel={this.onCancelNewComment}
+                        onCreate={()=>{
+                            this.handleOkNewComment(orderDetail.IM_SALESDOCU)
+                            }}
+                    />        
                     <Modal
                         title="Order Detail"
                         visible={this.state.visible}
@@ -289,32 +358,38 @@ export default class OrderView extends PureComponent {
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>
-                                                <Col lg={16} md={16} sm={24}>
-                                                    <Card style={{ 'height': '250px' }} >
+                                            <Col lg={24} md={24} sm={24} style={{textAlign:'right', padding:'6px'}}>
+                                            <Button onClick={this.openModalComment} type="primary"><Icon type="message" /> Add comment</Button>
+                                            </Col>
+                                            </Row>
+                                            <Row gutter={12}>
+                                                <Col lg={24} md={24} sm={24}>
+                                            <div style={{
+                                                height: '350px'
+                                            }}>
+                                            <div style={{
+                                                height: '90%',
+                                                overflowY: 'auto', margin: '5px 0px'
+                                            }} >
+                                                {console.log(orderDetail.EX_USERLOG)}
                                                         <List
                                                             bordered
                                                             size="small"
                                                             dataSource={orderDetail.EX_USERLOG}
-                                                            renderItem={item => (<List.Item>{item.ZCOMMENT}</List.Item>)}
-                                                            pagination={{
-                                                                onChange: (page) => {
-                                                                    console.log(page);
-                                                                },
-                                                                pageSize: 3,
-                                                            }}
+                                                    renderItem={item => (<List.Item>
+                                                                            <List.Item.Meta
+                                                                                avatar={<Avatar icon="user" />}
+                                                                                title={item.ERNAM}
+                                                                                description={item.ZCOMMENT}
+                                                                            />
+                                                                            
+                                                                            </List.Item>)}
+                                                            
                                                         />
-                                                    </Card>
+                                                    </div>
+                                                    </div>
                                                 </Col>
-                                                <Col lg={8} md={8} sm={24}>
-                                                    <Card style={{ 'height': '250px' }}>
-                                                        <TextArea rows={2} />
-                                                        <div style={{ 'text-align': 'right', 'padding-top': '3px'}}>
-                                                            <Button  type="primary"><Icon type="message" /> Add comment</Button>
-
-                                                        </div>
-                                                       
-                                                    </Card>
-                                                </Col>
+                                                
                                             </Row>
                                     
                                         

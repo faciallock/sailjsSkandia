@@ -26,22 +26,48 @@ client.connect(function (err) {
 
 
 });
+function getRoles(userType){
+    switch (userType) {
+        case "C":
+        return {
+            orders:{
+                c:true,
+                r:true,
+                u:true,
+                d:true
+            },
+            comments:{
+                c: true,
+                r: true,
+                u: true,
+                d: true
+            }
+        }
+            
+            break;
+    
+        default:
+            break;
+    }
+    return [{ test: 'test' }]
+}
 module.exports = {
     login: async function (req, res) {
+        let roles=[];
         try{
-        if (!req.param('userId') && !req.param('userId') && !req.param('type')) {
+            if (!req.param('userId') && !req.param('password')) {
             return res.badRequest({ err: 'bad request params missing' })
 
         }
             client.invoke('ZSDJ_USER_VALIDATION_REACT',
-            { USER_ID: req.param('userId'), PASSWORD: req.param('password'), IM_CSR: req.param('type') },
+            { USER_ID: req.param('userId'), PASSWORD: req.param('password') },
             //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
             function (err, response) {
                 if (err) {
                     return console.error('Error invoking STFC_STRUCTURE:', err);
                     res.serverError({ err: "true :( " + err });
                 }
-                //console.log('Result STFC_STRUCTURE:', res);
+                
                 if (response.EMESSAGE ==="Authentication failed"){
                     res.status(401);
                     return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
@@ -49,8 +75,9 @@ module.exports = {
 
                 }else{
                     const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
-                    //return res.ok(token);
-                    return res.ok({ msg: response, token: token, currentAuthority: "admin" })
+                    console.log(response);
+                    
+                    return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority: "admin" })
                 }
                 
             }); 
@@ -59,6 +86,45 @@ module.exports = {
             return res.serverError(err);
         }
        
+    },
+    fetchType: async function (req, res) {
+        let data={};
+        try {
+            if (!req.param('userId') && !req.param('password')) {
+                return res.badRequest({ err: 'bad request params missing' })
+
+            }
+            client.invoke('ZSDJ_USER_TYPE_REACT',
+                { USER_ID: req.param('userId') },
+                //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
+                function (err, response) {
+                    if (err) {
+                        //return console.error('Error invoking STFC_STRUCTURE:', err);
+                        return res.serverError({ err });
+                    }
+                    console.log(response);
+                    console.log(response.USER_TYPE);
+                    let roles={};
+                    switch (response.USER_TYPE) {
+                        case "C":
+                            roles = { comments: { c: false, r: true, u: true, d: true } };
+                            break;
+                        case "D":
+                            roles = { comments: { c: true, r: true, u: true, d: true } };
+                            break;
+                        default:
+                            break;
+                    }
+                    data={user: response,roles};
+                    return res.ok({ data })
+                    
+
+                });
+        }
+        catch (err) {
+            return res.serverError(err);
+        }
+
     },
     currentUser: async function(req, res){
         const payload = {

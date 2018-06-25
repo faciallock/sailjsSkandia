@@ -36,7 +36,7 @@ module.exports = {
                     return console.error('Error invoking STFC_STRUCTURE:', err);
                     res.send({ error: "true :( " + err });
                 }
-                console.log('Result STFC_STRUCTURE:', res);
+                //console.log('Result STFC_STRUCTURE:', res);
                 return res.ok({ msg: response })
             });
         }catch(e){
@@ -79,7 +79,7 @@ module.exports = {
                     return console.error('Error invoking STFC_STRUCTURE:', err);
                     res.send({ error: "true :( " + err });
                 }
-                console.log('Result STFC_STRUCTURE:', response);
+                //console.log('Result STFC_STRUCTURE:', response);
                 return res.ok({ msg: response })
             });
         }catch(e){

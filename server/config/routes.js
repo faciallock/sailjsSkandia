@@ -36,6 +36,8 @@ module.exports.routes = {
   'GET /currentUser': 'SAPController.currentUser',
   'GET /orders': 'OrderController.findOrdersByUser',
   'POST /orders/comment': 'OrderController.createComment',
+  'GET /user/type': 'SAPController.fetchType',
+  
   
 
   

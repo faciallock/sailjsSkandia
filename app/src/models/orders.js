@@ -63,14 +63,15 @@ export default {
 };
  */
 
-import { getOrders, getOrderDetail, addComment } from '../services/api';
+import { getOrders, getOrderDetail, addComment, getUserType } from '../services/api';
 
 export default {
     namespace: 'orders',
 
     state: {
         orders: [],
-        orderDetail:{}
+        orderDetail:{},
+        userRoles:{}
     },
 
     effects: {
@@ -81,6 +82,7 @@ export default {
                 payload:response,
             });
         },
+        
         *addComment({ payload }, { call, put }) {
             const response = yield call(addComment, payload);
 
@@ -114,6 +116,13 @@ export default {
             //     yield put(routerRedux.push('/'));
             // }
         },
+        *getUserType({ payload }, { call, put }) {
+            const response = yield call(getUserType, payload);
+            yield put({
+                type: 'queryUserType',
+                payload: response,
+            });
+        },
         *fetchDetail({ payload }, { call, put }) {
             const response = yield call(getOrderDetail, payload);
             yield put({
@@ -135,6 +144,12 @@ export default {
             return {
                 ...state,
                 orderDetail: action.payload.msg
+            };
+        },
+        queryUserType(state, action) {
+            return {
+                ...state,
+                userRoles: action.payload.data
             };
         }/* ,
         appendList(state, action) {

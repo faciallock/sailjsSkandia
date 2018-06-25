@@ -2,6 +2,7 @@ import { routerRedux } from 'dva/router';
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
+/* import { CommonDataManager } from '../utils/CommonDataManager'; */
 
 export default {
   namespace: 'login',
@@ -26,7 +27,11 @@ export default {
         yield put(routerRedux.push('/'));
       }else if (response.token.length !==0) {
         console.log(response.token.length)
-        localStorage.setItem('userName', response.msg.USER_ID)
+        localStorage.setItem('userName', response.msg.USER_ID);
+        //localStorage.setItem('roles', response.roles);
+        /* var commonData = CommonDataManager.getInstance();
+        commonData.setRoles(response.roles); */
+
         reloadAuthorized();
         //routerRedux.push('/')
         yield put(routerRedux.push('/'));

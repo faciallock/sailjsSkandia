@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { List, Table, Form, Divider, Card, Tabs, Row, Col, Spin, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar, Modal } from 'antd';
+import { List, Table, Form, Divider, Card, Alert, Tabs, Row, Col, Spin, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar, Modal } from 'antd';
 
 import StandardTable from '../../components/StandardTable';
+
 import PageHeader from '../../components/PageHeader';
 import OrderDetail from './OrderDetail';
 
@@ -11,6 +12,8 @@ import OrderShippingForm from './OrderShippingForm';
 import OrderFreightForm from './OrderFreightForm';
 import ViewOrderTable from './ViewOrderTable';
 import ModalNewComment from './ModalNewComment';
+
+
 import { routerRedux } from 'dva/router';
 import { IntlProvider,FormattedNumber } from 'react-intl';
 import _ from 'lodash';
@@ -32,12 +35,17 @@ const data = [
     'comment 2',
     'Comment 3'
 ];
+
+const noMatch = <Alert message="No permission." type="error" showIcon />;
+
+
 const breadcrumbList = [{
     title: 'Order Number',
 }];
 @connect(({ orders, orderDetail,loading }) => ({
     orders,
     orderDetail:orders.orderDetail,
+    userRoles: orders.userRoles,
     loading: loading.models.orders
 }))
 export default class OrderView extends PureComponent {
@@ -60,6 +68,13 @@ export default class OrderView extends PureComponent {
             type: 'orders/fetch',
             payload: {
                 userName: localStorage.getItem('userName'),
+            },
+        });
+
+        this.props.dispatch({
+            type: 'orders/getUserType',
+            payload: {
+                userId: localStorage.getItem('userName'),
             },
         });
 
@@ -166,8 +181,8 @@ export default class OrderView extends PureComponent {
 
     render() {
         console.log(this.props);
-        const { orders: { orders }, orderDetail, loading } = this.props;
-        //console.log(orders.orderDetail);
+        const { orders: { orders }, orderDetail, userRoles, loading } = this.props;
+        console.log(userRoles);
         const { selectedRows, modalVisible, visibleNewComment } = this.state;
         const columns = [
             {
@@ -248,6 +263,10 @@ export default class OrderView extends PureComponent {
             ZCOD = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "ZCOD" });
             JR1 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "JR1" });
         }
+
+        /* let commonData = CommonDataManager.getInstance();
+        let roles = commonData.getRoles(); */
+        //console.log(roles);
         
             
        
@@ -261,7 +280,9 @@ export default class OrderView extends PureComponent {
                         onCreate={()=>{
                             this.handleOkNewComment(orderDetail.IM_SALESDOCU)
                             }}
-                    />        
+                    />   
+                    
+                         
                     <Modal
                         title="Order Detail"
                         visible={this.state.visible}
@@ -279,7 +300,7 @@ export default class OrderView extends PureComponent {
                         <Spin size="large" spinning={loading} tip="Loading order detail..." >
                             <PageHeader
                                 style={{padding:'1px'}}
-                                title={<div className="title">{this.state.currentRecord.VBELN}</div>}
+                                title={<div className="title">{orderDetail.IM_SALESDOCU}</div>}
                                 action={
                                     <div style={{textAlign:'left'}}>
                                         <Row>
@@ -301,7 +322,7 @@ export default class OrderView extends PureComponent {
                                     </div>
                                     }
                                 breadcrumbList={breadcrumbList}
-                                logo={<Icon style={{ fontSize: 48, color: '#08c' }}   type="file-text"/>}
+                                logo={<Icon style={{ fontSize: 48, color: '#1d2d5c' }}   type="file-text"/>}
                                 content={<div className="content">
                                     
                                     <Row gutter={12}>
@@ -328,15 +349,15 @@ export default class OrderView extends PureComponent {
                                             <b>Net Value:</b>  <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/>
                                         </Col>
                                         <Col lg={5} md={8} sm={12}>
-                                            <b>S/H Charges:</b> {ZF00[0].COND_VAL}
+                                            <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false : ZF00[0].COND_VAL}
                                         </Col>
                                         <Col lg={5} md={8} sm={12}>
-                                            <b>COD Charges:</b> {ZCOD[0].COND_VAL}
+                                            <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : ZCOD[0].COND_VAL}
                                             
                                         </Col>
                                         
                                         <Col lg={5} md={8} sm={12}>
-                                            <b>Taxes:</b>{JR1[0].COND_VAL}
+                                            <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : JR1[0].COND_VAL}
                                         </Col>
                                         <Col lg={4} md={8} sm={12}>
 
@@ -359,7 +380,9 @@ export default class OrderView extends PureComponent {
                                     <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>
                                             <Col lg={24} md={24} sm={24} style={{textAlign:'right', padding:'6px'}}>
-                                            <Button onClick={this.openModalComment} type="primary"><Icon type="message" /> Add comment</Button>
+                                            <Button 
+                                                onClick={this.openModalComment} 
+                                                disabled={(typeof userRoles.roles === 'undefined') ? false : userRoles.roles.comments.c } type="primary"><Icon type="message" /> Add comment</Button>
                                             </Col>
                                             </Row>
                                             <Row gutter={12}>
@@ -376,7 +399,7 @@ export default class OrderView extends PureComponent {
                                                             bordered
                                                             size="small"
                                                             dataSource={orderDetail.EX_USERLOG}
-                                                    renderItem={item => (<List.Item>
+                                                            renderItem={item => (<List.Item>
                                                                             <List.Item.Meta
                                                                                 avatar={<Avatar icon="user" />}
                                                                                 title={item.ERNAM}

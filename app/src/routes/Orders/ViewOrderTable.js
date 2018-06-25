@@ -23,14 +23,14 @@ export default class ViewOrderTable extends PureComponent {
         let aHeaderItems=[
             { 
                 EX_LASTCHANGE: detail.EX_LASTCHANGE, 
-                EX_SHCHARGE: ZF00[0].COND_VAL,
+                EX_SHCHARGE: (typeof ZF00[0] === 'undefined') ? "" : ZF00[0].COND_VAL,
                 EX_PRODRUSH: detail.EX_PRODRUSH,
                 EX_NETVAL: detail.EX_NETVAL,
                 EX_ORDSTATUS: detail.EX_ORDSTATUS,
-                EX_ZCOD: ZCOD[0].COND_VAL,
+                EX_ZCOD: (typeof ZCOD[0] === 'undefined') ? "" : ZCOD[0].COND_VAL,
                 EX_CSR: detail.EX_CSR, 
                 EX_DOCTYP: detail.EX_DOCTYP,
-                EX_JR1: JR1[0].COND_VAL
+                EX_JR1: (typeof JR1[0] === 'undefined') ? "" : JR1[0].COND_VAL
             }
         ];
         
@@ -177,7 +177,19 @@ export default class ViewOrderTable extends PureComponent {
         } else {
             dataType=this.processHeaderOrder(this.props.data);
 
+            console.log(this.props.data.EX_CONFIG.find((item)=> { return item.CHAR_NAME == "WOV_WIDTH" && item.ITEMNO === "000001" }));
+
             data = this.props.data.EX_ITEMS;
+            console.log(data);
+            let dataConverted = this.props.data.EX_ITEMS.map((item)=>{
+                return item.width="100";
+
+            });
+            console.log(dataConverted);
+
+            //console.log(dataConverted);
+            //dataConverted
+
         }
         return (
             <div>

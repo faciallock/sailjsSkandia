@@ -29,8 +29,8 @@ export class Dictionary {
                 },
                 {
                     title: 'Width',
-                    dataIndex: 'MATERIAL',
-                    key: 'MATERIAL'
+                    dataIndex: 'WIDTH',
+                    key: 'WIDTH'
                 },
                 {
                     title: 'Length',
@@ -55,12 +55,12 @@ export class Dictionary {
                 {
                     title: 'No of panel',
                     dataIndex: 'taxes',
-                    key: '7'
+                    key: '8'
                 },
                 {
                     title: 'Extension Brackets',
                     dataIndex: 'taxes',
-                    key: '7'
+                    key: '8'
                 },
                 {
                     title: 'Specials / speciality code',

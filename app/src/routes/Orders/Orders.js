@@ -382,7 +382,7 @@ export default class OrderView extends PureComponent {
                                             <Col lg={24} md={24} sm={24} style={{textAlign:'right', padding:'6px'}}>
                                             <Button 
                                                 onClick={this.openModalComment} 
-                                                disabled={(typeof userRoles.roles === 'undefined') ? false : userRoles.roles.comments.c } type="primary"><Icon type="message" /> Add comment</Button>
+                                                disabled={{/* (typeof userRoles.roles === 'undefined') ? false : userRoles.roles.comments.c  */}} type="primary"><Icon type="message" /> Add comment</Button>
                                             </Col>
                                             </Row>
                                             <Row gutter={12}>

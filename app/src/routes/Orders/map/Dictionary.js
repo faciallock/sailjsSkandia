@@ -34,73 +34,73 @@ export class Dictionary {
                 },
                 {
                     title: 'Length',
-                    dataIndex: 'SHORT_TEXT',
-                    key: 'SHORT_TEXT'
+                    dataIndex: 'LENGTH',
+                    key: 'LENGTH'
                 },
                 {
                     title: 'BracketMount',
-                    dataIndex: 'PLANT',
-                    key: 'PLANT'
+                    dataIndex: 'BRACKETMOUNT',
+                    key: 'BRACKETMOUNT'
                 },
                 {
                     title: 'LiftCord',
-                    dataIndex: 'CLASS',
-                    key: 'CLASS'
+                    dataIndex: 'LIFTCORD',
+                    key: 'LIFTCORD'
                 },
                 {
                     title: 'Draw / Liner',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'DRAWLINER',
+                    key: 'DRAWLINER'
                 },
                 {
                     title: 'No of panel',
-                    dataIndex: 'taxes',
-                    key: '8'
+                    dataIndex: 'PANELS',
+                    key: 'PANELS'
                 },
                 {
                     title: 'Extension Brackets',
-                    dataIndex: 'taxes',
-                    key: '8'
+                    dataIndex: 'BRACKETS',
+                    key: 'BRACKETS'
                 },
                 {
                     title: 'Specials / speciality code',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'SPECIALSONE',
+                    key: 'SPECIALSONE'
                 },
                 {
                     title: 'Specials / speciality code 2',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'SPECIALSTWO',
+                    key: 'SPECIALSTWO'
                 },
                 {
                     title: 'Gross price',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'GROSSPRICE',
+                    key: 'GROSSPRICE'
                 },
                 {
                     title: 'Best Discount',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'BESTDISCOUNT',
+                    key: 'BESTDISCOUNT'
                 },
                 {
                     title: 'Price Per Line Item',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'PRICEPERLINE',
+                    key: 'PRICEPERLINE'
                 },
                 {
                     title: 'Surcharges',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'SURCHARGES',
+                    key: 'SURCHARGES'
                 },
                 {
                     title: 'BOM',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'BOM',
+                    key: 'BOM'
                 },
                 {
                     title: 'Inventory',
-                    dataIndex: 'taxes',
-                    key: '7'
+                    dataIndex: 'INVENTORY',
+                    key: 'INVENTORY'
                 }
             ],
             ZSH: [{

@@ -124,12 +124,15 @@ export default {
             });
         },
         *fetchDetail({ payload }, { call, put }) {
+
             const response = yield call(getOrderDetail, payload);
             yield put({
                 type: 'queryOrderDetail',
                 payload: response,
             });
+            
         }
+        
     },
 
     reducers: {

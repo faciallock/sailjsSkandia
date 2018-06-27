@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import _ from 'lodash';
 import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import { Dictionary } from './map/Dictionary';
+import {zsd}  from './lines/zsd';
 
 
 export default class ViewOrderTable extends PureComponent {
@@ -13,7 +14,25 @@ export default class ViewOrderTable extends PureComponent {
             loading: false,
         };
     }
-    processHeaderOrder=(detail)=>{
+    renderData = (data,type) => {
+        
+        switch (type) {
+            case "ZSD":
+                return zsd.renderLineItems(data);
+                break;
+            case "ZMS":
+                return zsd.renderLineItems(data);
+                break;
+        
+            default:
+                return data.EX_ITEMS;
+                break;
+        }
+        
+        
+
+    }
+    processHeaderOrder = (detail) => {
         console.log(detail);
         let ZF00 = _.filter(detail.EX_CONDITIONS, { COND_TYP: "ZF00" });
         let ZCOD = _.filter(detail.EX_CONDITIONS, { COND_TYP: "ZCOD" });
@@ -42,154 +61,18 @@ export default class ViewOrderTable extends PureComponent {
         console.log();
         console.log(this.props.data.EX_DOCTYP);
         const columns=Dictionary.requestColumns().getRequest(this.props.data.EX_DOCTYP);
-        /* const columns = [{
-            title: 'Item No',
-            width: 120,
-            dataIndex: 'ITEMNO',
-            key: 'ITEMNO',
-            fixed: 'left'
-        },
-        {
-            title: 'Price',
-            width: 120,
-            dataIndex: 'ITEMPRICE',
-            key:'ITEMPRICE',
-            color: 'green',
-
-        },
-        {
-            title: 'Category',
-            dataIndex: 'EX_DOCTYP',
-            key: 'EX_DOCTYP'
-        },
-        {
-            title: 'Quantity',
-            dataIndex: 'QUANTITY',
-            key: 'QUANTITY'
-        },
-        {
-            title: 'Material',
-            dataIndex: 'MATERIAL',
-            key: 'MATERIAL'
-        },
-        {
-            title: 'Description',
-            dataIndex: 'SHORT_TEXT',
-            key: 'SHORT_TEXT'
-        },
-        {
-            title: 'Plant',
-            dataIndex: 'PLANT',
-            key: 'PLANT'
-        },
-        {
-            title: 'Class',
-            dataIndex: 'CLASS',
-            key: 'CLASS'
-        },
-        {
-            title: 'Taxes',
-            dataIndex: 'taxes',
-            key: '7'
-        },
-        {
-            title: 'Comments',
-            key: 'operation',
-            width: 120,
-            render: () => <a href="#" > view </a>,
-        },
-        ]; */
-        /* const columnsType = [{
-            title: 'Order Type',
-            width: 80,
-            dataIndex: 'EX_DOCTYP',
-            key: 'EX_DOCTYP'
-        },
-        {
-            title: 'Order Status',
-            width: 120,
-            dataIndex: 'EX_ORDSTATUS',
-            key: 'EX_ORDSTATUS',
-            color: 'green',
-
-        },
-        {
-            title: 'Created By',
-            dataIndex: 'EX_CSR',
-            key: 'EX_CSR'
-        },
-        {
-            title: 'Last Modified By',
-            dataIndex: 'EX_LASTCHANGE',
-            key: 'EX_LASTCHANGE'
-        },
-        {
-            title: 'Net Value',
-            dataIndex: 'EX_NETVAL',
-            key: 'EX_NETVAL'
-        },
-        {
-            title: 'Rush Charges Cat.',
-            dataIndex: 'EX_PRODRUSH',
-            key: 'EX_PRODRUSH'
-        },
-        {
-            title: 'S/H Charges',
-            dataIndex: 'EX_SHCHARGE',
-            key: 'EX_SHCHARGE'
-        },
-        {
-            title: 'COD Charges',
-            dataIndex: 'EX_ZCOD',
-            key: 'EX_ZCOD'
-        },
-        {
-            title: 'Taxes',
-            dataIndex: 'EX_JR1',
-
-            key: 'EX_JR1'
-        },
-        {
-            title: 'Comments',
-            key: 'operation',
-            width: 120,
-            render: () => <a href="#" > view </a>,
-        },
-        ]; */
-
-        /* const data = [{
-            key: '1',
-            name: 'Shades',
-            age: 'Confirmed',
-            address: 'AMURUGESAN',
-            lastModifiedBy: 'AMURUGESAN',
-            netValue: '$570.23',
-            rushChargesCat: "Regular",
-            shCharges: "29.73",
-            codCharges: "0.0",
-            taxes: "0.0"
-
-        }]; */
         let data = [];
-        let dataType;
+        //let dataType;
         if (this.props.data=== undefined) {
             return <div>No Data ...</div>
         } else {
-            dataType=this.processHeaderOrder(this.props.data);
+            //dataType=this.processHeaderOrder(this.props.data);
 
-            console.log(this.props.data.EX_CONFIG.find((item)=> { return item.CHAR_NAME == "WOV_WIDTH" && item.ITEMNO === "000001" }));
+            
 
-            data = this.props.data.EX_ITEMS;
-            console.log(data);
-            let dataConverted = this.props.data.EX_ITEMS.map((item)=>{
-                return item.width="100";
-
-            });
-            console.log(dataConverted);
-
-            //console.log(dataConverted);
-            //dataConverted
-
+            data = this.renderData(this.props.data, this.props.data.EX_DOCTYP); ;
+            //console.log(data);
+            
         }
         return (
             <div>

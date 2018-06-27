@@ -172,6 +172,8 @@ export default class OrderView extends PureComponent {
             
     }
 
+    
+
 
     handleClick = (value) => {
         this.openDetail(value);
@@ -251,6 +253,7 @@ export default class OrderView extends PureComponent {
                     placeholder="Number Order here"
                     onSearch={this.handleClick}
                     style={{ width: 250 }}
+                    defaultValue="0010010628"
                     enterButton
                 />
             </div>
@@ -382,7 +385,9 @@ export default class OrderView extends PureComponent {
                                             <Col lg={24} md={24} sm={24} style={{textAlign:'right', padding:'6px'}}>
                                             <Button 
                                                 onClick={this.openModalComment} 
-                                                disabled={{/* (typeof userRoles.roles === 'undefined') ? false : userRoles.roles.comments.c  */}} type="primary"><Icon type="message" /> Add comment</Button>
+                                                type="primary"><Icon type="message" /> Add comment</Button>
+
+                                            {/* (typeof userRoles.roles === 'undefined') ? false : userRoles.roles.comments.c  */}
                                             </Col>
                                             </Row>
                                             <Row gutter={12}>
@@ -430,6 +435,7 @@ export default class OrderView extends PureComponent {
                             loading={loading}
                             dataSource={orders}
                             columns={columns}
+                            size="small"
                             scroll={{ x: 1200 }}
                             rowKey={record => record.VBELN}
                         />

@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
+import { Icon } from 'antd';
 export class Dictionary {
     
     static requestColumns(){
@@ -12,8 +13,8 @@ export class Dictionary {
                 },
                 {
                     title: 'Product',
-                    dataIndex: 'ITEMPRICE',
-                    key: 'ITEMPRICE',
+                    dataIndex: 'MATERIAL',
+                    key: 'MATERIAL',
                     color: 'green',
 
                 },
@@ -38,7 +39,7 @@ export class Dictionary {
                     key: 'LENGTH'
                 },
                 {
-                    title: 'BracketMount',
+                    title: 'Bracket Mount',
                     dataIndex: 'BRACKETMOUNT',
                     key: 'BRACKETMOUNT'
                 },
@@ -80,7 +81,20 @@ export class Dictionary {
                 {
                     title: 'Best Discount',
                     dataIndex: 'BESTDISCOUNT',
-                    key: 'BESTDISCOUNT'
+                    key: 'BESTDISCOUNT',
+                    render: (record) => {
+                        console.log(record);
+
+                        return (
+                            <div>
+                            {record.map((item)=>{
+                                <span>{item.COND_VAL} %
+                                </span>
+                            })}
+                            </div>
+                            //<a onClick={() => {}}><Icon type="eye-o" /> Show</a>
+                        )
+                    }
                 },
                 {
                     title: 'Price Per Line Item',

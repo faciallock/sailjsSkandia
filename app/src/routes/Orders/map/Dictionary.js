@@ -11,9 +11,9 @@ import { ZMSColumns } from './ZMSColumns';
 
 export class Dictionary {
     
-    static requestColumns(){
+    static requestColumns(onBomClick){
         return {
-            ZSD: ZSDColumns.getColumns(),
+            ZSD: ZSDColumns.getColumns(onBomClick),
             ZSH: ZSHColumns.getColumns(),
             ZHZ: ZHZColumns.getColumns(),
             ZVT: ZVTColumns.getColumns(),

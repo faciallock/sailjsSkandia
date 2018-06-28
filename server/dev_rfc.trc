@@ -407,3 +407,311 @@ ERRNO       10054
 ERRNO TEXT  WSAECONNRESET: Connection reset by peer
 COUNTER     3
 
+
+**** Trace file opened at 2018-06-12, 12:45:33 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.10, IP address_v6: 192.168.254.10
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Jun 12 12:45:33 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.10:64951
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Jun 12 12:45:57 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.10:64952
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-12, 17:04:33 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.6, IP address_v6: 192.168.254.6
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Jun 12 17:04:33 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.6:60857
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-14, 11:17:35 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.18, IP address_v6: 192.168.254.18
+
+The function module "ZSDJ_USER_TYPE_REACT" cannot be used for 'remote' calls.
+
+**** Trace file opened at 2018-06-14, 11:23:47 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.18, IP address_v6: 192.168.254.18
+
+The function module "ZSDJ_USER_TYPE_REACT" cannot be used for 'remote' calls.
+
+**** Trace file opened at 2018-06-14, 11:24:03 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.18, IP address_v6: 192.168.254.18
+
+The function module "ZSDJ_USER_TYPE_REACT" cannot be used for 'remote' calls.
+
+**** Trace file opened at 2018-06-14, 11:24:37 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.18, IP address_v6: 192.168.254.18
+
+The function module "ZSDJ_USER_TYPE_REACT" cannot be used for 'remote' calls.
+
+**** Trace file opened at 2018-06-14, 11:25:26 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.18, IP address_v6: 192.168.254.18
+
+The function module "ZSDJ_USER_TYPE_REACT" cannot be used for 'remote' calls.
+
+**** Trace file opened at 2018-06-26, 10:56:57 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.16, IP address_v6: 192.168.254.16
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Jun 26 10:56:57 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.16:57580
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Jun 26 10:56:57 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.16:57581
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-26, 14:20:19 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.24, IP address_v6: 192.168.254.24
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Jun 26 14:20:19 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.24:63681
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-27, 12:39:56 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.30, IP address_v6: 192.168.254.30
+
+
+LOCATION    CPIC (TCP/IP) on local host DESKTOP-N6PIQF4 with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Wed Jun 27 12:39:56 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.30:59387
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-27, 13:42:29 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.30, IP address_v6: 192.168.254.30
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Wed Jun 27 13:42:29 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.30:63226
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-27, 16:12:09 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.30, IP address_v6: 192.168.254.30
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Wed Jun 27 16:12:09 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.30:63787
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Wed Jun 27 16:12:09 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.30:63788
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-27, 23:02:44 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.30, IP address_v6: 192.168.254.30
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Wed Jun 27 23:02:44 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.30:59240
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Wed Jun 27 23:02:44 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4456
+DETAIL      NiIWrite: P=10.0.0.25:3300; L=192.168.254.30:59239
+SYSTEM CALL WSASend
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+**** Trace file opened at 2018-06-28, 13:30:30 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.37, IP address_v6: 192.168.254.37
+
+Program SAPLZINTERFACES was modified during the run.
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       no conversation found with id 76595268
+TIME        Thu Jun 28 13:32:30 201
+RELEASE     711
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          473
+MODULE      r3cpic.c
+LINE        9187
+COUNTER     1
+
+
+LOCATION    CPIC (TCP/IP) on local host DESKTOP-N6PIQF4 with Unicode
+ERROR       no conversation found with id 76595268
+TIME        Thu Jun 28 13:32:59 201
+RELEASE     711
+COMPONENT   CPIC (TCP/IP) with Unicode
+VERSION     3
+RC          473
+MODULE      r3cpic.c
+LINE        9187
+COUNTER     1
+
+
+**** Trace file opened at 2018-06-28, 13:38:16 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.37, IP address_v6: 192.168.254.37
+
+Program SAPLZINTERFACES was modified during the run.

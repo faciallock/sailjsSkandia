@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import moment from 'moment';
+
 import { connect } from 'dva';
 import { List, Table, Form, Divider, Card, Alert, Tabs, Row, Col, Spin, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar, Modal } from 'antd';
 
@@ -12,11 +12,15 @@ import OrderShippingForm from './OrderShippingForm';
 import OrderFreightForm from './OrderFreightForm';
 import ViewOrderTable from './ViewOrderTable';
 import ModalNewComment from './ModalNewComment';
+import ModalBOM from './ModalBOM';
+
+import moment from 'moment';
 
 
 import { routerRedux } from 'dva/router';
 import { IntlProvider,FormattedNumber } from 'react-intl';
 import _ from 'lodash';
+
 
 
 
@@ -46,7 +50,9 @@ const breadcrumbList = [{
     orders,
     orderDetail:orders.orderDetail,
     userRoles: orders.userRoles,
+    bomDetail: orders.bomDetail,
     loading: loading.models.orders
+
 }))
 export default class OrderView extends PureComponent {
     
@@ -57,7 +63,8 @@ export default class OrderView extends PureComponent {
         formValues: {},
         visible: false,
         currentRecord: {},
-        visibleNewComment:false
+        visibleNewComment:false,
+        visibleBOM:false
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -84,6 +91,38 @@ export default class OrderView extends PureComponent {
         this.setState({
             visible: false,
         });
+    }
+    onBomClick = (orderId, lineItemNumber)=>{
+        console.log({orderId});
+        console.log({ lineItemNumber });
+        this.props.dispatch({
+            type: 'orders/fetchBOM',
+            payload: {
+                orderId, lineItemNumber
+            },
+        });
+        this.setState({
+            visibleBOM: true,
+        });
+    }
+    formatCommentDate=(date,time)=>{
+
+        let dateJS = new Date(parseInt(date.substring(0, 4)), parseInt(date.substring(4, 6))-1, parseInt(date.substring(6, 8)), parseInt(time.substring(0, 2))-1, parseInt(time.substring(2, 4)), parseInt(time.substring(4, 6)))  //date+time;
+        console.log(moment(dateJS).format("YYYY-MM-DD HH:mm:ss"));
+        return moment(moment(dateJS).format("YYYY-MM-DD HH:mm:ss"), "YYYY-MM-DD HH:mm:ss").fromNow();
+        
+    }
+    reverseComments = (items) => {
+        if(items){
+            return items.reverse();
+        }
+        else{
+            return []
+        }
+
+        
+        
+
     }
     showModal = (record, orderDetail) =>{
         this.openDetail(record.VBELN);
@@ -117,6 +156,10 @@ export default class OrderView extends PureComponent {
     onCancelNewComment=() =>{
         this.setState({ visibleNewComment: false })
     }
+    onOKBOM = () => {
+        this.setState({ visibleBOM: false })
+    }
+    
     handleOkNewComment =(documentId)=>{
         const form = this.formRefComment.props.form;
         form.validateFields((err, values) => {
@@ -183,9 +226,9 @@ export default class OrderView extends PureComponent {
 
     render() {
         console.log(this.props);
-        const { orders: { orders }, orderDetail, userRoles, loading } = this.props;
+        const { orders: { orders }, orderDetail, bomDetail, userRoles, loading } = this.props;
         console.log(userRoles);
-        const { selectedRows, modalVisible, visibleNewComment } = this.state;
+        const { selectedRows, modalVisible, visibleNewComment, visibleBOM } = this.state;
         const columns = [
             {
                 title: 'Order No',
@@ -283,7 +326,14 @@ export default class OrderView extends PureComponent {
                         onCreate={()=>{
                             this.handleOkNewComment(orderDetail.IM_SALESDOCU)
                             }}
-                    />   
+                    />
+                    <ModalBOM
+                        visible={visibleBOM}
+                        onOK={this.onOKBOM}
+                        data={bomDetail}
+                        loading={loading}
+                    />
+                   
                     
                          
                     <Modal
@@ -378,7 +428,7 @@ export default class OrderView extends PureComponent {
                                         <OrderFreightForm data={orderDetail} />
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="table" />Items</span>} key="3">
-                                        <ViewOrderTable data={orderDetail} />
+                                    <ViewOrderTable data={orderDetail} onBomClick={this.onBomClick} />
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>
@@ -404,14 +454,28 @@ export default class OrderView extends PureComponent {
                                                             bordered
                                                             size="small"
                                                             dataSource={orderDetail.EX_USERLOG}
-                                                            renderItem={item => (<List.Item>
+                                                            renderItem={item => (
+                                                                
+                                                                        <List.Item
+                                                                    actions={[
+                                                                        <span style={{ color:'#1d2d5c',fontSize:'0.8rem'}}>
+                                                                                        
+                                                                            {this.formatCommentDate(item.ERDAT, item.ERZET)} <Icon type="clock-circle-o" />
+                                                                            
+                                                                                </span>
+                                                                            ]}
+                                                                        >
+                                                                            
+                                                                                
+                                                                                
+                                                                            
                                                                             <List.Item.Meta
                                                                                 avatar={<Avatar icon="user" />}
                                                                                 title={item.ERNAM}
                                                                                 description={item.ZCOMMENT}
                                                                             />
                                                                             
-                                                                            </List.Item>)}
+                                                                        </List.Item>)}
                                                             
                                                         />
                                                     </div>

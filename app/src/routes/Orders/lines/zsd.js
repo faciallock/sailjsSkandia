@@ -29,6 +29,8 @@ export class zsd extends React.PureComponent {
             item.GROSSPRICE = itemExCondGrossPrice.COND_VAL;
             item.BESTDISCOUNT = aDiscount;
             item.EX_SURCHRG = itemExSurchrg;
+            item.BOM = {
+                orderId: data.IM_SALESDOCU, lineItemNumber: item.ITEMNO}
 
             
             

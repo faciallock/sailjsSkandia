@@ -63,7 +63,7 @@ export default {
 };
  */
 
-import { getOrders, getOrderDetail, addComment, getUserType } from '../services/api';
+import { getOrders, getOrderDetail, getBOM, addComment, getUserType } from '../services/api';
 
 export default {
     namespace: 'orders',
@@ -71,7 +71,9 @@ export default {
     state: {
         orders: [],
         orderDetail:{},
-        userRoles:{}
+        userRoles:{},
+        bomDetail:{}
+
     },
 
     effects: {
@@ -131,6 +133,15 @@ export default {
                 payload: response,
             });
             
+        },
+        *fetchBOM({ payload }, { call, put }) {
+
+            const response = yield call(getBOM, payload);
+            yield put({
+                type: 'queryBOM',
+                payload: response,
+            });
+
         }
         
     },
@@ -149,6 +160,13 @@ export default {
                 orderDetail: action.payload.msg
             };
         },
+        queryBOM(state, action) {
+            return {
+                ...state,
+                bomDetail: action.payload.msg
+            };
+        },
+        
         queryUserType(state, action) {
             return {
                 ...state,

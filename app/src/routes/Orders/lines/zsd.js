@@ -14,10 +14,8 @@ export class zsd extends React.PureComponent {
             let itemExConfigSpecialOne = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_2ON1` && itemConfig.ITEMNO === item.ITEMNO });
             let itemExConfigSpecialTwo = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_2ON2` && itemConfig.ITEMNO === item.ITEMNO });
             let itemExCondGrossPrice = data.EX_CONDITIONS.find((itemCond) => { return itemCond.COND_TYP == `ZPR0` && itemCond.ITEMNO === parseInt(item.ITEMNO) });
-            let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" })
-
-          //  parseInt(item.ITEMNO)
-
+            let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" });
+            let itemExSurchrg = data.EX_SURCHRG.filter((itemSurchrg) => { return itemSurchrg.ITEMNO === parseInt(item.ITEMNO) });
             
 
             item.WIDTH = itemExConfigWidth.VALUE_CHAR;
@@ -30,6 +28,8 @@ export class zsd extends React.PureComponent {
             item.SPECIALSTWO = itemExConfigSpecialTwo.VALUE_DESC;
             item.GROSSPRICE = itemExCondGrossPrice.COND_VAL;
             item.BESTDISCOUNT = aDiscount;
+            item.EX_SURCHRG = itemExSurchrg;
+
             
             
             //ZEA_COLOR

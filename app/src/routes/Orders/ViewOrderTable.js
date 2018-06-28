@@ -3,6 +3,10 @@ import _ from 'lodash';
 import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import { Dictionary } from './map/Dictionary';
 import {zsd}  from './lines/zsd';
+import { zms } from './lines/zms';
+import { zsh } from './lines/zsh';
+import { zhz } from './lines/zhz';
+import { zvt } from './lines/zvt';
 
 
 export default class ViewOrderTable extends PureComponent {
@@ -21,9 +25,19 @@ export default class ViewOrderTable extends PureComponent {
                 return zsd.renderLineItems(data);
                 break;
             case "ZMS":
-                return zsd.renderLineItems(data);
+                return zms.renderLineItems(data);
                 break;
-        
+            case "ZSH":
+                return zsh.renderLineItems(data);
+                break;
+
+            case "ZHZ":
+                return zhz.renderLineItems(data);
+                break;
+
+            case "ZVT":
+                return zvt.renderLineItems(data);
+                break;
             default:
                 return data.EX_ITEMS;
                 break;
@@ -79,7 +93,11 @@ export default class ViewOrderTable extends PureComponent {
                 {/* <div style={{padding:'12px'}}>
                 <Table columns={columnsType} size="small" pagination={false} dataSource={dataType} scroll={{ x: 1500 }} />
                 </div> */}
-                <Table columns={columns} dataSource={data} scroll={{ x: 2350 }} />
+                <Table 
+                columns={columns} 
+                dataSource={data}
+                scroll={{ x: 2350 }}
+                    rowKey={record => record.ITEMNO} />
             </div>
         )
 

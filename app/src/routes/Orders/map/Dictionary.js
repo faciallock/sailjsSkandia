@@ -14,10 +14,10 @@ export class Dictionary {
     static requestColumns(onBomClick, onInventoryClick){
         return {
             ZSD: ZSDColumns.getColumns(onBomClick, onInventoryClick),
-            ZSH: ZSHColumns.getColumns(),
-            ZHZ: ZHZColumns.getColumns(),
-            ZVT: ZVTColumns.getColumns(),
-            ZMS: ZMSColumns.getColumns(),
+            ZSH: ZSHColumns.getColumns(onBomClick, onInventoryClick),
+            ZHZ: ZHZColumns.getColumns(onBomClick, onInventoryClick),
+            ZVT: ZVTColumns.getColumns(onBomClick, onInventoryClick),
+            ZMS: ZMSColumns.getColumns(onBomClick, onInventoryClick),
             getRequest: function(aColumn) {
                 var value = eval("this." + aColumn);
                 return value;

@@ -63,7 +63,7 @@ export default {
 };
  */
 
-import { getOrders, getOrderDetail, getBOM, addComment, getUserType } from '../services/api';
+import { getOrders, getOrderDetail, getBOM, getInventory, addComment, getUserType } from '../services/api';
 
 export default {
     namespace: 'orders',
@@ -72,7 +72,8 @@ export default {
         orders: [],
         orderDetail:{},
         userRoles:{},
-        bomDetail:{}
+        bomDetail:{},
+        inventoryDetail:{}
 
     },
 
@@ -94,29 +95,6 @@ export default {
                 type: 'queryOrderDetail',
                 payload: responseFetch,
             });
-            //console.log(payload);
-            /* yield put({
-                type: 'queryOrderDetail',
-                payload: response,
-            }); */
-            
-            // yield put({
-            //     type: 'changeLoginStatus',
-            //     payload: response,
-            // });
-            // // Login successfully
-            // console.log(response);
-            // if (typeof response === 'undefined') {
-            //     //reloadAuthorized();
-            //     //routerRedux.push('/')
-            //     yield put(routerRedux.push('/'));
-            // } else if (response.token.length !== 0) {
-            //     console.log(response.token.length)
-            //     localStorage.setItem('userName', response.msg.USER_ID)
-            //     reloadAuthorized();
-            //     //routerRedux.push('/')
-            //     yield put(routerRedux.push('/'));
-            // }
         },
         *getUserType({ payload }, { call, put }) {
             const response = yield call(getUserType, payload);
@@ -142,7 +120,17 @@ export default {
                 payload: response,
             });
 
+        },
+        *fetchInventory({ payload }, { call, put }) {
+
+            const response = yield call(getInventory, payload);
+            yield put({
+                type: 'queryInventory',
+                payload: response,
+            });
+
         }
+        
         
     },
 
@@ -166,6 +154,13 @@ export default {
                 bomDetail: action.payload.msg
             };
         },
+        queryInventory(state, action) {
+            return {
+                ...state,
+                inventoryDetail: action.payload.msg
+            };
+        },
+        
         
         queryUserType(state, action) {
             return {

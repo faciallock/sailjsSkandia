@@ -71,6 +71,28 @@ module.exports = {
         }
 
     },
+    getInventory: async function (req, res) {
+        try {
+            client.invoke('ZSD_INV_LIST',
+                { IM_SALESDOCU: req.query.orderId },
+                function (err, response) {
+                    if (err) {
+                        return console.error('Error invoking STFC_STRUCTURE:', err);
+                        res.send({ error: "true :( " + err });
+                    }
+                    //console.log('Result STFC_STRUCTURE:', res);
+                    /* let comments=response.EX_USERLOG;
+                    comments.reverse();
+                    response.EX_USERLOG = comments; */
+
+                    return res.ok({ msg: response })
+                });
+        } catch (e) {
+            console.log(e);
+            return res.ok({ msg: e })
+        }
+
+    },
     createComment: async function (req, res) {
         console.log(req.query);
         console.log(req.param('comment'));

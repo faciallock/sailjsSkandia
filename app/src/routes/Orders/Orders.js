@@ -13,6 +13,7 @@ import OrderFreightForm from './OrderFreightForm';
 import ViewOrderTable from './ViewOrderTable';
 import ModalNewComment from './ModalNewComment';
 import ModalBOM from './ModalBOM';
+import ModalInventory from './ModalInventory';
 
 import moment from 'moment';
 
@@ -51,6 +52,7 @@ const breadcrumbList = [{
     orderDetail:orders.orderDetail,
     userRoles: orders.userRoles,
     bomDetail: orders.bomDetail,
+    inventoryDetail: orders.inventoryDetail,
     loading: loading.models.orders
 
 }))
@@ -64,7 +66,8 @@ export default class OrderView extends PureComponent {
         visible: false,
         currentRecord: {},
         visibleNewComment:false,
-        visibleBOM:false
+        visibleBOM:false,
+        visibleInventory:false
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -103,6 +106,18 @@ export default class OrderView extends PureComponent {
         });
         this.setState({
             visibleBOM: true,
+        });
+    }
+    onInventoryClick = (orderId) => {
+        console.log({ orderId });
+        this.props.dispatch({
+            type: 'orders/fetchInventory',
+            payload: {
+                orderId
+            },
+        });
+        this.setState({
+            visibleInventory: true,
         });
     }
     formatCommentDate=(date,time)=>{
@@ -158,6 +173,9 @@ export default class OrderView extends PureComponent {
     }
     onOKBOM = () => {
         this.setState({ visibleBOM: false })
+    }
+    onOKInventory = () => {
+        this.setState({ visibleInventory: false })
     }
     
     handleOkNewComment =(documentId)=>{
@@ -226,9 +244,9 @@ export default class OrderView extends PureComponent {
 
     render() {
         console.log(this.props);
-        const { orders: { orders }, orderDetail, bomDetail, userRoles, loading } = this.props;
+        const { orders: { orders }, orderDetail, bomDetail, inventoryDetail, userRoles, loading } = this.props;
         console.log(userRoles);
-        const { selectedRows, modalVisible, visibleNewComment, visibleBOM } = this.state;
+        const { selectedRows, modalVisible, visibleNewComment, visibleBOM, visibleInventory } = this.state;
         const columns = [
             {
                 title: 'Order No',
@@ -333,6 +351,13 @@ export default class OrderView extends PureComponent {
                         data={bomDetail}
                         loading={loading}
                     />
+                    <ModalInventory
+                        visible={visibleInventory}
+                        onOK={this.onOKInventory}
+                        data={inventoryDetail}
+                        loading={loading}
+                    />
+                    
                    
                     
                          
@@ -428,7 +453,7 @@ export default class OrderView extends PureComponent {
                                         <OrderFreightForm data={orderDetail} />
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="table" />Items</span>} key="3">
-                                    <ViewOrderTable data={orderDetail} onBomClick={this.onBomClick} />
+                                    <ViewOrderTable data={orderDetail} onBomClick={this.onBomClick} onInventoryClick={this.onInventoryClick} />
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>

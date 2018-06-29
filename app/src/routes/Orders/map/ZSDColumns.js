@@ -3,7 +3,7 @@ import { Icon, Modal, List, Button } from 'antd';
 import { ModalInfo } from '../components/ModalInfo';
 export class ZSDColumns {
 
-    static getColumns(onBomClick) {
+    static getColumns(onBomClick, onInventoryClick) {
         return [{
             title: 'Line',
             width: 80,
@@ -188,7 +188,9 @@ export class ZSDColumns {
 
                     <Button
                         onClick={() => {
-                            const columns = [
+
+                            onInventoryClick(record.orderId)
+                            {/* const columns = [
                                 {
                                     title: 'Surcharge Type',
                                     dataIndex: 'COND_TYP',
@@ -207,7 +209,7 @@ export class ZSDColumns {
                                 }
                             ];
 
-                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE");
+                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE"); */}
                         }}
                         type="default" icon="eye-o">View</Button>
                 )

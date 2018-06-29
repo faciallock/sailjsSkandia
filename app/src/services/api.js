@@ -83,9 +83,11 @@ export async function getOrderDetail({ orderId }) {
   return request(`/api/order/findOne?orderId=${orderId}`);
 }
 export async function getBOM({ orderId, lineItemNumber }) {
-  console.log({orderId});
-  console.log({ lineItemNumber });
   return request(`/api/order/bom?orderId=${orderId}&lineItemNumber=${lineItemNumber}`);
+}
+export async function getInventory({ orderId }) {
+  console.log({ orderId });
+  return request(`/api/order/inventory?orderId=${orderId}`);
 }
 export async function getOrders({ userName }) {
   console.log(userName);

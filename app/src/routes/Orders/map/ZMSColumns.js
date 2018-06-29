@@ -3,7 +3,7 @@ import { Icon, Modal, List, Button } from 'antd';
 import { ModalInfo } from '../components/ModalInfo';
 export class ZMSColumns {
 
-    static getColumns() {
+    static getColumns(onBomClick, onInventoryClick) {
         return [{
             title: 'Line',
             width: 80,
@@ -53,37 +53,137 @@ export class ZMSColumns {
             dataIndex: 'BESTDISCOUNT',
             key: 'BESTDISCOUNT',
             render: (record) => {
-                console.log(record);
-
                 return (
-                    <div>
-                        {record.map((item) => {
-                            <span>{item.COND_VAL} %
-                            </span>
-                        })}
-                    </div>
+
+                    <Button
+                        onClick={() => {
+                            let aData = [];
+                            aData = record;
+                            aData.map((item) => {
+                                let currentValue = item.COND_VAL + "%";
+                                item.VALUE = currentValue;
+                                return item;
+
+                            });
+                            ModalInfo.show('Best Discount', aData, "l");
+                        }}
+                        type="default" icon="eye-o">View</Button>
                 )
             }
         },
         {
             title: 'Price Per Line Item',
-            dataIndex: 'PRICEPERLINE',
-            key: 'PRICEPERLINE'
+            dataIndex: 'ITEMPRICE',
+            key: 'ITEMPRICE'
         },
         {
             title: 'Surcharges',
-            dataIndex: 'SURCHARGES',
-            key: 'SURCHARGES'
+            dataIndex: 'EX_SURCHRG',
+            key: 'EX_SURCHRG',
+            render: (record) => {
+                return (
+
+
+                    <Button
+                        onClick={() => {
+                            const columns = [
+                                {
+                                    title: 'Surcharge Type',
+                                    dataIndex: 'COND_TYP',
+                                    key: 'COND_TYP',
+
+                                },
+                                {
+                                    title: 'Description',
+                                    dataIndex: 'VTEXT',
+                                    key: 'VTEXT'
+                                },
+                                {
+                                    title: 'Value',
+                                    dataIndex: 'COND_VAL',
+                                    key: 'COND_VAL'
+                                }
+                            ];
+
+                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE");
+                        }}
+                        type="default" icon="eye-o">View</Button>
+                )
+            }
         },
         {
             title: 'BOM',
             dataIndex: 'BOM',
-            key: 'BOM'
+            key: 'BOM',
+            render: (record) => {
+                return (
+
+
+                    <Button
+                        onClick={() => {
+                            console.log(record);
+                            onBomClick(record.orderId, record.lineItemNumber);
+                           {/*  const columns = [
+                                {
+                                    title: 'Surcharge Type',
+                                    dataIndex: 'COND_TYP',
+                                    key: 'COND_TYP',
+
+                                },
+                                {
+                                    title: 'Description',
+                                    dataIndex: 'VTEXT',
+                                    key: 'VTEXT'
+                                },
+                                {
+                                    title: 'Value',
+                                    dataIndex: 'COND_VAL',
+                                    key: 'COND_VAL'
+                                }
+                            ];
+
+                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE"); */}
+                        }}
+                        type="default" icon="eye-o">View</Button>
+                )
+            }
         },
         {
             title: 'Inventory',
             dataIndex: 'INVENTORY',
-            key: 'INVENTORY'
+            key: 'INVENTORY',
+            render: (record) => {
+                return (
+
+
+                    <Button
+                        onClick={() => {
+
+                            onInventoryClick(record.orderId)
+                            {/* const columns = [
+                                {
+                                    title: 'Surcharge Type',
+                                    dataIndex: 'COND_TYP',
+                                    key: 'COND_TYP',
+
+                                },
+                                {
+                                    title: 'Description',
+                                    dataIndex: 'VTEXT',
+                                    key: 'VTEXT'
+                                },
+                                {
+                                    title: 'Value',
+                                    dataIndex: 'COND_VAL',
+                                    key: 'COND_VAL'
+                                }
+                            ];
+
+                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE"); */}
+                        }}
+                        type="default" icon="eye-o">View</Button>
+                )
+            }
         }]
         
     }

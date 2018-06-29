@@ -21,7 +21,9 @@ export class zvt extends React.PureComponent {
 
             
             let itemExCondGrossPrice = data.EX_CONDITIONS.find((itemCond) => { return itemCond.COND_TYP == `ZPR0` && itemCond.ITEMNO === parseInt(item.ITEMNO) });
-            let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" })
+//            let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" })
+
+            let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD3" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD4" && itemCond.ITEMNO === parseInt(item.ITEMNO)) });
 
           //  parseInt(item.ITEMNO)
 
@@ -39,6 +41,11 @@ export class zvt extends React.PureComponent {
             item.FREEHANG = itemExConfigFreeHang ? itemExConfigFreeHang.VALUE_DESC : "";
             item.EXTB = itemExConfigExtensionBrackets ? itemExConfigExtensionBrackets.VALUE_DESC : "";
             item.TWOONONE = itemExConfigBottomChains ? itemExConfigBottomChains.VALUE_DESC : "";
+
+
+            item.BOM = {
+                orderId: data.IM_SALESDOCU, lineItemNumber: item.ITEMNO}
+            item.INVENTORY = { orderId: data.IM_SALESDOCU};
             
             //ZEA_COLOR
             //ZEA_BRACKET_SH

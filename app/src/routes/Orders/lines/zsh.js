@@ -20,8 +20,9 @@ export class zsh extends React.PureComponent {
             let itemExConfigSquareFeet = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_PRICE_VINYL` && itemConfig.ITEMNO === item.ITEMNO });
             
             let itemExCondGrossPrice = data.EX_CONDITIONS.find((itemCond) => { return itemCond.COND_TYP == `ZPR0` && itemCond.ITEMNO === parseInt(item.ITEMNO) });
-            let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" })
-
+            //let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" })
+            let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD3" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD4" && itemCond.ITEMNO === parseInt(item.ITEMNO)) });
+            let itemExSurchrg = data.EX_SURCHRG.filter((itemSurchrg) => { return itemSurchrg.ITEMNO === parseInt(item.ITEMNO) });
           //  parseInt(item.ITEMNO)
 
             
@@ -39,6 +40,11 @@ export class zsh extends React.PureComponent {
             item.PRE_MAGNET_DRILL = itemExConfigPreDrill ? itemExConfigPreDrill.VALUE_DESC : "";
             item.CLEAR_VIEW = itemExConfigClearView ? itemExConfigClearView.VALUE_DESC : "";
             item.PRICE_VINYL = itemExConfigSquareFeet ? itemExConfigSquareFeet.VALUE_CHAR : "";
+            item.EX_SURCHRG = itemExSurchrg;
+            item.BOM = {
+                orderId: data.IM_SALESDOCU, lineItemNumber: item.ITEMNO
+            }
+            item.INVENTORY = { orderId: data.IM_SALESDOCU };
             
             
             //ZEA_COLOR

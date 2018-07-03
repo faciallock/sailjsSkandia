@@ -93,6 +93,62 @@ module.exports = {
         }
 
     },
+
+    search: async function (req, res) {
+        try {
+
+                // IM_IND Indicator for role
+                // IM_CUSTNO for Dealers
+                // IM_USERNAME username
+                // IM_ORDER_NO Order number
+                // IM_SIDEMARK Sidemark
+                // IM_CUSTOMER Customer number (when looking up for a customer)
+                // IM_NAME Name
+                // IM_ORDER_DATE Order Date
+                // IM_SHIPPED_DATE Shipped date
+                // IM_SHIP_BY Ship by
+                // IM_TOTAL_PRICE Total price
+                // IM_STATUS Status
+
+
+            client.invoke('ZGET_PENDING_SORDERS_CUSTOMERX',
+                {    
+                   IM_IND: req.body.UserIndicator,
+                   IM_CUSTNO: req.body.DealerNumber,
+                   IM_USERNAME: req.body.UserName,
+
+                   IM_ORDER_NO: req.body.OrderNumber, 
+                   IM_SIDEMARK: req.body.Sidemark,
+                   IM_CUSTOMER: req.body.CustomerNumber, 
+                   IM_NAME: req.body.Name, 
+                   IM_ORDER_DATE: req.body.OrderDate,
+                   IM_SHIPPED_DATE: req.body.ShippedDate,
+                   IM_SHIP_BY: req.body.ShippedBy,
+                   IM_TOTAL_PRICE: req.body.TotalPrice,
+                   IM_STATUS: req.body.Status},
+
+
+                function (err, response) {
+                    if (err) {
+                        return console.error('Error invoking STFC_STRUCTURE:', err);
+                        res.send({ error: "true :( " + err });
+                    }
+                    //console.log('Result STFC_STRUCTURE:', res);
+                    /* let comments=response.EX_USERLOG;
+                    comments.reverse();
+                    response.EX_USERLOG = comments; */
+
+                    return res.ok({ msg: response })
+                });
+        } catch (e) {
+            console.log(e);
+            return res.ok({ msg: e })
+        }
+
+    },
+
+
+
     createComment: async function (req, res) {
         console.log(req.query);
         console.log(req.param('comment'));
@@ -138,4 +194,5 @@ module.exports = {
     
 
 };
+
 

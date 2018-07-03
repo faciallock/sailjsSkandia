@@ -34,6 +34,7 @@ module.exports.routes = {
   'GET /order/findOne': 'OrderController.findOne',
   'GET /order/bom': 'OrderController.getBOM',
   'GET /order/inventory': 'OrderController.getInventory',
+  'POST /orders/search': 'OrderController.search',
   'POST /sap/Login': 'SAPController.login',
   'GET /currentUser': 'SAPController.currentUser',
   'GET /orders': 'OrderController.findOrdersByUser',

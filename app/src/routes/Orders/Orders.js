@@ -14,6 +14,7 @@ import ViewOrderTable from './ViewOrderTable';
 import ModalNewComment from './ModalNewComment';
 import ModalBOM from './ModalBOM';
 import ModalInventory from './ModalInventory';
+import SearchForm from './SearchForm';
 
 import moment from 'moment';
 
@@ -67,7 +68,8 @@ export default class OrderView extends PureComponent {
         currentRecord: {},
         visibleNewComment:false,
         visibleBOM:false,
-        visibleInventory:false
+        visibleInventory:false,
+        showSearch: false
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -95,6 +97,7 @@ export default class OrderView extends PureComponent {
             visible: false,
         });
     }
+
     onBomClick = (orderId, lineItemNumber)=>{
         console.log({orderId});
         console.log({ lineItemNumber });
@@ -231,6 +234,51 @@ export default class OrderView extends PureComponent {
 
         });
             
+    }
+
+
+    handleSearch = (payload) =>{
+
+
+        //payload.UserName = localStorage.getItem('userName');
+        payload.UserName = "AMURUGESAN";
+        payload.UserIndicator = "C";
+        payload.DealerNumber = "";
+
+
+
+        if( typeof payload.OrderNumber == "undefined"){payload.OrderNumber = ""; };
+        if( typeof payload.Sidemark == "undefined" ){ payload.Sidemark = "";}; 
+        if( typeof payload.CustomerNumber == "undefined" ){ payload.CustomerNumber = ""; };
+        if( typeof payload.Name == "undefined" ){ payload.Name = "";};
+        if( typeof payload.OrderDate == "undefined" || payload.OrderDate == null){ payload.OrderDate = "";};
+        if( typeof payload.ShippedDate == "undefined" || payload.ShippedDate == null){ payload.ShippedDate = ""; };
+        if( typeof payload.ShippedBy == "undefined" ){ payload.ShippedBy = "";};
+        if( typeof payload.TotalPrice == "undefined" ){ payload.TotalPrice = "";};
+        if( typeof payload.Status == "undefined" ){ payload.Status = "";} ;
+
+        if( payload.OrderNumber != "") {payload.OrderNumber = payload.OrderNumber.padStart(10, '0'); };
+        if( payload.CustomerNumber != "") {payload.CustomerNumber = payload.CustomerNumber.padStart(10, '0'); };
+        
+        if( payload.OrderDate != "") { payload.OrderDate = payload.OrderDate.format("YYYYMMDD"); };
+        if( payload.ShippedDate != "") { payload.ShippedDate = payload.ShippedDate.format("YYYYMMDD"); };
+
+        
+
+
+        this.props.dispatch({
+            type: 'orders/search',
+            payload: payload,
+        });
+    }
+
+    toggleSearch = () =>{
+
+    this.setState({
+        showSearch: !this.state.showSearch,
+    });
+    
+
     }
 
     
@@ -519,6 +567,17 @@ export default class OrderView extends PureComponent {
                         </Spin>
                         
                     </Modal>
+
+                    <Card bordered={false}>
+
+                    <a style={{ marginLeft: 8, fontSize: 12 }} onClick={this.toggleSearch}>
+                    Show search <Icon type={this.state.showSearch ? 'up' : 'down'} />
+                    </a>
+                    { this.state.showSearch &&                                                                             
+                    <SearchForm handleSearch={this.handleSearch} /> }
+                    
+                    </Card>
+
                     <Card bordered={false}>
                         <Table
                             loading={loading}

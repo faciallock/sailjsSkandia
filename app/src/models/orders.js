@@ -63,7 +63,7 @@ export default {
 };
  */
 
-import { getOrders, getOrderDetail, getBOM, getInventory, addComment, getUserType } from '../services/api';
+import { getOrders, getOrderDetail, getBOM, getInventory, addComment, getUserType, searchOrder } from '../services/api';
 
 export default {
     namespace: 'orders',
@@ -80,6 +80,14 @@ export default {
     effects: {
         *fetch({ payload }, { call, put }) {
             const response = yield call(getOrders, payload);
+            yield put({
+                type: 'queryOrders',
+                payload:response,
+            });
+        },
+
+        *search({ payload }, { call, put }) {
+            const response = yield call(searchOrder, payload);
             yield put({
                 type: 'queryOrders',
                 payload:response,

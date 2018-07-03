@@ -584,11 +584,7 @@ export default class OrderView extends PureComponent {
                         
                     </Modal>
 
-                    <Card bordered={false}>
-
-                   
                     
-                    </Card>
 
                     <Card bordered={false}>
                         <Table

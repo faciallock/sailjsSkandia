@@ -44,7 +44,7 @@ const SearchForm = Form.create()(
                                 message: '',
                         }],
                         })(
-                        <Input placeholder="Customer number" />
+                        <Input prefix={<Icon type="solution" style={{ color: '#1d2d5c' }} />} placeholder="Customer number" />
                         )}
                         </FormItem>
                 </Col>
@@ -56,7 +56,7 @@ const SearchForm = Form.create()(
                                 message: '',
                         }],
                         })(
-                        <Input placeholder="Order number" />
+                        <Input prefix={<Icon type="file-text" style={{ color: '#1d2d5c' }} />} placeholder="Order number" />
                         )}
                         </FormItem>
                 </Col>
@@ -68,7 +68,7 @@ const SearchForm = Form.create()(
                                 message: '',
                         }],
                         })(
-                        <Input placeholder="Sidemark" />
+                        <Input prefix={<Icon type="tag-o" style={{ color: '#1d2d5c' }}/>} placeholder="Sidemark" />
                         )}
                         </FormItem>
                 </Col>
@@ -80,7 +80,7 @@ const SearchForm = Form.create()(
                                 message: '',
                         }],
                         })(
-                        <Input placeholder="Name" />
+                        <Input prefix={<Icon type="user" style={{ color: '#1d2d5c' }} />} placeholder="Name" />
                         )}
                         </FormItem>
                 </Col>
@@ -93,8 +93,8 @@ const SearchForm = Form.create()(
                                 required: false,
                                 message: '',
                         }],
-                        })(
-                        <Input placeholder="Shipped By" />
+                        })( 
+                        <Input prefix={<Icon type="shop" style={{ color: '#1d2d5c' }} />} placeholder="Shipped By" />
                         )}
                         </FormItem>
                 </Col>
@@ -107,7 +107,7 @@ const SearchForm = Form.create()(
                                 message: '',
                         }],
                         })(
-                        <Input placeholder="Total Price" />
+                        <Input prefix={<span style={{ color: '#1d2d5c' }} >$</span>} placeholder="Total Price" />
                         )}
                         </FormItem>
                 </Col>
@@ -118,8 +118,8 @@ const SearchForm = Form.create()(
                                 required: false,
                                 message: '',
                         }],
-                        })(
-                        <Input placeholder="Status" />
+                        })( 
+                        <Input prefix={<Icon type="check-circle-o" style={{ color: '#1d2d5c' }}/>} placeholder="Status" />
                         )}
                         </FormItem>
                 </Col>

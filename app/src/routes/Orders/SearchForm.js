@@ -54,9 +54,11 @@ const SearchForm = Form.create()(
                             rules: [{
                                 required: false,
                                 message: '',
+                                
                         }],
+                        value:"0010010628"
                         })(
-                        <Input prefix={<Icon type="file-text" style={{ color: '#1d2d5c' }} />} placeholder="Order number" />
+                        <Input  prefix={<Icon type="file-text" style={{ color: '#1d2d5c' }} />} placeholder="Order number" />
                         )}
                         </FormItem>
                 </Col>

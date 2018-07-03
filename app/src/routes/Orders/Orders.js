@@ -392,7 +392,7 @@ export default class OrderView extends PureComponent {
             <PageHeaderLayout title=""
             content={
                 <div style={{textAlign: "right",position:'relative',top:'-20px'} }>
-                <Button style={{ marginLeft: 8 }} onClick={this.toggleSearch}><Icon type="search" />
+                <Button  style={{ marginLeft: 8 }} onClick={this.toggleSearch}><Icon type="search"  style={{ color: '#1d2d5c' }}/>
                     Show search <Icon type={this.state.showSearch ? 'up' : 'down'} />
                     </Button>
                     { this.state.showSearch &&                                                                             
@@ -445,19 +445,25 @@ export default class OrderView extends PureComponent {
                                 action={
                                     <div style={{textAlign:'left',paddingLeft:'30px',position:'relative',top:'-5px'}}>
                                         <Row>
-                                            <Col lg={12} md={12} sm={24}>
-                                                <b>Order Type:</b> {OrderTypes.types().getRequest(orderDetail.EX_DOCTYP) } 
+                                            <Col lg={8} md={12} sm={24}>
+                                                <b>Company:</b> {orderDetail.EX_CUST ? orderDetail.EX_CUST.split("-")[1]: ""}
                                             </Col>
-                                            <Col lg={12} md={12} sm={24}>
-                                                <b>Order Status:</b> {orderDetail.EX_ORDSTATUS}
+                                            <Col lg={8} md={12} sm={24}>
+                                                <b>Account:</b> {orderDetail.EX_CUST ? orderDetail.EX_CUST.split("-")[0]: ""}
+                                            </Col>
+                                            <Col lg={8} md={12} sm={24}>
+                                                <b>Sales Org:</b> {orderDetail.EX_ORG}
                                             </Col>
                                         </Row>
                                         <Row>
-                                            <Col lg={12} md={12} sm={24}>
-                                                <b>Created By:</b> {orderDetail.EX_CSR}
+                                            <Col lg={8} md={12} sm={24}>
+                                                <b>Order Type:</b> {OrderTypes.types().getRequest(orderDetail.EX_DOCTYP) } 
                                             </Col>
-                                            <Col lg={12} md={12} sm={24}>
-                                                <b>Last Modified By:</b> {orderDetail.EX_LASTCHANGE}
+                                            <Col lg={8} md={12} sm={24}>
+                                                <b>Order Status:</b>
+                                            </Col>
+                                            <Col lg={8} md={12} sm={24}>
+                                                <b>Order Status #2:</b> {orderDetail.EX_ORDSTATUS}
                                             </Col>
                                         </Row>
                                     </div>
@@ -465,9 +471,43 @@ export default class OrderView extends PureComponent {
                                 breadcrumbList={breadcrumbList}
                                 logo={<Icon style={{ fontSize: 48, color: '#1d2d5c' }}   type="file-text"/>}
                                 content={<div className="content">
-                                    <Divider />
-                                    
+                                    <Divider style={{margin:'12px 0',top:'-12px'}} />
+
                                     <Row gutter={12}>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>Payment Terms:</b> {orderDetail.EX_BILL_TERM ? orderDetail.EX_BILL_TERM.VALUE : ""}  
+                                        </Col>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>Created By:</b> {orderDetail.EX_CSR}
+                                        </Col>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>Last Modified By:</b> {orderDetail.EX_LASTCHANGE}
+                                        </Col>
+                                    </Row>
+                                    <Row gutter={12}>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>Net Value:</b> <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> 
+                                        </Col>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
+                                        </Col>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false :parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2)  }
+                                        </Col>
+                                    </Row>
+                                    <Row gutter={12}>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2) }
+                                        </Col>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : parseFloat(Math.round(JR1[0].COND_VAL * 100) / 100).toFixed(2) }
+                                        </Col>
+                                        <Col lg={8} md={8} sm={12}>
+                                            <b>Grand Total:</b> <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> 
+                                        </Col>
+                                    </Row>
+                                    
+                                    {/* <Row gutter={12}>
                                         <Col lg={5} md={8} sm={12}>
                                             <b>Desc:</b> {this.state.currentRecord.DESC}  
                                         </Col>
@@ -504,7 +544,7 @@ export default class OrderView extends PureComponent {
                                         <Col lg={4} md={8} sm={12}>
 
                                         </Col>
-                                    </Row>
+                                    </Row> */}
                                 </div>}
                             />
                         

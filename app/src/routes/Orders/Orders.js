@@ -16,6 +16,8 @@ import ModalBOM from './ModalBOM';
 import ModalInventory from './ModalInventory';
 import SearchForm from './SearchForm';
 
+import { OrderTypes } from './map/OrderTypes';
+
 import moment from 'moment';
 
 
@@ -410,7 +412,7 @@ export default class OrderView extends PureComponent {
                     
                          
                     <Modal
-                        title="Order Detail"
+                        title="View Order Details"
                         visible={this.state.visible}
                         onOk={this.hideModal}
                         okText="OK"
@@ -428,10 +430,10 @@ export default class OrderView extends PureComponent {
                                 style={{padding:'1px'}}
                                 title={<div className="title">{orderDetail.IM_SALESDOCU}</div>}
                                 action={
-                                    <div style={{textAlign:'left'}}>
+                                    <div style={{textAlign:'left',paddingLeft:'30px',position:'relative',top:'-5px'}}>
                                         <Row>
                                             <Col lg={12} md={12} sm={24}>
-                                                <b>Order Type:</b> {orderDetail.EX_DOCTYP} 
+                                                <b>Order Type:</b> {OrderTypes.types().getRequest(orderDetail.EX_DOCTYP) } 
                                             </Col>
                                             <Col lg={12} md={12} sm={24}>
                                                 <b>Order Status:</b> {orderDetail.EX_ORDSTATUS}
@@ -450,6 +452,7 @@ export default class OrderView extends PureComponent {
                                 breadcrumbList={breadcrumbList}
                                 logo={<Icon style={{ fontSize: 48, color: '#1d2d5c' }}   type="file-text"/>}
                                 content={<div className="content">
+                                    <Divider />
                                     
                                     <Row gutter={12}>
                                         <Col lg={5} md={8} sm={12}>

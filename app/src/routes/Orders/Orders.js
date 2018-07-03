@@ -50,6 +50,9 @@ const noMatch = <Alert message="No permission." type="error" showIcon />;
 const breadcrumbList = [{
     title: 'Order Number',
 }];
+const breadcrumbTitle = [{
+    title: 'Orders',
+}];
 @connect(({ orders, orderDetail,loading }) => ({
     orders,
     orderDetail:orders.orderDetail,
@@ -358,7 +361,7 @@ export default class OrderView extends PureComponent {
         
         
 
-        const actionInputSearch = (
+        /* const actionInputSearch = (
             <div>
                 <Input.Search
                     placeholder="Number Order here"
@@ -368,7 +371,7 @@ export default class OrderView extends PureComponent {
                     enterButton
                 />
             </div>
-        );
+        ); */
         let ZF00 = [{ COND_VAL: "" }], ZCOD = [{ COND_VAL: "" }], JR1 = [{ COND_VAL: "" }];
         
 
@@ -386,7 +389,17 @@ export default class OrderView extends PureComponent {
        
         return (
             <IntlProvider locale="en">
-            <PageHeaderLayout title="Orders" action={actionInputSearch} >
+            <PageHeaderLayout title=""
+            content={
+                <div style={{textAlign: "right",position:'relative',top:'-20px'} }>
+                <Button style={{ marginLeft: 8 }} onClick={this.toggleSearch}><Icon type="search" />
+                    Show search <Icon type={this.state.showSearch ? 'up' : 'down'} />
+                    </Button>
+                    { this.state.showSearch &&                                                                             
+                    <SearchForm handleSearch={this.handleSearch} /> }
+                </div>}
+            breadcrumbList={breadcrumbTitle} 
+             >
                     <ModalNewComment
                         wrappedComponentRef={this.saveFormRefComment}
                         visible={visibleNewComment}
@@ -573,11 +586,7 @@ export default class OrderView extends PureComponent {
 
                     <Card bordered={false}>
 
-                    <a style={{ marginLeft: 8, fontSize: 12 }} onClick={this.toggleSearch}>
-                    Show search <Icon type={this.state.showSearch ? 'up' : 'down'} />
-                    </a>
-                    { this.state.showSearch &&                                                                             
-                    <SearchForm handleSearch={this.handleSearch} /> }
+                   
                     
                     </Card>
 

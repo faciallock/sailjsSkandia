@@ -4,7 +4,7 @@ import en_US from 'antd/lib/locale-provider/en_US';
 import 'moment/locale/en-au';
 
 import {
-    Form, Table, Modal, Button, LocaleProvider, Row, Col, Input, DatePicker 
+    Form, Divider,Icon, Button, LocaleProvider, Row, Col, Input, DatePicker 
 } from 'antd';
 const SearchForm = Form.create()(
 
@@ -33,9 +33,10 @@ const SearchForm = Form.create()(
                 className="ant-advanced-search-form"
                 onSubmit={this.handleSearch}
                 >
+                <Divider />
 
                 <Row gutter={24}>
-                <Col span={8} key="CustomerNumber">
+                <Col lg={6} md={12} sm={12} xs={24} key="CustomerNumber">
                     <FormItem>
                         {getFieldDecorator("CustomerNumber", {
                             rules: [{
@@ -47,7 +48,7 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
-                <Col span={8} key="OrderNumber">
+                <Col lg={6} md={12} sm={12} xs={24} key="OrderNumber">
                     <FormItem>
                         {getFieldDecorator("OrderNumber", {
                             rules: [{
@@ -59,7 +60,7 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
-                <Col span={8} key="Sidemark">
+                <Col lg={6} md={12} sm={12} xs={24} key="Sidemark">
                     <FormItem>
                         {getFieldDecorator("Sidemark", {
                             rules: [{
@@ -71,9 +72,7 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
-                </Row>
-                <Row gutter={24}>
-                <Col span={8} key="Name">
+                <Col lg={6} md={12} sm={12} xs={24} key="Name">
                     <FormItem>
                         {getFieldDecorator("Name", {
                             rules: [{
@@ -85,23 +84,9 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
-                <Col span={8} key="OrderDate">
-                    <FormItem>
-                        {getFieldDecorator('OrderDate', { type: 'object', required: false })(
-                            <DatePicker placeholder="Order date"/>
-                        )}
-                    </FormItem>
-                </Col>
-                <Col span={8} key="ShippedDate">
-                    <FormItem>
-                        {getFieldDecorator('ShippedDate', { type: 'object', required: false })(
-                            <DatePicker placeholder="Shipped date" />
-                        )}
-                    </FormItem>
-                </Col>
                 </Row>
                 <Row gutter={24}>
-                <Col span={8} key="ShippedBy">
+                <Col lg={6} md={12} sm={12} xs={12} key="ShippedBy">
                     <FormItem>
                         {getFieldDecorator("ShippedBy", {
                             rules: [{
@@ -113,7 +98,8 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
-                <Col span={8} key="TotalPrice">
+
+                <Col lg={3} md={6} sm={6} xs={12} key="TotalPrice">
                     <FormItem>
                         {getFieldDecorator("TotalPrice", {
                             rules: [{
@@ -125,7 +111,7 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
-                <Col span={8} key="Status">
+                <Col lg={3} md={6} sm={6} xs={12} key="Status">
                     <FormItem>
                         {getFieldDecorator("Status", {
                             rules: [{
@@ -137,10 +123,25 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
+                
+                <Col lg={6} md={12} sm={12} xs={12} key="OrderDate">
+                    <FormItem>
+                        {getFieldDecorator('OrderDate', { type: 'object', required: false })(
+                            <DatePicker placeholder="Order date"/>
+                        )}
+                    </FormItem>
+                </Col>
+                <Col lg={6} md={12} sm={12} xs={12}  key="ShippedDate">
+                    <FormItem>
+                        {getFieldDecorator('ShippedDate', { type: 'object', required: false })(
+                            <DatePicker placeholder="Shipped date" />
+                        )}
+                    </FormItem>
+                </Col>
                 </Row>
                 <Row>
                 <Col span={24} style={{ textAlign: 'right' }}>
-                <Button type="primary" htmlType="submit">Search</Button>
+                <Button type="primary" htmlType="submit"><Icon type="search" /> Search</Button>
                 <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
                 Clear
                 </Button>

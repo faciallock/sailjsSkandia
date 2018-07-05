@@ -64,15 +64,21 @@ class OrderShippingForm extends Component {
             data = this.props.data;
             console.log(data.EX_SHIP_TO);
             let exShipTo,city,region,postCode ="";
+            var postCodeTemp;
 
             if (data.EX_SHIP_TO.length != 0) {
-                exShipTo = data.EX_SHIP_TO[0].STR_SUPPL1;
-                city = data.EX_SHIP_TO[0].CITY1;
-                region = data.EX_SHIP_TO[0].REGION;
-                postCode = data.EX_SHIP_TO[0].POST_CODE1;
+
+                /// extract correct ship to
+                let itemShipTo = data.EX_SHIP_TO.find((itemShipTo) => { return itemShipTo.KUNNR == data.EX_SHIPTOID });
+
+                exShipTo = itemShipTo.STREET;
+                city = itemShipTo.CITY1;
+                region = itemShipTo.REGION;
+                postCodeTemp = itemShipTo.POST_CODE1;
+                postCode = postCodeTemp.split("-")[0];
                 
                 data.EX_SHIP_TO=[];
-                this.setState({ exShipTo, region, postCode });
+                this.setState({ exShipTo, region, postCode, city });
             }
             
         }

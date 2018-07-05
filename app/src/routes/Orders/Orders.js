@@ -460,7 +460,7 @@ export default class OrderView extends PureComponent {
                                                 <b>Order Type:</b> {OrderTypes.types().getRequest(orderDetail.EX_DOCTYP) } 
                                             </Col>
                                             <Col lg={8} md={12} sm={24}>
-                                                <b>Order Status:</b>
+                                                <b>Order Status:</b> {orderDetail.EX_IND == 'C'? 'Confirmed':'Pending'}
                                             </Col>
                                             <Col lg={8} md={12} sm={24}>
                                                 <b>Order Status #2:</b> {orderDetail.EX_ORDSTATUS}
@@ -503,7 +503,7 @@ export default class OrderView extends PureComponent {
                                             <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : parseFloat(Math.round(JR1[0].COND_VAL * 100) / 100).toFixed(2) }
                                         </Col>
                                         <Col lg={8} md={8} sm={12}>
-                                            <b>Grand Total:</b> <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> 
+                                            <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>
                                         </Col>
                                     </Row>
                                     

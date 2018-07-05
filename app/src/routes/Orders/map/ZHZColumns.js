@@ -75,8 +75,8 @@ export class ZHZColumns {
         },
         {
             title: 'CutDown Item#',
-            dataIndex: 'CUT',
-            key: 'CUT'
+            dataIndex: 'MSC_ITEM',
+            key: 'MSC_ITEM'
         },
         {
             title: 'Gross price',
@@ -122,6 +122,13 @@ export class ZHZColumns {
                         <Button
                             onClick={() => {
                                 const columns = [
+
+                                    {
+                                        title: 'Selected',
+                                        dataIndex: 'MARK',
+                                        key: 'MARK',
+
+                                    },
                                     {
                                         title: 'Surcharge Type',
                                         dataIndex: 'COND_TYP',

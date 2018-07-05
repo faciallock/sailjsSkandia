@@ -26,6 +26,10 @@ export class zms extends React.PureComponent {
                 orderId: data.IM_SALESDOCU, lineItemNumber: item.ITEMNO}
             item.INVENTORY = { orderId: data.IM_SALESDOCU};
             
+
+            var aMaterialColor = item.MATERIAL ? item.MATERIAL.split("-"): [item.MATERIAL, ""];
+            item.COLOR = aMaterialColor[1];
+            item.MATERIAL = aMaterialColor[0];
             //ZEA_COLOR
             //ZEA_BRACKET_SH
             return item;

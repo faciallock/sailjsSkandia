@@ -48,6 +48,12 @@ export class zhz extends React.PureComponent {
             
             //ZEA_COLOR
             //ZEA_BRACKET_SH
+
+
+            var aMaterialColor = item.MATERIAL ? item.MATERIAL.split("-"): [item.MATERIAL, ""];
+            item.COLOR = aMaterialColor[1];
+            item.MATERIAL = aMaterialColor[0];
+
             return item;
 
         });

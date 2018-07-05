@@ -20,8 +20,8 @@ export class ZSDColumns {
         },
         {
             title: 'Color',
-            dataIndex: 'EX_DOCTYP',
-            key: 'EX_DOCTYP'
+            dataIndex: 'COLOR',
+            key: 'COLOR'
         },
         {
             title: 'Quantity',
@@ -117,6 +117,12 @@ export class ZSDColumns {
                     <Button
                         onClick={() => {
                             const columns = [
+                                {
+                                    title: 'Selected',
+                                    dataIndex: 'MARK',
+                                    key: 'MARK',
+
+                                },
                                 {
                                     title: 'Surcharge Type',
                                     dataIndex: 'COND_TYP',

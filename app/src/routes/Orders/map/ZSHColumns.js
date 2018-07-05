@@ -123,6 +123,12 @@ export class ZSHColumns {
                             onClick={() => {
                                 const columns = [
                                     {
+                                        title: 'Selected',
+                                        dataIndex: 'MARK',
+                                        key: 'MARK',
+
+                                    },
+                                    {
                                         title: 'Surcharge Type',
                                         dataIndex: 'COND_TYP',
                                         key: 'COND_TYP',

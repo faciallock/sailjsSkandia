@@ -396,7 +396,7 @@ export default class OrderView extends PureComponent {
                     Show search <Icon type={this.state.showSearch ? 'up' : 'down'} />
                     </Button>
                     { this.state.showSearch &&                                                                             
-                    <SearchForm handleSearch={this.handleSearch} /> }
+                    <SearchForm handleSearch={this.handleSearch}/> }
                 </div>}
             breadcrumbList={breadcrumbTitle} 
              >
@@ -550,14 +550,14 @@ export default class OrderView extends PureComponent {
                         
                             
                                 <Tabs defaultActiveKey="1">
-                                    <TabPane tab={<span><Icon type="solution" /> Shipping Information</span>} key="1">
+                                    <TabPane tab={<span><Icon type="table" />Items</span>} key="1">
+                                    <ViewOrderTable data={orderDetail} onBomClick={this.onBomClick} onInventoryClick={this.onInventoryClick} />
+                                    </TabPane>
+                                    <TabPane tab={<span><Icon type="solution" /> Shipping Information</span>} key="2">
                                         <OrderShippingForm data={orderDetail} />
                                     </TabPane>
-                                    <TabPane tab={<span><Icon type="inbox" />Freight</span>} key="2">
+                                    <TabPane tab={<span><Icon type="inbox" />Freight</span>} key="3">
                                         <OrderFreightForm data={orderDetail} />
-                                    </TabPane>
-                                    <TabPane tab={<span><Icon type="table" />Items</span>} key="3">
-                                    <ViewOrderTable data={orderDetail} onBomClick={this.onBomClick} onInventoryClick={this.onInventoryClick} />
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>

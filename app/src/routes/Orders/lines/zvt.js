@@ -23,24 +23,24 @@ export class zvt extends React.PureComponent {
             let itemExCondGrossPrice = data.EX_CONDITIONS.find((itemCond) => { return itemCond.COND_TYP == `ZPR0` && itemCond.ITEMNO === parseInt(item.ITEMNO) });
 //            let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" })
 
-            let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD3" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD4" && itemCond.ITEMNO === parseInt(item.ITEMNO)) });
+            let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO))  });
 
           //  parseInt(item.ITEMNO)
 
             
-            item.COLOR = itemExConfigColor ? itemExConfigColor.VALUE_CHAR : "";
-            item.WIDTH = itemExConfigWidth ? itemExConfigWidth.VALUE_CHAR : "";
-            item.LENGTH = itemExConfigLength ? itemExConfigLength.VALUE_CHAR: "";
-            item.GROSSPRICE = itemExCondGrossPrice ? itemExCondGrossPrice.COND_VAL: "";
-            item.BESTDISCOUNT = aDiscount ? aDiscount: [];
+            item.COLOR = itemExConfigColor ? itemExConfigColor.VALUE_CHAR : "";  
+            item.WIDTH = itemExConfigWidth ? itemExConfigWidth.VALUE_CHAR : "";  
+            item.LENGTH = itemExConfigLength ? itemExConfigLength.VALUE_CHAR: "";  
+            item.GROSSPRICE = itemExCondGrossPrice ? itemExCondGrossPrice.COND_VAL: "";  
+            item.BESTDISCOUNT = aDiscount ? aDiscount: []; 
 
-            item.BRACKET_SH = itemExConfigBracketMount ?  itemExConfigBracketMount.VALUE_DESC: "";
+            item.BRACKET_SH = itemExConfigBracketMount ?  itemExConfigBracketMount.VALUE_DESC: "";  
                      
-            item.STACK = itemExConfigStack   ? itemExConfigStack.VALUE_DESC : "";
-            item.CONTROLS = itemExConfigControls ? itemExConfigControls.VALUE_DESC : "";
-            item.FREEHANG = itemExConfigFreeHang ? itemExConfigFreeHang.VALUE_DESC : "";
-            item.EXTB = itemExConfigExtensionBrackets ? itemExConfigExtensionBrackets.VALUE_DESC : "";
-            item.TWOONONE = itemExConfigBottomChains ? itemExConfigBottomChains.VALUE_DESC : "";
+            item.STACK = itemExConfigStack   ? itemExConfigStack.VALUE_DESC : "";  
+            item.CONTROLS = itemExConfigControls ? itemExConfigControls.VALUE_DESC : "";  
+            item.FREEHANG = itemExConfigFreeHang ? itemExConfigFreeHang.VALUE_DESC : "";  
+            item.EXTB = itemExConfigExtensionBrackets ? itemExConfigExtensionBrackets.VALUE_DESC : "";  
+            item.TWOONONE = itemExConfigBottomChains ? itemExConfigBottomChains.VALUE_DESC : "";  
 
 
             item.BOM = {
@@ -50,7 +50,7 @@ export class zvt extends React.PureComponent {
 
             var aMaterialColor = item.MATERIAL ? item.MATERIAL.split("-"): [item.MATERIAL, ""];
             item.COLOR = aMaterialColor[1];
-            item.MATERIAL = aMaterialColor[0];
+            item.MATERIAL = aMaterialColor[0] + "-" + item.SHORT_TEXT;
             //ZEA_COLOR
             //ZEA_BRACKET_SH
             return item;

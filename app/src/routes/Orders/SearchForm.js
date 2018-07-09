@@ -11,6 +11,20 @@ const SearchForm = Form.create()(
     class extends React.Component {
 
 
+
+        handleClear = () => {
+            
+                this.props.form.resetFields();
+                this.props.form.validateFields((err, values) => {
+                    console.log('Received values of form: ', values);
+      
+                    this.props.handleSearch(values);
+      
+                  });
+            
+        }
+
+
         handleSearch = (e) => {
             e.preventDefault();
             this.props.form.validateFields((err, values) => {
@@ -144,7 +158,7 @@ const SearchForm = Form.create()(
                 <Row>
                 <Col span={24} style={{ textAlign: 'right' }}>
                 <Button type="primary" htmlType="submit"><Icon type="search" /> Search</Button>
-                <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
+                <Button style={{ marginLeft: 8 }} onClick={this.handleClear}>
                 Clear
                 </Button>
                 </Col>

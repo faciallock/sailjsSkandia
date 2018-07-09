@@ -19,26 +19,26 @@ export class zsd extends React.PureComponent {
             //let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" });
 
             //let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" && itemCond.ITEMNO === parseInt(item.ITEMNO) });
-            let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD3" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD4" && itemCond.ITEMNO === parseInt(item.ITEMNO)) });
+            let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO))  });
             
             let itemExSurchrg = data.EX_SURCHRG.filter((itemSurchrg) => { return itemSurchrg.ITEMNO === parseInt(item.ITEMNO) });
             
 
-            item.WIDTH = itemExConfigWidth ? itemExConfigWidth.VALUE_CHAR: "";
-            item.LENGTH = itemExConfigLength ? itemExConfigLength.VALUE_CHAR: "";
-            item.BRACKETMOUNT = itemExConfigBracket? itemExConfigBracket.VALUE_DESC: "";
-            item.LIFTCORD = itemExConfigCords ? itemExConfigCords.VALUE_DESC: "";
+            item.WIDTH = itemExConfigWidth ? itemExConfigWidth.VALUE_CHAR: "";  
+            item.LENGTH = itemExConfigLength ? itemExConfigLength.VALUE_CHAR: ""; 
+            item.BRACKETMOUNT = itemExConfigBracket? itemExConfigBracket.VALUE_DESC: ""; 
+            item.LIFTCORD = itemExConfigCords ? itemExConfigCords.VALUE_DESC: "";   
             
             //item.PANELS = itemExConfigPanelSize.VALUE_CHAR: "";
 
-            item.DRAWLINER = itemExConfigDraw ? itemExConfigDraw.VALUE_DESC: "";
-            item.PANELS = itemExConfigPanels ? itemExConfigPanels.VALUE_CHAR: "";
+            item.DRAWLINER = itemExConfigDraw ? itemExConfigDraw.VALUE_DESC: "";   
+            item.PANELS = itemExConfigPanels ? itemExConfigPanels.VALUE_CHAR: "";   
             
 
-            item.BRACKETS = itemExConfigExtB ? itemExConfigExtB.VALUE_DESC: "";
-            item.SPECIALSONE= itemExConfigSpecialOne ? itemExConfigSpecialOne.VALUE_DESC: "";
-            item.SPECIALSTWO = itemExConfigSpecialTwo ? itemExConfigSpecialTwo.VALUE_DESC: "";
-            item.GROSSPRICE = itemExCondGrossPrice ? itemExCondGrossPrice.COND_VAL: "";
+            item.BRACKETS = itemExConfigExtB ? itemExConfigExtB.VALUE_DESC: "";   
+            item.SPECIALSONE= itemExConfigSpecialOne ? itemExConfigSpecialOne.VALUE_DESC: "";   
+            item.SPECIALSTWO = itemExConfigSpecialTwo ? itemExConfigSpecialTwo.VALUE_DESC: "";   
+            item.GROSSPRICE = itemExCondGrossPrice ? itemExCondGrossPrice.COND_VAL: "";   
             item.BESTDISCOUNT = aDiscount;
             item.EX_SURCHRG = itemExSurchrg;
             item.BOM = {
@@ -48,7 +48,7 @@ export class zsd extends React.PureComponent {
 
             var aMaterialColor = item.MATERIAL ? item.MATERIAL.split("-"): [item.MATERIAL, ""];
             item.COLOR = aMaterialColor[1];
-            item.MATERIAL = aMaterialColor[0];
+            item.MATERIAL = aMaterialColor[0] + "-" + item.SHORT_TEXT;
 
             
             

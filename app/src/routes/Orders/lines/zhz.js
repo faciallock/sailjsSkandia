@@ -22,24 +22,24 @@ export class zhz extends React.PureComponent {
             let itemExCondGrossPrice = data.EX_CONDITIONS.find((itemCond) => { return itemCond.COND_TYP == `ZPR0` && itemCond.ITEMNO === parseInt(item.ITEMNO) });
             //let aDiscount = data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" && itemCond.ITEMNO === parseInt(item.ITEMNO)  });
             let itemExSurchrg = data.EX_SURCHRG.filter((itemSurchrg) => { return itemSurchrg.ITEMNO === parseInt(item.ITEMNO) });
-            let aDiscount =data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD3" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD4" && itemCond.ITEMNO === parseInt(item.ITEMNO)) });
+            let aDiscount =data.EX_CONDITIONS.filter((itemCond) => { return (itemCond.COND_TYP === "ZBD1" && itemCond.ITEMNO === parseInt(item.ITEMNO)) || (itemCond.COND_TYP === "ZBD2" && itemCond.ITEMNO === parseInt(item.ITEMNO))  });
 
           //  parseInt(item.ITEMNO)
 
             
-            item.COLOR = itemExConfigColor ? itemExConfigColor.VALUE_CHAR : "";
-            item.WIDTH = itemExConfigWidth ? itemExConfigWidth.VALUE_CHAR : "";
-            item.LENGTH = itemExConfigLength ? itemExConfigLength.VALUE_CHAR: "";
-            item.GROSSPRICE = itemExCondGrossPrice ? itemExCondGrossPrice.COND_VAL: "";
-            item.BESTDISCOUNT = aDiscount ? aDiscount: [];
+            item.COLOR = itemExConfigColor ? itemExConfigColor.VALUE_CHAR : ""; 
+            item.WIDTH = itemExConfigWidth ? itemExConfigWidth.VALUE_CHAR : ""; 
+            item.LENGTH = itemExConfigLength ? itemExConfigLength.VALUE_CHAR: ""; 
+            item.GROSSPRICE = itemExCondGrossPrice ? itemExCondGrossPrice.COND_VAL: ""; 
+            item.BESTDISCOUNT = aDiscount ? aDiscount: []; 
 
-            item.BRACKET_SH = itemExConfigBracketMount ?  itemExConfigBracketMount.VALUE_DESC: "";
-            item.TILTER = itemExConfigBracketTilter ?  itemExConfigBracketTilter.VALUE_DESC: "";
-            item.CORDS = itemExConfigBracketLiftCords ?  itemExConfigBracketLiftCords.VALUE_DESC: "";
-            item.EXTB = itemExConfigExtensionBrackets ?  itemExConfigExtensionBrackets.VALUE_DESC: "";
-            item.TWOONONE = itemExConfig2or3 ?  itemExConfig2or3.VALUE_DESC: "";
-            item.LADDER_TAPE = itemExConfigLadder ?  itemExConfigLadder.VALUE_DESC: "";
-            item.CUT = itemExConfigCutDownItem ?  itemExConfigCutDownItem.VALUE_DESC: "";
+            item.BRACKET_SH = itemExConfigBracketMount ?  itemExConfigBracketMount.VALUE_DESC: ""; 
+            item.TILTER = itemExConfigBracketTilter ?  itemExConfigBracketTilter.VALUE_DESC: ""; 
+            item.CORDS = itemExConfigBracketLiftCords ?  itemExConfigBracketLiftCords.VALUE_DESC: ""; 
+            item.EXTB = itemExConfigExtensionBrackets ?  itemExConfigExtensionBrackets.VALUE_DESC: ""; 
+            item.TWOONONE = itemExConfig2or3 ?  itemExConfig2or3.VALUE_DESC: ""; 
+            item.LADDER_TAPE = itemExConfigLadder ?  itemExConfigLadder.VALUE_DESC: ""; 
+            item.CUT = itemExConfigCutDownItem ?  itemExConfigCutDownItem.VALUE_DESC: ""; 
             item.EX_SURCHRG = itemExSurchrg;
             item.BOM = {
                 orderId: data.IM_SALESDOCU, lineItemNumber: item.ITEMNO
@@ -52,7 +52,7 @@ export class zhz extends React.PureComponent {
 
             var aMaterialColor = item.MATERIAL ? item.MATERIAL.split("-"): [item.MATERIAL, ""];
             item.COLOR = aMaterialColor[1];
-            item.MATERIAL = aMaterialColor[0];
+            item.MATERIAL = aMaterialColor[0] + "-" + item.SHORT_TEXT;
 
             return item;
 

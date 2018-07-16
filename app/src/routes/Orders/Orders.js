@@ -303,7 +303,10 @@ export default class OrderView extends PureComponent {
         const { orders: { orders }, orderDetail, bomDetail, inventoryDetail, userRoles, loading } = this.props;
         console.log(userRoles);
         const { selectedRows, modalVisible, visibleNewComment, visibleBOM, visibleInventory } = this.state;
-        const columns = [
+        
+        if ( localStorage.getItem('userType') != "D"){
+        
+        var columns = [
             {
                 title: 'Order No',
                 dataIndex: 'VBELN',
@@ -363,6 +366,56 @@ export default class OrderView extends PureComponent {
                 }
             },
         ];
+
+
+    }else{
+
+        var columns = [
+            {
+                title: 'Order No',
+                dataIndex: 'VBELN',
+                key: 'VBELN',
+                fixed: 'left',
+                width: 140
+            },
+            {
+                title: 'Sidemark/PO',
+                dataIndex: 'BSTNK',
+                key: 'BSTNK'
+            },
+            {
+                title: 'Product',
+                dataIndex: 'DESC',
+                key: 'DESC',
+                sorter: true
+            },
+            {
+                title: 'Status',
+                dataIndex: 'IND',
+                key: 'IND',
+                render: (text, record) => {
+                    
+                    let value = text === 'C'? "Confirmed":"Pending";
+       
+                    return (
+                        <span>{value}</span>
+                    )
+                }
+            }, {
+                title: 'Action',
+                key: 'operation',
+                fixed: 'right',
+                width: 100,
+                render: (text, record) => {
+                    
+                    return (
+                        <a onClick={() => this.showModal(record,orderDetail)}><Icon type="eye-o" /> Show</a>
+                    )
+                }
+            },
+        ];
+
+    }
         
         
 
@@ -482,17 +535,17 @@ export default class OrderView extends PureComponent {
                                         <Col lg={8} md={8} sm={12}>
                                             <b>Payment Terms:</b> {orderDetail.EX_BILL_TERM ? orderDetail.EX_BILL_TERM.VALUE : ""}  
                                         </Col>
-                                        <Col lg={8} md={8} sm={12}>
+                                        {localStorage.getItem('userType') != "D" &&<Col lg={8} md={8} sm={12}>
                                             <b>Created By:</b> {orderDetail.EX_CSR}
-                                        </Col>
+                                        </Col> &&
                                         <Col lg={8} md={8} sm={12}>
                                             <b>Last Modified By:</b> {orderDetail.EX_LASTCHANGE}
-                                        </Col>
+                                        </Col>}
                                     </Row>
                                     <Row gutter={12}>
-                                        <Col lg={8} md={8} sm={12}>
+                                    {localStorage.getItem('userType') != "D" && <Col lg={8} md={8} sm={12}>
                                             <b>Net Value:</b> <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> 
-                                        </Col>
+                                     </Col> }
                                         <Col lg={8} md={8} sm={12}>
                                             <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
                                         </Col>
@@ -564,7 +617,7 @@ export default class OrderView extends PureComponent {
                                     <TabPane tab={<span><Icon type="inbox" />Freight</span>} key="3">
                                         <OrderFreightForm data={orderDetail} />
                                     </TabPane>
-                                    <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
+                                    { localStorage.getItem('userType') != "D" && <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>
                                             <Col lg={24} md={24} sm={24} style={{textAlign:'right', padding:'6px'}}>
                                             <Button 
@@ -621,7 +674,7 @@ export default class OrderView extends PureComponent {
                                         
                                         
                                         
-                                    </TabPane>
+                                    </TabPane> }
                                 </Tabs>
                             
                         

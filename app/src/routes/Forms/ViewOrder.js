@@ -349,7 +349,7 @@ class ViewOrder extends PureComponent {
                     </Form.Item>
               </Col>
               
-              <Col lg={8} md={12} sm={24}>
+              {localStorage.getItem('userType') != "D" && <Col lg={8} md={12} sm={24}>
                 <Form.Item  label="Sales Org.">
                 
                   {getFieldDecorator('owner', {
@@ -359,7 +359,7 @@ class ViewOrder extends PureComponent {
                       </Select>
                   )}
                 </Form.Item>
-              </Col>
+              </Col>}
               <Col lg={8} md={24} sm={24}>
                      <Form.Item
                      
@@ -381,7 +381,7 @@ class ViewOrder extends PureComponent {
                         }
                       </Form.Item>
               </Col>
-              <Col lg={8} md={24} sm={24}>
+              {localStorage.getItem('userType') != "D" && <Col lg={8} md={24} sm={24}>
                 <Form.Item  label="Reference">
                   {getFieldDecorator('url', {
                     rules: [{ required: true, message: 'Error' }],
@@ -391,8 +391,8 @@ class ViewOrder extends PureComponent {
                     />
                   )}
                 </Form.Item>
-              </Col>
-              <Col lg={8} md={24} sm={24}>
+              </Col>}
+              {localStorage.getItem('userType') != "D" && <Col lg={8} md={24} sm={24}>
                 <Form.Item  label="Repair/Remake Code">
                 
                   {getFieldDecorator('owner', {
@@ -404,7 +404,7 @@ class ViewOrder extends PureComponent {
                     </Select>
                   )}
                 </Form.Item>
-              </Col>
+                </Col> }
               <Col lg={8} md={24} sm={24}>
                 <Form.Item  label="Packed Date">
                   {getFieldDecorator('url', {
@@ -414,7 +414,7 @@ class ViewOrder extends PureComponent {
                   )}
                 </Form.Item>
               </Col>
-              <Col lg={8} md={24} sm={24}>
+              {localStorage.getItem('userType') != "D" && <Col lg={8} md={24} sm={24}>
                 <Form.Item  label="Batch Date">
                   {getFieldDecorator('url', {
                     rules: [{ required: true, message: 'Error' }],
@@ -422,7 +422,7 @@ class ViewOrder extends PureComponent {
                           <label >{batchDate}</label>
                   )}
                 </Form.Item>
-              </Col>
+                </Col> }
               <Col lg={8} md={24} sm={24}>
                 <Form.Item  label="Invoice Date">
                   {getFieldDecorator('url', {
@@ -490,7 +490,7 @@ class ViewOrder extends PureComponent {
 
               <Form layout="vertical" hideRequiredMark>
                 <Row gutter={12}>
-                  <Col lg={24} md={24} sm={24}>
+                {localStorage.getItem('userType') != "D" &&<Col lg={24} md={24} sm={24}>
                     <Form.Item  label="Shippers Instruction">
                     {getFieldDecorator('url', {
                       rules: [{ required: true, message: 'Error' }],
@@ -500,7 +500,7 @@ class ViewOrder extends PureComponent {
                       />
                     )}
                   </Form.Item>
-                  </Col>
+                  </Col>}
                   <Col lg={8} md={24} sm={24}>
                     <Form.Item  label="Tracking Number">
                       <label >{trackingNumber}</label>
@@ -535,20 +535,20 @@ class ViewOrder extends PureComponent {
                           </Select>
                     </Form.Item>
                   </Col>
-                  <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                  {localStorage.getItem('userType') != "D" && <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
                     <Form.Item  label="Freight Overrride">
                        
                       <Select placeholder="" value={freightOverride}>
                           </Select>
                        
                     </Form.Item>
-                  </Col>
-                  <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                    </Col> }
+                    {localStorage.getItem('userType') != "D" && <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
                     <Form.Item  label="Freight Cost">
                       
                         <label >{freightCost}</label>
                     </Form.Item>
-                  </Col>
+                    </Col> }
                 </Row>
               </Form>
             </Card>

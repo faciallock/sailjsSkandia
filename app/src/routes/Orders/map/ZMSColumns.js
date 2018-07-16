@@ -4,7 +4,7 @@ import { ModalInfo } from '../components/ModalInfo';
 export class ZMSColumns {
 
     static getColumns(onBomClick, onInventoryClick) {
-        return [{
+        var aColumns =  [{
             title: 'Line',
             width: 80,
             dataIndex: 'ITEMNO',
@@ -116,8 +116,13 @@ export class ZMSColumns {
                         type="default" icon="eye-o">View</Button>
                 )
             }
-        },
-        {
+        }];
+
+
+        if ( localStorage.getItem('userType') != "D"){
+
+
+            aColumns.push({
             title: 'BOM',
             dataIndex: 'BOM',
             key: 'BOM',
@@ -129,32 +134,14 @@ export class ZMSColumns {
                         onClick={() => {
                             console.log(record);
                             onBomClick(record.orderId, record.lineItemNumber);
-                           {/*  const columns = [
-                                {
-                                    title: 'Surcharge Type',
-                                    dataIndex: 'COND_TYP',
-                                    key: 'COND_TYP',
-
-                                },
-                                {
-                                    title: 'Description',
-                                    dataIndex: 'VTEXT',
-                                    key: 'VTEXT'
-                                },
-                                {
-                                    title: 'Value',
-                                    dataIndex: 'COND_VAL',
-                                    key: 'COND_VAL'
-                                }
-                            ];
-
-                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE"); */}
+                           {}
                         }}
                         type="default" icon="eye-o">View</Button>
                 )
             }
-        },
-        {
+        }); 
+        
+        aColumns.push({
             title: 'Inventory',
             dataIndex: 'INVENTORY',
             key: 'INVENTORY',
@@ -166,31 +153,19 @@ export class ZMSColumns {
                         onClick={() => {
 
                             onInventoryClick(record.orderId)
-                            {/* const columns = [
-                                {
-                                    title: 'Surcharge Type',
-                                    dataIndex: 'COND_TYP',
-                                    key: 'COND_TYP',
-
-                                },
-                                {
-                                    title: 'Description',
-                                    dataIndex: 'VTEXT',
-                                    key: 'VTEXT'
-                                },
-                                {
-                                    title: 'Value',
-                                    dataIndex: 'COND_VAL',
-                                    key: 'COND_VAL'
-                                }
-                            ];
-
-                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE"); */}
+                            {}
                         }}
                         type="default" icon="eye-o">View</Button>
                 )
             }
-        }]
+        });
+
+        
+
+
+    }
+
+    return aColumns;
         
     }
 }

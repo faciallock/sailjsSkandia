@@ -50,6 +50,7 @@ const SearchForm = Form.create()(
                 <Divider />
 
                 <Row gutter={24}>
+                { localStorage.getItem('userType') != "D" &&
                 <Col lg={6} md={12} sm={12} xs={24} key="CustomerNumber">
                     <FormItem>
                         {getFieldDecorator("CustomerNumber", {
@@ -62,6 +63,7 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
+                }
                 <Col lg={6} md={12} sm={12} xs={24} key="OrderNumber">
                     <FormItem>
                         {getFieldDecorator("OrderNumber", {
@@ -69,8 +71,7 @@ const SearchForm = Form.create()(
                                 required: false,
                                 message: '',
                                 
-                        }],
-                        value:"0010010628"
+                        }]
                         })(
                         <Input  prefix={<Icon type="file-text" style={{ color: '#1d2d5c' }} />} placeholder="Order number" />
                         )}
@@ -88,6 +89,7 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
+                { localStorage.getItem('userType') != "D" &&
                 <Col lg={6} md={12} sm={12} xs={24} key="Name">
                     <FormItem>
                         {getFieldDecorator("Name", {
@@ -99,7 +101,7 @@ const SearchForm = Form.create()(
                         <Input prefix={<Icon type="user" style={{ color: '#1d2d5c' }} />} placeholder="Name" />
                         )}
                         </FormItem>
-                </Col>
+                </Col>}
                 </Row>
                 <Row gutter={24}>
                 <Col lg={6} md={12} sm={12} xs={12} key="ShippedBy">
@@ -114,7 +116,7 @@ const SearchForm = Form.create()(
                         )}
                         </FormItem>
                 </Col>
-
+                { localStorage.getItem('userType') != "D" &&
                 <Col lg={3} md={6} sm={6} xs={12} key="TotalPrice">
                     <FormItem>
                         {getFieldDecorator("TotalPrice", {
@@ -126,7 +128,7 @@ const SearchForm = Form.create()(
                         <Input prefix={<span style={{ color: '#1d2d5c' }} >$</span>} placeholder="Total Price" />
                         )}
                         </FormItem>
-                </Col>
+                </Col>}
                 <Col lg={3} md={6} sm={6} xs={12} key="Status">
                     <FormItem>
                         {getFieldDecorator("Status", {

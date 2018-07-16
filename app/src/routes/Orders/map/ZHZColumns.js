@@ -4,7 +4,11 @@ import { ModalInfo } from '../components/ModalInfo';
 export class ZHZColumns {
 
     static getColumns(onBomClick, onInventoryClick) {
-        return [{
+        
+        
+        
+        
+        var aColumns = [{
             title: 'Line',
             width: 80,
             dataIndex: 'ITEMNO',
@@ -152,41 +156,57 @@ export class ZHZColumns {
                             type="default" icon="eye-o">View</Button>
                     )
                 }
-            },
-            {
-                title: 'BOM',
-                dataIndex: 'BOM',
-                key: 'BOM',
-                render: (record) => {
-                    return (
+            }];
 
+            
+            if ( localStorage.getItem('userType') == "D"){
 
-                        <Button
-                            onClick={() => {
-                                console.log(record);
-                                onBomClick(record.orderId, record.lineItemNumber);
-                            }}
-                            type="default" icon="eye-o">View</Button>
-                    )
-                }
-            },
-            {
-                title: 'Inventory',
-                dataIndex: 'INVENTORY',
-                key: 'INVENTORY',
-                render: (record) => {
-                    return (
+                aColumns = aColumns.splice(13, 1);
 
+            }else{
 
-                        <Button
-                            onClick={() => {
+                aColumns.push({
+                    title: 'BOM',
+                    dataIndex: 'BOM',
+                    key: 'BOM',
+                    render: (record) => {
+                        return (
+    
+    
+                            <Button
+                                onClick={() => {
+                                    console.log(record);
+                                    onBomClick(record.orderId, record.lineItemNumber);
+                                }}
+                                type="default" icon="eye-o">View</Button>
+                        )
+                    }
+                });
+                aColumns.push({
+                    title: 'Inventory',
+                    dataIndex: 'INVENTORY',
+                    key: 'INVENTORY',
+                    render: (record) => {
+                        return (
+    
+    
+                            <Button
+                                onClick={() => {
+    
+                                    onInventoryClick(record.orderId)
+                                }}
+                                type="default" icon="eye-o">View</Button>
+                        )
+                    }
+                });
 
-                                onInventoryClick(record.orderId)
-                            }}
-                            type="default" icon="eye-o">View</Button>
-                    )
-                }
-            }]
+            }
+
+            return aColumns;
+
+            
+            
+            
         
     }
 }

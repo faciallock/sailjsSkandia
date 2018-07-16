@@ -4,7 +4,7 @@ import { ModalInfo } from '../components/ModalInfo';
 export class ZSHColumns {
 
     static getColumns(onBomClick, onInventoryClick){
-        return [{
+        var aColumns =  [{
             title: 'Line',
             width: 80,
             dataIndex: 'ITEMNO',
@@ -151,8 +151,12 @@ export class ZSHColumns {
                             type="default" icon="eye-o">View</Button>
                     )
                 }
-            },
-            {
+            }];
+
+            if ( localStorage.getItem('userType') != "D"){
+            
+            
+            aColumns.push({
                 title: 'BOM',
                 dataIndex: 'BOM',
                 key: 'BOM',
@@ -168,8 +172,8 @@ export class ZSHColumns {
                             type="default" icon="eye-o">View</Button>
                     )
                 }
-            },
-            {
+            });
+            aColumns.push({
                 title: 'Inventory',
                 dataIndex: 'INVENTORY',
                 key: 'INVENTORY',
@@ -185,7 +189,11 @@ export class ZSHColumns {
                             type="default" icon="eye-o">View</Button>
                     )
                 }
-            }]
+            });
+
+        }
+
+        return aColumns;
         
     }
 }

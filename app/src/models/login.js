@@ -28,6 +28,9 @@ export default {
       }else if (response.token.length !==0) {
         console.log(response.token.length)
         localStorage.setItem('userName', response.msg.USER_ID);
+        localStorage.setItem('userType', response.msg.USER_TYPE);
+        
+        
         //localStorage.setItem('roles', response.roles);
         /* var commonData = CommonDataManager.getInstance();
         commonData.setRoles(response.roles); */

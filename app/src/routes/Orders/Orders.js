@@ -85,6 +85,7 @@ export default class OrderView extends PureComponent {
             type: 'orders/fetch',
             payload: {
                 userName: localStorage.getItem('userName'),
+                userType: localStorage.getItem('userType'), 
             },
         });
 
@@ -246,9 +247,11 @@ export default class OrderView extends PureComponent {
 
 
         //payload.UserName = localStorage.getItem('userName');
-        payload.UserName = "AMURUGESAN";
-        payload.UserIndicator = "C";
+        payload.UserName = localStorage.getItem('userName'), 
+        payload.UserIndicator = localStorage.getItem('userType'), 
         payload.DealerNumber = "";
+
+        
 
 
 
@@ -340,7 +343,9 @@ export default class OrderView extends PureComponent {
                 dataIndex: 'IND',
                 key: 'IND',
                 render: (text, record) => {
-                    let value= record ==='C'? "Confirmed":"Pending";
+                    
+                    let value = text === 'C'? "Confirmed":"Pending";
+       
                     return (
                         <span>{value}</span>
                     )

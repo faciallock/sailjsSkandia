@@ -89,9 +89,12 @@ export async function getInventory({ orderId }) {
   console.log({ orderId });
   return request(`/api/order/inventory?orderId=${orderId}`);
 }
-export async function getOrders({ userName }) {
+
+
+
+export async function getOrders({ userName, userType }) {
   console.log(userName);
-  return request(`/api/Orders?userName=${userName}&imInd=C`);
+  return request(`/api/Orders?userName=${userName}&imInd=${userType}`);
 }
 
 export async function searchOrder(params) {
@@ -105,7 +108,7 @@ export async function searchOrder(params) {
 
 
 
-export async function getUserType({ userId }) {
+export async function getUserType({ userId  }) {
   console.log(userId);
   return request(`/api/user/type?userId=${userId}`);
 }

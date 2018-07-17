@@ -244,6 +244,7 @@ export default class OrderView extends PureComponent {
 
 
     handleSearch = (payload) =>{
+        console.log(payload);
 
 
         //payload.UserName = localStorage.getItem('userName');
@@ -287,6 +288,95 @@ export default class OrderView extends PureComponent {
     });
     
 
+    }
+
+    renderFields = (userType, orderDetail, ZF00,ZCOD,JR1) => {
+        return (
+            <div>
+                {
+                    userType == 'D' &&
+                    <div>
+                        <Row gutter={12}>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Payment Terms:</b> {orderDetail.EX_BILL_TERM ? orderDetail.EX_BILL_TERM.VALUE : ""}  
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false :parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2)  }
+                            </Col>
+                           {/*  {localStorage.getItem('userType') != "D" &&<Col lg={8} md={8} sm={12}>
+                                <b>Created By:</b> {orderDetail.EX_CSR}
+                            </Col> &&
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Last Modified By:</b> {orderDetail.EX_LASTCHANGE}
+                            </Col>} */}
+                        </Row>
+                        {/* <Row gutter={12}> */}
+                        {/* {localStorage.getItem('userType') != "D" && 
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Net Value:</b> <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> 
+                            </Col> } */}
+                            
+                        {/* </Row> */}
+                        <Row gutter={12}>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2) }
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : parseFloat(Math.round(JR1[0].COND_VAL * 100) / 100).toFixed(2) }
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>
+                            </Col>
+                        </Row>
+                    </div>
+                }
+                {
+                    userType !== 'D' &&
+                    <div>
+                        <Row gutter={12}>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Payment Terms:</b> {orderDetail.EX_BILL_TERM ? orderDetail.EX_BILL_TERM.VALUE : ""}  
+                            </Col>
+                            
+                            
+                            <Col lg={8} md={8} sm={12}>
+                            
+                                <b>Created By:</b> {orderDetail.EX_CSR}
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Last Modified By:</b> {orderDetail.EX_LASTCHANGE}
+                            </Col>
+                        </Row>
+                        <Row gutter={12}>
+                         
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Net Value:</b> <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> 
+                            </Col> 
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false :parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2)  }
+                            </Col>
+                        </Row>
+                        <Row gutter={12}>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2) }
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : parseFloat(Math.round(JR1[0].COND_VAL * 100) / 100).toFixed(2) }
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>
+                            </Col>
+                        </Row>
+                    </div>
+                }
+            </div>
+        );
     }
 
     
@@ -502,6 +592,8 @@ export default class OrderView extends PureComponent {
                                 title={<div className="title">{orderDetail.IM_SALESDOCU}</div>}
                                 action={
                                     <div style={{textAlign:'left',paddingLeft:'30px',position:'relative',top:'-5px'}}>
+
+                                        
                                         <Row>
                                             <Col lg={8} md={12} sm={24}>
                                                 <b>Company:</b> {orderDetail.EX_CUST ? orderDetail.EX_CUST.split("-")[1]: ""}
@@ -531,39 +623,9 @@ export default class OrderView extends PureComponent {
                                 content={<div className="content">
                                     <Divider style={{margin:'12px 0',top:'-12px'}} />
 
-                                    <Row gutter={12}>
-                                        <Col lg={8} md={8} sm={12}>
-                                            <b>Payment Terms:</b> {orderDetail.EX_BILL_TERM ? orderDetail.EX_BILL_TERM.VALUE : ""}  
-                                        </Col>
-                                        {localStorage.getItem('userType') != "D" &&<Col lg={8} md={8} sm={12}>
-                                            <b>Created By:</b> {orderDetail.EX_CSR}
-                                        </Col> &&
-                                        <Col lg={8} md={8} sm={12}>
-                                            <b>Last Modified By:</b> {orderDetail.EX_LASTCHANGE}
-                                        </Col>}
-                                    </Row>
-                                    <Row gutter={12}>
-                                    {localStorage.getItem('userType') != "D" && <Col lg={8} md={8} sm={12}>
-                                            <b>Net Value:</b> <FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> 
-                                     </Col> }
-                                        <Col lg={8} md={8} sm={12}>
-                                            <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
-                                        </Col>
-                                        <Col lg={8} md={8} sm={12}>
-                                            <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false :parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2)  }
-                                        </Col>
-                                    </Row>
-                                    <Row gutter={12}>
-                                        <Col lg={8} md={8} sm={12}>
-                                            <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2) }
-                                        </Col>
-                                        <Col lg={8} md={8} sm={12}>
-                                            <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : parseFloat(Math.round(JR1[0].COND_VAL * 100) / 100).toFixed(2) }
-                                        </Col>
-                                        <Col lg={8} md={8} sm={12}>
-                                            <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>
-                                        </Col>
-                                    </Row>
+                                    {this.renderFields(localStorage.getItem('userType'), orderDetail, ZF00,ZCOD,JR1)}
+
+                                    
                                     
                                     {/* <Row gutter={12}>
                                         <Col lg={5} md={8} sm={12}>

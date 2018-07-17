@@ -1,7 +1,9 @@
 import React, { PureComponent, Fragment } from 'react';
 import _ from 'lodash';
-import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
+import { Table, LocaleProvider, Button, Input, message, Popconfirm, Divider } from 'antd';
 import { Dictionary } from './map/Dictionary';
+import en_US from 'antd/lib/locale-provider/en_US';
+import 'moment/locale/en-au';
 import {zsd}  from './lines/zsd';
 import { zms } from './lines/zms';
 import { zsh } from './lines/zsh';
@@ -93,11 +95,13 @@ export default class ViewOrderTable extends PureComponent {
                 {/* <div style={{padding:'12px'}}>
                 <Table columns={columnsType} size="small" pagination={false} dataSource={dataType} scroll={{ x: 1500 }} />
                 </div> */}
-                <Table 
-                columns={columns} 
-                dataSource={data}
-                scroll={{ x: 2350 }}
-                    rowKey={record => record.ITEMNO} />
+                <LocaleProvider locale={en_US}>
+                    <Table 
+                    columns={columns} 
+                    dataSource={data}
+                    scroll={{ x: 2350 }}
+                        rowKey={record => record.ITEMNO} />
+                </LocaleProvider>
             </div>
         )
 

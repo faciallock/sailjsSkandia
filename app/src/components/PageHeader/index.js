@@ -48,9 +48,9 @@ export default class PageHeader extends PureComponent {
       linkElement = 'a',
     } = this.props;
     return (
-      <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
+      <Breadcrumb  separator={breadcrumbSeparator}>
         {breadcrumbList.map(item => (
-          <Breadcrumb.Item key={item.title}>
+          <Breadcrumb.Item style={{position:'relative', left:'50px',fontSize:'1.5rem'}} key={item.title}>
             {item.href
               ? createElement(
                   linkElement,

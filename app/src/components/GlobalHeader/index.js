@@ -58,8 +58,8 @@ export default class GlobalHeader extends PureComponent {
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-        <Menu.Item disabled><Icon type="user" />Users</Menu.Item>
-        <Menu.Item disabled><Icon type="setting" />Settings</Menu.Item>
+        {/* <Menu.Item disabled><Icon type="user" />Users</Menu.Item>
+        <Menu.Item disabled><Icon type="setting" />Settings</Menu.Item> */}
         <Menu.Divider />
         <Menu.Item key="logout"><Icon type="logout" />Log out</Menu.Item>
       </Menu>
@@ -83,7 +83,7 @@ export default class GlobalHeader extends PureComponent {
           onClick={this.toggle}
         />
         <div className={styles.right}>
-          <HeaderSearch
+          {/* <HeaderSearch
             className={`${styles.action} ${styles.search}`}
             placeholder="Search"
             dataSource={[]}
@@ -93,16 +93,16 @@ export default class GlobalHeader extends PureComponent {
             onPressEnter={(value) => {
               console.log('enter', value); // eslint-disable-line
             }}
-          />
+          /> */}
           <Tooltip title="Help">
-            <a
+            {/* <a
               target="_blank"
               href="https://www.cogentibs.com/"
               rel="noopener noreferrer"
               className={styles.action}
             >
               <Icon type="question-circle-o" />
-            </a >
+            </a > */}
           </Tooltip>
           {/* <NoticeIcon
             className={styles.action}

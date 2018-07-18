@@ -97,7 +97,8 @@ export default class ViewOrderTable extends PureComponent {
                 </div> */}
                 <LocaleProvider locale={en_US}>
                     <Table 
-                    columns={columns} 
+                    columns={columns}
+                    locale={{ emptyText: 'No Data' }} 
                     dataSource={data}
                     scroll={{ x: 2350 }}
                         rowKey={record => record.ITEMNO} />

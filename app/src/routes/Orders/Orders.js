@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import { connect } from 'dva';
-import { List, Table, Form, Divider, Card, Alert, Tabs, Row, Col, Spin, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar, Modal } from 'antd';
+import { List, Table, Form, Divider, Card, Alert, Tabs, Row, Col, Spin, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar, Modal, LocaleProvider } from 'antd';
 
 import StandardTable from '../../components/StandardTable';
 
@@ -15,6 +15,8 @@ import ModalNewComment from './ModalNewComment';
 import ModalBOM from './ModalBOM';
 import ModalInventory from './ModalInventory';
 import SearchForm from './SearchForm';
+import en_US from 'antd/lib/locale-provider/en_US';
+import 'moment/locale/en-au';
 
 import { OrderTypes } from './map/OrderTypes';
 
@@ -671,7 +673,9 @@ export default class OrderView extends PureComponent {
                             
                                 <Tabs defaultActiveKey="1">
                                     <TabPane tab={<span><Icon type="table" />Items</span>} key="1">
+                                    <LocaleProvider locale={en_US}>
                                     <ViewOrderTable data={orderDetail} onBomClick={this.onBomClick} onInventoryClick={this.onInventoryClick} />
+                                    </LocaleProvider>
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="solution" /> Shipping Information</span>} key="2">
                                         <OrderShippingForm data={orderDetail} />

@@ -24,7 +24,7 @@ export default {
       if(typeof response==='undefined'){
         //reloadAuthorized();
         //routerRedux.push('/')
-        yield put(routerRedux.push('/'));
+        yield put(routerRedux.push('/orders'));
       }else if (response.token.length !==0) {
         console.log(response.token.length)
         localStorage.setItem('userName', response.msg.USER_ID);
@@ -37,7 +37,7 @@ export default {
 
         reloadAuthorized();
         //routerRedux.push('/')
-        yield put(routerRedux.push('/'));
+        yield put(routerRedux.push('/orders'));
       }
     },
     *logout(_, { put, select }) {

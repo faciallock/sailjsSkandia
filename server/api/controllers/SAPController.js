@@ -64,8 +64,17 @@ module.exports = {
             //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
             function (err, response) {
                 if (err) {
-                    return console.error('Error invoking STFC_STRUCTURE:', err);
-                    res.serverError({ err: "true :( " + err });
+                    console.error('Error invoking STFC_STRUCTURE:', err);
+
+                    client.close();
+                    client.connect(function (err) {
+                        if (err) {
+                            console.error('could not connect to server', err);
+                        } else {
+                            console.error('Connected');
+                        }
+                    });
+                    return res.serverError({msg:"Error"});
                 }
                 
                 if (response.EMESSAGE ==="Authentication failed"){
@@ -100,7 +109,14 @@ module.exports = {
                 function (err, response) {
                     if (err) {
                         //return console.error('Error invoking STFC_STRUCTURE:', err);
-                        return res.serverError({ err });
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
                     }
                     console.log(response);
                     console.log(response.USER_TYPE);

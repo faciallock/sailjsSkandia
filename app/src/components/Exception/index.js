@@ -22,8 +22,8 @@ export default ({ className, linkElement = 'a', type, title, desc, img, actions,
           {
             actions ||
               createElement(linkElement, {
-                to: '/',
-                href: '/',
+                to: '/home',
+                href: '/home',
               }, <Button type="primary">Return</Button>)
           }
         </div>

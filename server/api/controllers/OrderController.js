@@ -33,15 +33,22 @@ module.exports = {
             { IM_SALESDOCU: req.query.orderId, IM_USER: 'CSR' },
             function (err, response) {
                 if (err) {
-                    return console.error('Error invoking STFC_STRUCTURE:', err);
-                    res.send({ error: "true :( " + err });
+                    console.error('Error invoking STFC_STRUCTURE:', err);
+
+                    client.close();
+                    client.connect(function (err) {
+                        if (err) {
+                            console.error('could not connect to server', err);
+                        } else {
+                            console.error('Connected');
+                        }
+                    });
+                    return res.serverError({msg:"Error"});
                 }
-                //console.log('Result STFC_STRUCTURE:', res);
-                /* let comments=response.EX_USERLOG;
-                comments.reverse();
-                response.EX_USERLOG = comments; */
-                
-                return res.ok({ msg: response })
+                else{
+                    return res.ok({ msg: response })
+
+                }
             });
         }catch(e){
             console.log(e);
@@ -55,15 +62,22 @@ module.exports = {
                 { IM_SALESDOCU: req.query.orderId, IM_ITEMNO: req.query.lineItemNumber},
                 function (err, response) {
                     if (err) {
-                        return console.error('Error invoking STFC_STRUCTURE:', err);
-                        res.send({ error: "true :( " + err });
+                        console.error('Error invoking STFC_STRUCTURE:', err);
+    
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                        return res.serverError({msg:"Error"});
                     }
-                    //console.log('Result STFC_STRUCTURE:', res);
-                    /* let comments=response.EX_USERLOG;
-                    comments.reverse();
-                    response.EX_USERLOG = comments; */
-
-                    return res.ok({ msg: response })
+                    else{
+                        return res.ok({ msg: response })
+    
+                    }
                 });
         } catch (e) {
             console.log(e);
@@ -77,15 +91,22 @@ module.exports = {
                 { IM_SALESDOCU: req.query.orderId },
                 function (err, response) {
                     if (err) {
-                        return console.error('Error invoking STFC_STRUCTURE:', err);
-                        res.send({ error: "true :( " + err });
+                        console.error('Error invoking STFC_STRUCTURE:', err);
+    
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                        return res.serverError({msg:"Error"});
                     }
-                    //console.log('Result STFC_STRUCTURE:', res);
-                    /* let comments=response.EX_USERLOG;
-                    comments.reverse();
-                    response.EX_USERLOG = comments; */
-
-                    return res.ok({ msg: response })
+                    else{
+                        return res.ok({ msg: response })
+    
+                    }
                 });
         } catch (e) {
             console.log(e);
@@ -130,15 +151,22 @@ module.exports = {
 
                 function (err, response) {
                     if (err) {
-                        return console.error('Error invoking STFC_STRUCTURE:', err);
-                        res.send({ error: "true :( " + err });
+                        console.error('Error invoking STFC_STRUCTURE:', err);
+    
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                        return res.serverError({msg:"Error"});
                     }
-                    //console.log('Result STFC_STRUCTURE:', res);
-                    /* let comments=response.EX_USERLOG;
-                    comments.reverse();
-                    response.EX_USERLOG = comments; */
-
-                    return res.ok({ msg: response })
+                    else{
+                        return res.ok({ msg: response })
+    
+                    }
                 });
         } catch (e) {
             console.log(e);
@@ -161,11 +189,22 @@ module.exports = {
                 { IM_SALESDOCU: req.param('orderId'), IM_ZCOMMENT: req.param('comment'), IM_ERNAM: req.param('userName')  },
                 function (err, response) {
                     if (err) {
-                        return console.error('Error invoking STFC_STRUCTURE:', err);
-                        res.send({ error: "true :( " + err });
+                        console.error('Error invoking STFC_STRUCTURE:', err);
+    
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                        return res.serverError({msg:"Error"});
                     }
-                    console.log('Result STFC_STRUCTURE:', response);
-                    return res.ok({ msg: response })
+                    else{
+                        return res.ok({ msg: response })
+    
+                    }
                 });
         } catch (e) {
             console.log(e);
@@ -180,11 +219,23 @@ module.exports = {
             { IM_IND: req.query.imInd,IM_CUSTNO: '', IM_USERNAME: req.query.userName },
             function (err, response) {
                 if (err) {
-                    return console.error('Error invoking STFC_STRUCTURE:', err);
-                    res.send({ error: "true :( " + err });
+                    console.error('Error invoking STFC_STRUCTURE:', err);
+
+                    client.close();
+                    client.connect(function (err) {
+                        if (err) {
+                            console.error('could not connect to server', err);
+                        } else {
+                            console.error('Connected');
+                        }
+                    });
+                    return res.serverError({msg:"Error"});
                 }
-                //console.log('Result STFC_STRUCTURE:', response);
-                return res.ok({ msg: response })
+                else{
+                    return res.ok({ msg: response })
+
+                }
+                
             });
         }catch(e){
             console.log(e);

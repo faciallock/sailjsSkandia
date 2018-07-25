@@ -70,6 +70,7 @@ const ModalBOM = Form.create()(
                     visible={visible}
                     title="BOM Details"
                     width="80%"
+                    onCancel={onOK}
                     okText="OK"
                         footer={[
                             <Button key="submit" type="primary" loading={loading} onClick={onOK}>

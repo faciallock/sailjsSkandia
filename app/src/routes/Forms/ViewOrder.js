@@ -350,12 +350,12 @@ class ViewOrder extends PureComponent {
               </Col>
               
               {localStorage.getItem('userType') != "D" && <Col lg={8} md={12} sm={24}>
-                <Form.Item  label="Sales Org.">
+                <Form.Item  label="Sales Org">
                 
                   {getFieldDecorator('owner', {
                     rules: [{ required: true, message: '' }],
                   })(
-                      <Select value={salesOrg} placeholder="">
+                      <Select value={salesOrg} placeholder="" disabled={true}>
                       </Select>
                   )}
                 </Form.Item>
@@ -387,7 +387,7 @@ class ViewOrder extends PureComponent {
                     rules: [{ required: true, message: 'Error' }],
                   })(
                     <Input
-                      placeholder=""
+                      placeholder="" disabled={true}
                     />
                   )}
                 </Form.Item>
@@ -398,7 +398,7 @@ class ViewOrder extends PureComponent {
                   {getFieldDecorator('owner', {
                     rules: [{ required: true, message: '' }],
                   })(
-                    <Select placeholder="">
+                    <Select placeholder="" disabled={true}>
                       <Option value="one">One option</Option>
                       <Option value="second">Second option</Option>
                     </Select>
@@ -437,7 +437,7 @@ class ViewOrder extends PureComponent {
                   {getFieldDecorator('url', {
                     rules: [{ required: true, message: 'Error' }],
                   })(
-                    <label >{invoiceNumer}</label>
+                    <label >{invoiceNumer.replace(/^0+/, '')}</label>
                   )}
                 </Form.Item>
               </Col>

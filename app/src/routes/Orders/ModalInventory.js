@@ -50,14 +50,16 @@ const ModalInventory = Form.create()(
             return (
                 <LocaleProvider locale={en_US}>
                 <Modal
+                    
                     visible={visible}
                     title="Inventory Details"
                     width="80%"
+                    onCancel={onOK}
                     okText="OK"
                         footer={[
                             <Button key="submit" type="primary" loading={loading} onClick={onOK}>
                                 Ok
-            </Button>
+                            </Button>
                         ]}
                 >
                         

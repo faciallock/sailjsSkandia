@@ -76,7 +76,7 @@ export default class OrderView extends PureComponent {
         visibleNewComment:false,
         visibleBOM:false,
         visibleInventory:false,
-        showSearch: false
+        showSearch: true
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -404,17 +404,42 @@ export default class OrderView extends PureComponent {
                 dataIndex: 'VBELN',
                 key: 'VBELN',
                 fixed: 'left',
-                width: 140
-            },
+                width: 140,
+				render: (text, record) => {
+                    
+                    let value = text.replace(/^0+/, '');
+                    return (
+                        <span>{value}</span> 
+                    )
+                }            },
             {
                 title: 'Sidemark/PO',
                 dataIndex: 'BSTNK',
                 key: 'BSTNK'
             },
             {
-                title: 'Customer Account',
+                title: 'Customer No',
                 dataIndex: 'KUNNR',
-                key: 'KUNNR'
+                key: 'KUNNR',
+                render: (text, record) => {
+                    
+                    let value = text.replace(/^0+/, '');
+                    return (
+                        <span>{value}</span> 
+                    )
+                }
+            },
+			{
+                title: 'Date',
+                dataIndex: 'ERDAT',
+                key: 'ERDAT',
+                render: (text, record) => {
+                                       
+                    return (
+                        <span>{moment(text).format("MM/DD/YYYY")}</span> 
+                    )
+                }
+
             },
             {
                 title: 'Name',
@@ -425,7 +450,14 @@ export default class OrderView extends PureComponent {
                 title: 'Product',
                 dataIndex: 'DESC',
                 key: 'DESC',
-                sorter: true
+                sorter: true,
+                render: (text, record) => {
+                                       
+                    let value = text.replace(/^Skandia+/, '');
+                    return (
+                        <span>{value}</span> 
+                    )
+                }
             },
             {
                 title: 'Total Price',
@@ -468,7 +500,14 @@ export default class OrderView extends PureComponent {
                 dataIndex: 'VBELN',
                 key: 'VBELN',
                 fixed: 'left',
-                width: 140
+                width: 140,
+                render: (text, record) => {
+                    
+                    let value = text.replace(/^0+/, '');
+                    return (
+                        <span>{value}</span> 
+                    )
+                }
             },
             {
                 title: 'Sidemark/PO',
@@ -476,10 +515,29 @@ export default class OrderView extends PureComponent {
                 key: 'BSTNK'
             },
             {
+                title: 'Date',
+                dataIndex: 'ERDAT',
+                key: 'ERDAT',
+                render: (text, record) => {
+                                       
+                    return (
+                        <span>{moment(text).format("MM/DD/YYYY")}</span> 
+                    )
+                }
+
+            },
+            {
                 title: 'Product',
                 dataIndex: 'DESC',
                 key: 'DESC',
-                sorter: true
+                sorter: true,
+                render: (text, record) => {
+                                       
+                    let value = text.replace(/^Skandia+/, '');
+                    return (
+                        <span>{value}</span> 
+                    )
+                }
             },
             {
                 title: 'Status',
@@ -555,7 +613,7 @@ export default class OrderView extends PureComponent {
                         visible={visibleNewComment}
                         onCancel={this.onCancelNewComment}
                         onCreate={()=>{
-                            this.handleOkNewComment(orderDetail.IM_SALESDOCU)
+                            this.handleOkNewComment(orderDetail.IM_SALESDOCU.replace(/^0+/, ''))
                             }}
                     />
                     <ModalBOM
@@ -580,7 +638,7 @@ export default class OrderView extends PureComponent {
                         onOk={this.hideModal}
                         okText="OK"
                         closable={false}
-
+                        onCancel={this.hideModal}
                         footer={[
                             <Button key="submit" onClick={this.hideModal}>
                                 <Icon type="close" /> Close
@@ -591,7 +649,7 @@ export default class OrderView extends PureComponent {
                         <Spin size="large" spinning={loading} tip="Loading order detail..." >
                             <PageHeader
                                 style={{padding:'1px'}}
-                                title={<div className="title">{orderDetail.IM_SALESDOCU}</div>}
+                                title={<div className="title">{orderDetail.IM_SALESDOCU ? orderDetail.IM_SALESDOCU.replace(/^0+/, ''): ""}</div>}
                                 action={
                                     <div style={{textAlign:'left',paddingLeft:'30px',position:'relative',top:'-5px'}}>
 
@@ -758,6 +816,7 @@ export default class OrderView extends PureComponent {
                             size="small"
                             scroll={{ x: 1200 }}
                             rowKey={record => record.VBELN}
+                            pagination = {{pageSize: 20}}
                         />
                     </Card>
 

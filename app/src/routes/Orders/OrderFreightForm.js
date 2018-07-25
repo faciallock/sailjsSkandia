@@ -59,7 +59,7 @@ class OrderFreightForm extends Component {
                             <Form.Item label="Shippers Instruction">
                                 
                                     <Input
-                                        placeholder="" defaultValue={""}
+                                        placeholder="" defaultValue={""} disabled={true}
                                     />
                                 
                             </Form.Item>
@@ -90,7 +90,7 @@ class OrderFreightForm extends Component {
                         <Col lg={12} md={12} sm={24}>
                             <Form.Item label="Freight">
 
-                                <Select placeholder="" value={data.EX_FREIGHT} >
+                                <Select placeholder="" value={data.EX_FREIGHT} disabled={true} >
                                     <Option value={data.EX_FREIGHT}><b>{data.EX_FREIGHT}</b></Option>
 
                                 </Select>
@@ -100,9 +100,9 @@ class OrderFreightForm extends Component {
                     </Row>
                     <Row gutter={16}>
                         <Col lg={12} md={12} sm={24}>
-                            <Form.Item label="Freight Overrride">
+                            <Form.Item label="Freight Override">
 
-                                <Select placeholder="" value={data.EX_FROVER} >
+                                <Select placeholder="" value={data.EX_FROVER} disabled={true}>
                                     <Option value={data.EX_FREIGHT}><b>{data.EX_FREIGHT}</b></Option>
                                 </Select>
 

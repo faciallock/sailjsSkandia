@@ -140,7 +140,7 @@ class OrderShippingForm extends Component {
                         </Col>
                         <Col lg={8} md={12} sm={24}>
                             <Form.Item label="Sales Org.">
-                                <Select value="" value={data.EX_ORG} placeholder="">
+                                <Select value="" value={data.EX_ORG} placeholder="" disabled={true}>
                                     <Option key={data.EX_ORG} value={data.EX_ORG}><b>{data.EX_ORG}</b></Option>
                                 </Select>
                             </Form.Item>
@@ -161,12 +161,12 @@ class OrderShippingForm extends Component {
                         </Col>
                         <Col lg={8} md={24} sm={24}>
                             <Form.Item label="Reference">
-                                <Input placeholder="" value={data.EX_REFERENCE}/>
+                                <Input placeholder="" value={data.EX_REFERENCE} disabled={true}/>
                             </Form.Item>
                         </Col>
                         <Col lg={8} md={24} sm={24}>
-                            <Form.Item label="Repair/Remake Code">
-                                <Select placeholder="">
+                            <Form.Item label="Repair/Remake Code" >
+                                <Select placeholder="" disabled={true}>
                                     <Option value="one">One option</Option>
                                     <Option value="second">Second option</Option>
                                 </Select>
@@ -197,7 +197,7 @@ class OrderShippingForm extends Component {
                     <Row gutter={12}>
                         <Col lg={8} md={24} sm={24}>
                             <Form.Item label="Invoice Number">
-                                <label ><b>{data.EX_INVNO}</b></label>
+                                <label ><b>{data.EX_INVNO.replace(/^0+/, '')}</b></label>
                             </Form.Item>
                         </Col>
                         <Col lg={8} md={24} sm={24}>

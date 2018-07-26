@@ -84,7 +84,8 @@ export default class OrderView extends PureComponent {
         visibleDiscount:false,
         visibleSurcharges:false,
         discountDetail:{},
-        surchargesDetail:{}
+        surchargesDetail:{},
+        sortedInfo: null,
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -436,9 +437,12 @@ export default class OrderView extends PureComponent {
         console.log(this.props);
         const { orders: { orders }, orderDetail,  bomDetail, inventoryDetail, userRoles, loading } = this.props;
         console.log(userRoles);
-        const { visibleSurcharges, visibleDiscount, visibleNewComment, discountDetail, surchargesDetail,visibleBOM, visibleInventory } = this.state;
-        
+        const { visibleSurcharges, visibleDiscount,  visibleNewComment, discountDetail, surchargesDetail,visibleBOM, visibleInventory } = this.state;
+        let {sortedInfo }= this.state;
+        sortedInfo = sortedInfo || {};
         if ( localStorage.getItem('userType') != "D"){
+
+            
         
         var columns = [
             {
@@ -493,6 +497,8 @@ export default class OrderView extends PureComponent {
                 dataIndex: 'DESC',
                 key: 'DESC',
                 sorter: true,
+                sorter: (a, b) => a.DESC - b.DESC,
+                sortOrder: sortedInfo.columnKey === 'DESC' && sortedInfo.order,
                 render: (text, record) => {
                                        
                     let value = text.replace(/^Skandia+/, '');

@@ -9,7 +9,14 @@ export class ZVTColumns {
             width: 80,
             dataIndex: 'ITEMNO',
             key: 'ITEMNO',
-            fixed: 'left'
+            fixed: 'left',
+            render: (text, record) => {
+                    
+                let value = text.replace(/^0+/, '');
+                return (
+                    <span>{value}</span> 
+                )
+            } 
         },
         {
             title: 'Product',

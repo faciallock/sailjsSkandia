@@ -73,7 +73,37 @@ const SearchForm = Form.create()(
                                 </Col>
                             </Row>
                             <Row gutter={24}>
-                                <Col lg={8} md={8} sm={8} xs={24} key="Status">
+                                
+                                
+                                <Col lg={4} md={6} sm={8} xs={12} key="OrderDate">
+                                    <FormItem>
+                                        {getFieldDecorator('OrderDate', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Order date from" format={dateFormat}/>
+                                        )}
+                                    </FormItem>
+                                </Col>
+                                <Col lg={4} md={6} sm={8} xs={12} key="OrderDateTo">
+                                    <FormItem>
+                                        {getFieldDecorator('OrderDateTo', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Order date to" format={dateFormat}/>
+                                        )}
+                                    </FormItem>
+                                </Col>
+                                <Col lg={4} md={6} sm={8} xs={12}  key="ShippedDate">
+                                    <FormItem>
+                                        {getFieldDecorator('ShippedDate', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Shipped date from" format={dateFormat}/>
+                                        )}
+                                    </FormItem>
+                                </Col>
+                                <Col lg={4} md={6} sm={8} xs={12}  key="ShippedDateTo">
+                                    <FormItem>
+                                        {getFieldDecorator('ShippedDateTo', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Shipped date to" format={dateFormat}/>
+                                        )}
+                                    </FormItem>
+                                </Col>
+                                <Col lg={8} md={24} sm={24} xs={24} key="Status">
                                     <FormItem>
                                         {getFieldDecorator("Status", {
                                             rules: [{
@@ -85,21 +115,6 @@ const SearchForm = Form.create()(
                                         )}
                                     </FormItem>
                                 </Col>
-                                
-                                <Col lg={8} md={8} sm={8} xs={12} key="OrderDate">
-                                    <FormItem>
-                                        {getFieldDecorator('OrderDate', { type: 'object', required: false })(
-                                            <DatePicker placeholder="Order date" format={dateFormat}/>
-                                        )}
-                                    </FormItem>
-                                </Col>
-                                <Col lg={8} md={8} sm={8} xs={12}  key="ShippedDate">
-                                    <FormItem>
-                                        {getFieldDecorator('ShippedDate', { type: 'object', required: false })(
-                                            <DatePicker placeholder="Shipped date" format={dateFormat}/>
-                                        )}
-                                    </FormItem>
-                                </Col>
                             </Row>
                         </div>
                         
@@ -108,7 +123,7 @@ const SearchForm = Form.create()(
                     userType !== 'D' &&
                         <div>
                             <Row gutter={24}>
-                                { localStorage.getItem('userType') != "D" &&
+                                
                                 <Col lg={6} md={12} sm={12} xs={24} key="CustomerNumber">
                                     <FormItem>
                                         {getFieldDecorator("CustomerNumber", {
@@ -121,7 +136,18 @@ const SearchForm = Form.create()(
                                         )}
                                         </FormItem>
                                 </Col>
-                                }
+                                <Col lg={6} md={12} sm={12} xs={24} key="Name">
+                                    <FormItem>
+                                        {getFieldDecorator("Name", {
+                                            rules: [{
+                                                required: false,
+                                                message: '',
+                                        }],
+                                        })(
+                                        <Input prefix={<Icon type="user" style={{ color: '#1d2d5c' }} />} placeholder="Name" />
+                                        )}
+                                    </FormItem>
+                                </Col>
                                 <Col lg={6} md={12} sm={12} xs={24} key="OrderNumber">
                                     <FormItem>
                                         {getFieldDecorator("OrderNumber", {
@@ -147,47 +173,38 @@ const SearchForm = Form.create()(
                                         )}
                                         </FormItem>
                                 </Col>
-                                { localStorage.getItem('userType') != "D" &&
-                                <Col lg={6} md={12} sm={12} xs={24} key="Name">
-                                    <FormItem>
-                                        {getFieldDecorator("Name", {
-                                            rules: [{
-                                                required: false,
-                                                message: '',
-                                        }],
-                                        })(
-                                        <Input prefix={<Icon type="user" style={{ color: '#1d2d5c' }} />} placeholder="Name" />
-                                        )}
-                                    </FormItem>
-                                </Col>}
+                                
                             </Row>
                             <Row gutter={24}>
-                                <Col lg={6} md={12} sm={12} xs={12} key="ShippedBy">
+                            <Col lg={3} md={6} sm={12} xs={12} key="OrderDate">
                                     <FormItem>
-                                        {getFieldDecorator("ShippedBy", {
-                                            rules: [{
-                                                required: false,
-                                                message: '',
-                                        }],
-                                        })( 
-                                        <Input prefix={<Icon type="shop" style={{ color: '#1d2d5c' }} />} placeholder="Shipped By" />
+                                        {getFieldDecorator('OrderDate', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Order date from" format={dateFormat}/>
                                         )}
-                                        </FormItem>
+                                    </FormItem>
                                 </Col>
-                                { localStorage.getItem('userType') != "D" &&
-                                <Col lg={3} md={6} sm={6} xs={12} key="TotalPrice">
+                                <Col lg={3} md={6} sm={12} xs={12} key="OrderDateTo">
                                     <FormItem>
-                                        {getFieldDecorator("TotalPrice", {
-                                            rules: [{
-                                                required: false,
-                                                message: '',
-                                        }],
-                                        })(
-                                        <Input prefix={<span style={{ color: '#1d2d5c' }} >$</span>} placeholder="Total Price" />
+                                        {getFieldDecorator('OrderDateTo', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Order date to" format={dateFormat}/>
                                         )}
-                                        </FormItem>
-                                </Col>}
-                                <Col lg={3} md={6} sm={6} xs={12} key="Status">
+                                    </FormItem>
+                                </Col>
+                                <Col lg={3} md={6} sm={12} xs={12}  key="ShippedDate">
+                                    <FormItem>
+                                        {getFieldDecorator('ShippedDate', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Shipped date from" format={dateFormat}/>
+                                        )}
+                                    </FormItem>
+                                </Col>
+                                <Col lg={3} md={6} sm={12} xs={12}  key="ShippedDateTo">
+                                    <FormItem>
+                                        {getFieldDecorator('ShippedDateTo', { type: 'object', required: false })(
+                                            <DatePicker placeholder="Shipped date to" format={dateFormat}/>
+                                        )}
+                                    </FormItem>
+                                </Col>
+                                <Col lg={4} md={6} sm={6} xs={12} key="Status">
                                     <FormItem>
                                         {getFieldDecorator("Status", {
                                             rules: [{
@@ -199,20 +216,29 @@ const SearchForm = Form.create()(
                                         )}
                                     </FormItem>
                                 </Col>
-                                
-                                <Col lg={6} md={12} sm={12} xs={12} key="OrderDate">
+                                <Col lg={4} md={6} sm={6} xs={12} key="TotalPrice">
                                     <FormItem>
-                                        {getFieldDecorator('OrderDate', { type: 'object', required: false })(
-                                            <DatePicker placeholder="Order date" format={dateFormat}/>
+                                        {getFieldDecorator("TotalPrice", {
+                                            rules: [{
+                                                required: false,
+                                                message: '',
+                                        }],
+                                        })(
+                                        <Input prefix={<span style={{ color: '#1d2d5c' }} >$</span>} placeholder="Total Price" />
                                         )}
-                                    </FormItem>
+                                        </FormItem>
                                 </Col>
-                                <Col lg={6} md={12} sm={12} xs={12}  key="ShippedDate">
+                                <Col lg={4} md={12} sm={12} xs={12} key="ShippedBy">
                                     <FormItem>
-                                        {getFieldDecorator('ShippedDate', { type: 'object', required: false })(
-                                            <DatePicker placeholder="Shipped date" format={dateFormat}/>
+                                        {getFieldDecorator("ShippedBy", {
+                                            rules: [{
+                                                required: false,
+                                                message: '',
+                                        }],
+                                        })( 
+                                        <Input prefix={<Icon type="shop" style={{ color: '#1d2d5c' }} />} placeholder="Shipped By" />
                                         )}
-                                    </FormItem>
+                                        </FormItem>
                                 </Col>
                             </Row>
                         </div>

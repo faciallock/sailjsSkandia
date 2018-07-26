@@ -290,15 +290,14 @@ export default class OrderView extends PureComponent {
         payload.DealerNumber = "";
 
         
-
-
-
         if( typeof payload.OrderNumber == "undefined"){payload.OrderNumber = ""; };
         if( typeof payload.Sidemark == "undefined" ){ payload.Sidemark = "";}; 
         if( typeof payload.CustomerNumber == "undefined" ){ payload.CustomerNumber = ""; };
         if( typeof payload.Name == "undefined" ){ payload.Name = "";};
         if( typeof payload.OrderDate == "undefined" || payload.OrderDate == null){ payload.OrderDate = "";};
+        if( typeof payload.OrderDateTo == "undefined" || payload.OrderDateTo == null){ payload.OrderDateTo = "";};
         if( typeof payload.ShippedDate == "undefined" || payload.ShippedDate == null){ payload.ShippedDate = ""; };
+        if( typeof payload.ShippedDateTo == "undefined" || payload.ShippedDateTo == null){ payload.ShippedDateTo = ""; };
         if( typeof payload.ShippedBy == "undefined" ){ payload.ShippedBy = "";};
         if( typeof payload.TotalPrice == "undefined" ){ payload.TotalPrice = "";};
         if( typeof payload.Status == "undefined" ){ payload.Status = "";} ;
@@ -309,8 +308,16 @@ export default class OrderView extends PureComponent {
         if( payload.OrderDate != "") { payload.OrderDate = payload.OrderDate.format("YYYYMMDD"); };
         if( payload.ShippedDate != "") { payload.ShippedDate = payload.ShippedDate.format("YYYYMMDD"); };
 
-        
+        if( payload.OrderDateTo != "") { payload.OrderDateTo = payload.OrderDateTo.format("YYYYMMDD"); };
+        if( payload.ShippedDateTo != "") { payload.ShippedDateTo = payload.ShippedDateTo.format("YYYYMMDD"); };
 
+        if( payload.OrderDate == "" && payload.OrderDateTo != ""){ payload.OrderDate = payload.OrderDateTo };
+        if( payload.OrderDate != "" && payload.OrderDateTo == ""){ payload.OrderDateTo = payload.OrderDate };
+
+        if( payload.ShippedDate == "" && payload.ShippedDateTo != ""){ payload.ShippedDate = payload.ShippedDateTo };
+        if( payload.ShippedDate != "" && payload.ShippedDateTo == ""){ payload.ShippedDateTo = payload.ShippedDate };
+        
+        
 
         this.props.dispatch({
             type: 'orders/search',

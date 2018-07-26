@@ -496,8 +496,6 @@ export default class OrderView extends PureComponent {
                 title: 'Product',
                 dataIndex: 'DESC',
                 key: 'DESC',
-                sorter: true,
-                sorter: (a, b) => a.DESC - b.DESC,
                 sortOrder: sortedInfo.columnKey === 'DESC' && sortedInfo.order,
                 render: (text, record) => {
                                        
@@ -511,7 +509,6 @@ export default class OrderView extends PureComponent {
                 title: 'Total Price',
                 dataIndex: 'NETWR',
                 key: 'NETWR',
-                sorter: true
             },
             {
                 title: 'Status',

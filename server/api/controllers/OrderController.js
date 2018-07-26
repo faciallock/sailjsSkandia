@@ -146,7 +146,12 @@ module.exports = {
                    IM_SHIPPED_DATE: req.body.ShippedDate,
                    IM_SHIP_BY: req.body.ShippedBy,
                    IM_TOTAL_PRICE: req.body.TotalPrice,
-                   IM_STATUS: req.body.Status},
+                   IM_STATUS: req.body.Status,
+                   IM_SHIPPED_DATE_TO: req.body.ShippedDateTo,
+                   IM_ORDER_DATE_TO:req.body.OrderDateTo
+                
+                
+                },
 
 
                 function (err, response) {

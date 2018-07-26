@@ -3,7 +3,7 @@ import { Icon, Modal, List, Button } from 'antd';
 import { ModalInfo } from '../components/ModalInfo';
 export class ZVTColumns {
 
-    static getColumns(onBomClick, onInventoryClick) {
+    static getColumns(onSurchargesClick, onBestDiscountClick,onBomClick, onInventoryClick) {
         var aColumns = [{
             title: 'Line',
             width: 80,
@@ -90,12 +90,14 @@ export class ZVTColumns {
                             let aData = [];
                             aData = record;
                             aData.map((item) => {
-                                let currentValue = item.COND_VAL + "%";
+                                let currentNumber= parseFloat(Math.round(item.COND_VAL * 100)/ 100).toFixed(2)
+                                let currentValue = currentNumber + "%";
                                 item.VALUE = currentValue;
                                 return item;
 
                             });
-                            ModalInfo.show('Best Discount', aData, "l");
+                            //ModalInfo.show('Best Discount', aData, "l");
+                            onBestDiscountClick(aData);
                         }}
                         type="default" icon="eye-o">View</Button>
                 )
@@ -116,7 +118,7 @@ export class ZVTColumns {
 
                     <Button
                         onClick={() => {
-                            const columns = [
+                            /* const columns = [
                                 {
                                     title: 'Selected',
                                     dataIndex: 'MARK',
@@ -141,7 +143,9 @@ export class ZVTColumns {
                                 }
                             ];
 
-                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE");
+                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE"); */
+
+                            onSurchargesClick(record);
                         }}
                         type="default" icon="eye-o">View</Button>
                 )

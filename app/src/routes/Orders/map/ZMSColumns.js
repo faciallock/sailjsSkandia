@@ -3,7 +3,7 @@ import { Icon, Modal, List, Button } from 'antd';
 import { ModalInfo } from '../components/ModalInfo';
 export class ZMSColumns {
 
-    static getColumns(onBomClick, onInventoryClick) {
+    static getColumns(onSurchargesClick, onBestDiscountClick, onBomClick, onInventoryClick) {
         var aColumns =  [{
             title: 'Line',
             width: 80,
@@ -60,12 +60,14 @@ export class ZMSColumns {
                             let aData = [];
                             aData = record;
                             aData.map((item) => {
-                                let currentValue = item.COND_VAL + "%";
+                                let currentNumber= parseFloat(Math.round(item.COND_VAL * 100)/ 100).toFixed(2)
+                                let currentValue = currentNumber + "%";
                                 item.VALUE = currentValue;
                                 return item;
 
                             });
-                            ModalInfo.show('Best Discount', aData, "l");
+                            //ModalInfo.show('Best Discount', aData, "l");
+                            onBestDiscountClick(aData);
                         }}
                         type="default" icon="eye-o">View</Button>
                 )
@@ -86,32 +88,10 @@ export class ZMSColumns {
 
                     <Button
                         onClick={() => {
-                            const columns = [
-                                {
-                                    title: 'Selected',
-                                    dataIndex: 'MARK',
-                                    key: 'MARK',
+                            
 
-                                },
-                                {
-                                    title: 'Surcharge Type',
-                                    dataIndex: 'COND_TYP',
-                                    key: 'COND_TYP',
-
-                                },
-                                {
-                                    title: 'Description',
-                                    dataIndex: 'VTEXT',
-                                    key: 'VTEXT'
-                                },
-                                {
-                                    title: 'Value',
-                                    dataIndex: 'COND_VAL',
-                                    key: 'COND_VAL'
-                                }
-                            ];
-
-                            ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE");
+                            //ModalInfo.show('Surchages Details', record, "t", columns, "COND_TYPE");
+                            onSurchargesClick(record);
                         }}
                         type="default" icon="eye-o">View</Button>
                 )

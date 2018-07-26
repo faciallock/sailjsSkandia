@@ -76,7 +76,7 @@ export default class ViewOrderTable extends PureComponent {
     render() {
         console.log();
         console.log(this.props.data.EX_DOCTYP);
-        const columns = Dictionary.requestColumns(this.props.onBomClick, this.props.onInventoryClick).getRequest(this.props.data.EX_DOCTYP);
+        const columns = Dictionary.requestColumns(this.props.onSurchargesClick, this.props.onBestDiscountClick, this.props.onBomClick, this.props.onInventoryClick).getRequest(this.props.data.EX_DOCTYP);
         let data = [];
         //let dataType;
         if (this.props.data=== undefined) {

@@ -11,13 +11,13 @@ import { ZMSColumns } from './ZMSColumns';
 
 export class Dictionary {
     
-    static requestColumns(onBomClick, onInventoryClick){
+    static requestColumns(onSurchargesClick, onBestDiscountClick, onBomClick, onInventoryClick){
         return {
-            ZSD: ZSDColumns.getColumns(onBomClick, onInventoryClick),
-            ZSH: ZSHColumns.getColumns(onBomClick, onInventoryClick),
-            ZHZ: ZHZColumns.getColumns(onBomClick, onInventoryClick),
-            ZVT: ZVTColumns.getColumns(onBomClick, onInventoryClick),
-            ZMS: ZMSColumns.getColumns(onBomClick, onInventoryClick),
+            ZSD: ZSDColumns.getColumns(onSurchargesClick,onBestDiscountClick,onBomClick, onInventoryClick),
+            ZSH: ZSHColumns.getColumns(onSurchargesClick,onBestDiscountClick,onBomClick, onInventoryClick),
+            ZHZ: ZHZColumns.getColumns(onSurchargesClick,onBestDiscountClick,onBomClick, onInventoryClick),
+            ZVT: ZVTColumns.getColumns(onSurchargesClick,onBestDiscountClick,onBomClick, onInventoryClick),
+            ZMS: ZMSColumns.getColumns(onSurchargesClick,onBestDiscountClick,onBomClick, onInventoryClick),
             getRequest: function(aColumn) {
                 var value = eval("this." + aColumn);
                 return value;

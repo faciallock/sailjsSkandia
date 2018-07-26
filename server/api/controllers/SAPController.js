@@ -119,9 +119,10 @@ module.exports = {
                         });
                     }
                     console.log(response);
-                    console.log(response.USER_TYPE);
+                    //console.log(response.USER_TYPE);
                     let roles={};
-                    switch (response.USER_TYPE) {
+                    let userType= (typeof response !== undefined) ? "" : response.USER_TYPE;  
+                    switch (userType) {
                         case "C":
                             roles = { comments: { c: false, r: true, u: true, d: true } };
                             break;

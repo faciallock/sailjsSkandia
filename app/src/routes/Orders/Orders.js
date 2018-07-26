@@ -13,6 +13,10 @@ import OrderFreightForm from './OrderFreightForm';
 import ViewOrderTable from './ViewOrderTable';
 import ModalNewComment from './ModalNewComment';
 import ModalBOM from './ModalBOM';
+import ModalDiscount from './ModalDiscount';
+import ModalSurcharges from './ModalSurcharges';
+
+
 import ModalInventory from './ModalInventory';
 import SearchForm from './SearchForm';
 import en_US from 'antd/lib/locale-provider/en_US';
@@ -76,7 +80,11 @@ export default class OrderView extends PureComponent {
         visibleNewComment:false,
         visibleBOM:false,
         visibleInventory:false,
-        showSearch: true
+        showSearch: true,
+        visibleDiscount:false,
+        visibleSurcharges:false,
+        discountDetail:{},
+        surchargesDetail:{}
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -119,6 +127,27 @@ export default class OrderView extends PureComponent {
             visibleBOM: true,
         });
     }
+
+    onBestDiscountClick = (data)=>{
+        console.log(data);
+        //discountDetail
+
+        this.setState({
+            discountDetail: data,
+            visibleDiscount:true
+        });
+    }
+
+    onSurchargesClick = (data)=>{
+        console.log(data);
+        //discountDetail
+
+        this.setState({
+            surchargesDetail: data,
+            visibleSurcharges:true
+        });
+    }
+
     onInventoryClick = (orderId) => {
         console.log({ orderId });
         this.props.dispatch({
@@ -184,6 +213,12 @@ export default class OrderView extends PureComponent {
     }
     onOKBOM = () => {
         this.setState({ visibleBOM: false })
+    }
+    onOKDiscount = () => {
+        this.setState({ visibleDiscount: false })
+    }
+    onOKSurcharges= () => {
+        this.setState({ visibleSurcharges: false })
     }
     onOKInventory = () => {
         this.setState({ visibleInventory: false })
@@ -392,9 +427,9 @@ export default class OrderView extends PureComponent {
 
     render() {
         console.log(this.props);
-        const { orders: { orders }, orderDetail, bomDetail, inventoryDetail, userRoles, loading } = this.props;
+        const { orders: { orders }, orderDetail,  bomDetail, inventoryDetail, userRoles, loading } = this.props;
         console.log(userRoles);
-        const { selectedRows, modalVisible, visibleNewComment, visibleBOM, visibleInventory } = this.state;
+        const { visibleSurcharges, visibleDiscount, visibleNewComment, discountDetail, surchargesDetail,visibleBOM, visibleInventory } = this.state;
         
         if ( localStorage.getItem('userType') != "D"){
         
@@ -622,6 +657,22 @@ export default class OrderView extends PureComponent {
                         data={bomDetail}
                         loading={loading}
                     />
+
+                    <ModalDiscount
+                        visible={visibleDiscount}
+                        onOK={this.onOKDiscount}
+                        data={discountDetail}
+                        loading={loading}
+                    />
+                    
+
+                    <ModalSurcharges
+                        visible={visibleSurcharges}
+                        onOK={this.onOKSurcharges}
+                        data={surchargesDetail}
+                        loading={loading}
+                    />
+
                     <ModalInventory
                         visible={visibleInventory}
                         onOK={this.onOKInventory}
@@ -732,7 +783,7 @@ export default class OrderView extends PureComponent {
                                 <Tabs defaultActiveKey="1">
                                     <TabPane tab={<span><Icon type="table" />Items</span>} key="1">
                                     <LocaleProvider locale={en_US}>
-                                    <ViewOrderTable data={orderDetail} onBomClick={this.onBomClick} onInventoryClick={this.onInventoryClick} />
+                                    <ViewOrderTable onBestDiscountClick={this.onBestDiscountClick} onSurchargesClick={this.onSurchargesClick} data={orderDetail} onBomClick={this.onBomClick} onInventoryClick={this.onInventoryClick} />
                                     </LocaleProvider>
                                     </TabPane>
                                     <TabPane tab={<span><Icon type="solution" /> Shipping Information</span>} key="2">

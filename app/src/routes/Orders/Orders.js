@@ -476,7 +476,7 @@ export default class OrderView extends PureComponent {
                 }
             },
 			{
-                title: 'Date',
+                title: 'Order Date',
                 dataIndex: 'ERDAT',
                 key: 'ERDAT',
                 render: (text, record) => {
@@ -734,7 +734,9 @@ export default class OrderView extends PureComponent {
                                                 <b>Order Status:</b> {orderDetail.EX_IND == 'C'? 'Confirmed':'Pending'}
                                             </Col>
                                             <Col lg={8} md={12} sm={24}>
-                                                <b>Order Status #2:</b> {orderDetail.EX_ORDSTATUS}
+                                            {localStorage.getItem('userType') !== "D" &&
+                                                <span><b>Order Status #2:</b> {orderDetail.EX_ORDSTATUS}</span>
+                                            }
                                             </Col>
                                         </Row>
                                     </div>

@@ -100,7 +100,7 @@ export default class ViewOrderTable extends PureComponent {
                     columns={columns}
                     locale={{ emptyText: 'No Data' }} 
                     dataSource={data}
-                    scroll={{ x: 2350 }}
+                    scroll={{ x: 2500 }}
                         rowKey={record => record.ITEMNO} />
                 </LocaleProvider>
             </div>

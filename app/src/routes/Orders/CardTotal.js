@@ -84,7 +84,7 @@ export default class CardTotal extends PureComponent {
             width: 120,
             key: 'grossPrice',
         }, {
-            title: 'Best Discount',
+            title: 'Discount',
             dataIndex: 'bestDiscount',
             width: 120,
             key: 'bestDiscount',

@@ -15,7 +15,7 @@ const ModalDiscount = Form.create()(
                 <LocaleProvider locale={en_US}>
                 <Modal
                     visible={visible}
-                    title="Best Discount"
+                    title="Discount"
                     width="40%"
                     onCancel={onOK}
                         footer={[

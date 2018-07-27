@@ -91,27 +91,27 @@ export class ZSHColumns {
             key: 'PRICE_VINYL'
         },
         {
-            title: 'Best Discount',
+            title: 'Discount',
             dataIndex: 'BESTDISCOUNT',
+            width: 160,
             key: 'BESTDISCOUNT',
             render: (record) => {
+                console.log(record);
+                let currentDiscount="";
+
+                record.map((item) => {
+                    let currentNumber= parseFloat(Math.round(item.COND_VAL * 100)/ 100).toFixed(2)
+                    let currentValue = currentNumber + "%";
+                    currentDiscount= currentDiscount+currentValue+" / ";
+                    item.VALUE = currentValue;
+                    return item;
+
+                });
                 return (
+                    
+                    
 
-                    <Button
-                        onClick={() => {
-                            let aData = [];
-                            aData = record;
-                            aData.map((item) => {
-                                let currentNumber= parseFloat(Math.round(item.COND_VAL * 100)/ 100).toFixed(2)
-                                let currentValue = currentNumber + "%";
-                                item.VALUE = currentValue;
-                                return item;
-
-                            });
-                            //ModalInfo.show('Best Discount', aData, "l");
-                            onBestDiscountClick(aData);
-                        }}
-                        type="default" icon="eye-o">View</Button>
+                    <span>{ currentDiscount.substring(0, currentDiscount.length - 3)}</span>
                 )
             }
         },

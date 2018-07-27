@@ -35,7 +35,7 @@ class UserLayout extends React.PureComponent {
               <div className={styles.header}>
                 <Link to="/">
                   <img alt="logo" className={styles.logo} src={logo} />
-                  <span className={styles.title}>CSR Login</span>
+                  <span className={styles.title}>Login</span>
                 </Link>
               </div>
               <div className={styles.desc}>Log into your personalized, secure web site by entering your user and password in the fields below.</div>

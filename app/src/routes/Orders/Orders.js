@@ -720,7 +720,7 @@ export default class OrderView extends PureComponent {
                                                 <b>Company:</b> {orderDetail.EX_CUST ? orderDetail.EX_CUST.split("-")[1]: ""}
                                             </Col>
                                             <Col lg={8} md={12} sm={24}>
-                                                <b>Account:</b> {orderDetail.EX_CUST ? orderDetail.EX_CUST.split("-")[0]: ""}
+                                                <b>Account:</b> {orderDetail.EX_CUST ? orderDetail.EX_CUST.split("-")[0].replace(/^0+/, ''): ""}
                                             </Col>
                                             <Col lg={8} md={12} sm={24}>
                                                 <b>Sales Org:</b> {orderDetail.EX_ORG}

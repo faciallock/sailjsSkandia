@@ -83,7 +83,13 @@ export class ZVTColumns {
         {
             title: 'Gross price',
             dataIndex: 'GROSSPRICE',
-            key: 'GROSSPRICE'
+            key: 'GROSSPRICE',
+            render: (record) => {
+                let currentGrossprice=record!=="" ? "$"+parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
+                return (
+                    <span>{ currentGrossprice }</span>
+                )
+            }
         },
         {
             title: 'Discount',
@@ -95,10 +101,12 @@ export class ZVTColumns {
                 let currentDiscount="";
 
                 record.map((item) => {
-                    let currentNumber= parseFloat(Math.round(item.COND_VAL * 100)/ 100).toFixed(2)
-                    let currentValue = currentNumber + "%";
-                    currentDiscount= currentDiscount+currentValue+" / ";
-                    item.VALUE = currentValue;
+                    let currentNumber= parseFloat(Math.round(item.COND_VAL * 100)/ 100).toFixed(0);
+                    console.log("cond_val"+item.COND_VAL)
+                   // let currentValue = currentNumber + "%";
+                    currentDiscount= currentDiscount+currentNumber+"/";
+                    console.log({currentDiscount})
+                    item.VALUE = currentDiscount;
                     return item;
 
                 });
@@ -106,7 +114,7 @@ export class ZVTColumns {
                     
                     
 
-                    <span>{ currentDiscount.substring(0, currentDiscount.length - 3)}</span>
+                    <span>{ currentDiscount.substring(0, currentDiscount.length - 1)}</span>
                 )
             }
         },

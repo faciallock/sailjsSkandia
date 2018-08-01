@@ -500,8 +500,10 @@ export default class OrderView extends PureComponent {
                 render: (text, record) => {
                                        
                     let value = text.replace(/^Skandia+/, '');
+
+                    
                     return (
-                        <span>{value}</span> 
+                        <span>{value.substring(0, value.length - 3)}</span> 
                     )
                 }
             },
@@ -509,6 +511,12 @@ export default class OrderView extends PureComponent {
                 title: 'Total Price',
                 dataIndex: 'NETWR',
                 key: 'NETWR',
+                render: (record) => {
+                    let currentTotalPrice=record!=="" ? "$"+parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
+                    return (
+                        <span>{ currentTotalPrice }</span>
+                    )
+                }
             },
             {
                 title: 'Status',

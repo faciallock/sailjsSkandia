@@ -88,6 +88,11 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
+    //dispatch added to collapse the sidemenu
+    this.props.dispatch({
+      type: 'global/changeLayoutCollapsed',
+      payload: true,
+    });
   }
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -159,6 +164,7 @@ class BasicLayout extends React.PureComponent {
           // you will be forced to jump to the 403 interface without permission
           Authorized={Authorized}
           menuData={getMenuData()}
+          //collapsed={true}
           collapsed={collapsed}
           location={location}
           isMobile={this.state.isMobile}

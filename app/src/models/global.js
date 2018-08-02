@@ -35,6 +35,7 @@ export default {
 
   reducers: {
     changeLayoutCollapsed(state, { payload }) {
+      console.log(payload)
       return {
         ...state,
         collapsed: payload,

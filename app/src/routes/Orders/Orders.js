@@ -349,7 +349,7 @@ export default class OrderView extends PureComponent {
                                 <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false :parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2)  }
+                                <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false :   "$"+parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')   }
                             </Col>
                            {/*  {localStorage.getItem('userType') != "D" &&<Col lg={8} md={8} sm={12}>
                                 <b>Created By:</b> {orderDetail.EX_CSR}
@@ -367,10 +367,10 @@ export default class OrderView extends PureComponent {
                         {/* </Row> */}
                         <Row gutter={12}>
                             <Col lg={8} md={8} sm={12}>
-                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2) }
+                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false :   "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : parseFloat(Math.round(JR1[0].COND_VAL * 100) / 100).toFixed(2) }
+                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : "$"+parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
                                 <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>
@@ -404,15 +404,15 @@ export default class OrderView extends PureComponent {
                                 <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false :parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2)  }
+                                <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false : "$"+parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')  }
                             </Col>
                         </Row>
                         <Row gutter={12}>
                             <Col lg={8} md={8} sm={12}>
-                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2) }
+                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : parseFloat(Math.round(JR1[0].COND_VAL * 100) / 100).toFixed(2) }
+                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : "$"+parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')  }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
                                 <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>

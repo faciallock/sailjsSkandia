@@ -121,7 +121,13 @@ export class ZVTColumns {
         {
             title: 'Price Per Line Item',
             dataIndex: 'ITEMPRICE',
-            key: 'ITEMPRICE'
+            key: 'ITEMPRICE',
+            render: (record) => {
+                let currentLineItem=record!=="" ? "$"+parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
+                return (
+                    <span>{ currentLineItem }</span>
+                )
+            }
         },
         {
             title: 'Surcharges',

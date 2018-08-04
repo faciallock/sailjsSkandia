@@ -59,13 +59,15 @@ const breadcrumbList = [{
 const breadcrumbTitle = [{
     title: 'Orders',
 }];
-@connect(({ orders, orderDetail,loading }) => ({
+@connect(({ orders, orderDetail,loading, global }) => ({
     orders,
     orderDetail:orders.orderDetail,
     userRoles: orders.userRoles,
     bomDetail: orders.bomDetail,
     inventoryDetail: orders.inventoryDetail,
-    loading: loading.models.orders
+    loading: loading.models.orders,
+    eye: global.eye
+    
 
 }))
 export default class OrderView extends PureComponent {
@@ -86,6 +88,7 @@ export default class OrderView extends PureComponent {
         discountDetail:{},
         surchargesDetail:{},
         sortedInfo: null,
+        firstEye: ""
     }
     componentDidMount() {
         if(localStorage.getItem('userName') ===null){
@@ -536,9 +539,10 @@ export default class OrderView extends PureComponent {
                 fixed: 'right',
                 width: 100,
                 render: (text, record) => {
+                       
                     
                     return (
-                        <a onClick={() => this.showModal(record,orderDetail)}><Icon type="eye-o" /> Show</a>
+                        <a onClick={() => this.showModal(record,orderDetail)} className={"tour_eye_" + record.VBELN}><Icon type="eye-o" /> Show</a>
                     )
                 }
             },
@@ -653,8 +657,8 @@ export default class OrderView extends PureComponent {
             <PageHeaderLayout title=""
             content={
                 <div style={{textAlign: "right",position:'relative',top:'-20px'} }>
-                <Button  style={{ marginLeft: 8 }} onClick={this.toggleSearch}><Icon type="search"  style={{ color: '#1d2d5c' }}/>
-                    Show search <Icon type={this.state.showSearch ? 'up' : 'down'} />
+                <Button  style={{ marginLeft: 8 }} onClick={this.toggleSearch} className="tour_button_hideSearch"><Icon type="search"  style={{ color: '#1d2d5c' }}/>
+                    Hide search <Icon type={this.state.showSearch ? 'up' : 'down'} />
                     </Button>
                     { this.state.showSearch &&                                                                             
                     <SearchForm handleSearch={this.handleSearch}/> }
@@ -880,14 +884,14 @@ export default class OrderView extends PureComponent {
                     
 
                     <Card bordered={false}>
-                        <Table
+                        <Table className="world"
                             loading={loading}
                             dataSource={orders}
                             columns={columns}
                             size="small"
                             scroll={{ x: 1200 }}
                             rowKey={record => record.VBELN}
-                            pagination = {{pageSize: 20}}
+                            pagination = {{pageSize: 15}}
                         />
                     </Card>
 

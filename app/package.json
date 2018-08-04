@@ -4,7 +4,6 @@
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
-    "precommit": "npm run lint-staged",
     "start": "cross-env DISABLE_ESLINT=true roadhog dev",
     "start:no-proxy": "cross-env NO_PROXY=true DISABLE_ESLINT=true roadhog dev",
     "build": "cross-env DISABLE_ESLINT=true roadhog build",
@@ -32,6 +31,8 @@
     "dva-loading": "^1.0.4",
     "enquire-js": "^0.1.1",
     "fastclick": "^1.0.6",
+    "intro.js": "^2.9.3",
+    "intro.js-react": "^0.2.0",
     "lodash": "^4.17.4",
     "lodash-decorators": "^4.4.1",
     "moment": "^2.19.1",

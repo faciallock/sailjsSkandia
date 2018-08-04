@@ -94,15 +94,14 @@ export default class GlobalHeader extends PureComponent {
               console.log('enter', value); // eslint-disable-line
             }}
           /> */}
-          <Tooltip title="Help">
-            {/* <a
-              target="_blank"
-              href="https://www.cogentibs.com/"
+          <Tooltip title="App tour">
+             <a
+              onClick={this.props.onShowTour}
               rel="noopener noreferrer"
               className={styles.action}
-            >
+              >
               <Icon type="question-circle-o" />
-            </a > */}
+            </a > 
           </Tooltip>
           {/* <NoticeIcon
             className={styles.action}

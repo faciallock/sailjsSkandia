@@ -16,7 +16,9 @@ import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo2.png';
 
-const { Content, Header, Footer } = Layout;
+import 'intro.js/introjs.css';
+
+import { Steps, Hints } from 'intro.js-react';const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute } = Authorized;
 
 /**
@@ -71,7 +73,39 @@ class BasicLayout extends React.PureComponent {
   }
   state = {
     isMobile,
-  };
+stepsEnabled: false,
+    initialStep: 0,
+    steps: [
+      {
+        element: '.welcome',
+        intro: 'Welcome to the order display web app tutorial.',
+      },
+      {
+        element: '.tour_search',
+        intro: 'You can search for different orders on the search panel.',
+      },
+      {
+        element: '.tour_firstRow',
+        intro: 'You can find elements by sidemark, status, price and others. ',
+      },
+      {
+        element: '.tour_secondRow',
+        intro: 'You can also find your orders by date.',
+      },
+      {
+        element: '.tour_button_hideSearch',
+        intro: 'If you wish to maximize the order display space, you can hide the search form by clicking this button. ',
+      },
+      {
+        element: '.world',
+        intro: 'Once the app loads or a search is performed, you will find the sales orders on this table. From here you can execute actions such as "Show" for order details and "Print" to print the order.',
+      },
+    ],
+    hintsEnabled: false,
+    hints: [
+      {
+      }
+    ]  };
   getChildContext() {
     const { location, routerData } = this.props;
     return {
@@ -150,8 +184,38 @@ class BasicLayout extends React.PureComponent {
       });
     } */
   }
+ onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+  };
+  
+  toggleSteps = () => {
+    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  };
+
+  addStep = () => {
+    const newStep = {
+      element: '.alive',
+      intro: 'Alive step',
+    };
+
+    this.setState(prevState => ({ steps: [...prevState.steps, newStep] }));
+  };
+
+  toggleHints = () => {
+    this.setState(prevState => ({ hintsEnabled: !prevState.hintsEnabled }));
+  };
+
+  addHint = () => {
+    const newHint = {
+      element: '.alive',
+      hint: 'Alive hint',
+      hintPosition: 'middle-right',
+    };
+
+    this.setState(prevState => ({ hints: [...prevState.hints, newHint] }));
+  };
   render() {
-    const {
+	const { stepsEnabled, steps, initialStep, hintsEnabled, hints } = this.state;    const {
       currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
     } = this.props;
     const bashRedirect = this.getBashRedirect();
@@ -182,6 +246,7 @@ class BasicLayout extends React.PureComponent {
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
+			  onShowTour = {this.toggleSteps}
             />
 
             {/* <GlobalHeader
@@ -197,6 +262,16 @@ class BasicLayout extends React.PureComponent {
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
             /> */}
           </Header>
+          <Steps
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={initialStep}
+          onExit={this.onExit}
+        />
+        <Hints
+          enabled={hintsEnabled}
+          hints={hints}
+        />
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <Switch>
               {
@@ -256,4 +331,5 @@ export default connect(({ user, global, loading }) => ({
   collapsed: global.collapsed,
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
+  eye: global.eye
 }))(BasicLayout);

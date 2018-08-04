@@ -29,11 +29,11 @@ const SearchForm = Form.create()(
         renderFields = (userType, getFieldDecorator) => {
         const dateFormat = 'MM/DD/YYYY';
         return (
-            <div>
+            <div className="tour_search">
                 {
                     userType == 'D' &&
                         <div>
-                            <Row gutter={12}>
+                            <Row gutter={12} className="tour_firstRow">
                                 <Col lg={8} md={8} sm={8} xs={24} key="OrderNumber">
                                     <FormItem>
                                         {getFieldDecorator("OrderNumber", {
@@ -84,7 +84,7 @@ const SearchForm = Form.create()(
                                         </FormItem> 
                                 </Col>*/}
                             </Row>
-                            <Row gutter={12}>
+                            <Row gutter={12} className="tour_secondRow">
                                 
                                 
                                 <Col lg={4} md={6} sm={8} xs={12} key="OrderDate">
@@ -123,7 +123,7 @@ const SearchForm = Form.create()(
                 {
                     userType !== 'D' &&
                         <div>
-                            <Row gutter={12}>
+                            <Row gutter={12}  className="tour_firstRow">
                                 
                                 <Col lg={6} md={12} sm={12} xs={24} key="CustomerNumber">
                                     <FormItem>
@@ -200,7 +200,7 @@ const SearchForm = Form.create()(
                                 </Col>
                                 
                             </Row>
-                            <Row gutter={12}>
+                            <Row gutter={12} className="tour_secondRow">
                             <Col lg={6} md={6} sm={12} xs={12} key="OrderDate">
                                     <FormItem style={{width:'100%'}}>
                                         {getFieldDecorator('OrderDate', { type: 'object', required: false })(

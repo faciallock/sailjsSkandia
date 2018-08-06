@@ -467,7 +467,7 @@ export default class OrderView extends PureComponent {
                 key: 'BSTNK'
             },
             {
-                title: 'Customer No',
+                title: 'Cust No',
                 dataIndex: 'KUNNR',
                 key: 'KUNNR',
                 render: (text, record) => {
@@ -819,9 +819,9 @@ export default class OrderView extends PureComponent {
                                     { localStorage.getItem('userType') != "D" && <TabPane tab={<span><Icon type="message" />Comments</span>} key="4">
                                             <Row gutter={12}>
                                             <Col lg={24} md={24} sm={24} style={{textAlign:'right', padding:'6px'}}>
-                                            <Button 
+                                            {   localStorage.getItem('userType') != "S" && localStorage.getItem('userType') != "D" && <Button 
                                                 onClick={this.openModalComment} 
-                                                type="primary"><Icon type="message" /> Add comment</Button>
+                                                type="primary"><Icon type="message" /> Add comment</Button> }
 
                                             {/* (typeof userRoles.roles === 'undefined') ? false : userRoles.roles.comments.c  */}
                                             </Col>

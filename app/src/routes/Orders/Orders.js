@@ -882,18 +882,21 @@ export default class OrderView extends PureComponent {
                     </Modal>
 
                     
-
+                    
                     <Card bordered={false}>
-                        <Table className="world"
-                            loading={loading}
-                            dataSource={orders}
-                            columns={columns}
-                            size="small"
-                            scroll={{ x: 1200 }}
-                            rowKey={record => record.VBELN}
-                            pagination = {{pageSize: 15}}
-                        />
+                        <LocaleProvider locale={en_US}>
+                            <Table className="world"
+                                loading={loading}
+                                dataSource={orders}
+                                columns={columns}
+                                size="small"
+                                scroll={{ x: 1200 }}
+                                rowKey={record => record.VBELN}
+                                pagination = {{pageSize: 15}}
+                            />
+                        </LocaleProvider>
                     </Card>
+
 
                     
                 

@@ -186,10 +186,13 @@ stepsEnabled: false,
   }
  onExit = () => {
     this.setState(() => ({ stepsEnabled: false }));
+    //localStorage.setItem('tourFlag',true);
+    //alert("Exit")
   };
   
   toggleSteps = () => {
     this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+    //
   };
 
   addStep = () => {
@@ -266,7 +269,12 @@ stepsEnabled: false,
           enabled={stepsEnabled}
           steps={steps}
           initialStep={initialStep}
-          onExit={this.onExit}
+          onExit={()=>{this.onExit()}}
+          onComplete={()=>{
+            console.log(this);
+            localStorage.setItem('tourFlag',true);
+            }}
+
         />
         <Hints
           enabled={hintsEnabled}

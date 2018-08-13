@@ -11,6 +11,13 @@ import styles from './index.less';
 export default class GlobalHeader extends PureComponent {
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
+    
+
+  }
+  componentDidMount(){
+    if (localStorage.getItem('tourFlag') === null) {
+      this.props.onShowTour();
+    }
   }
   getNoticeData() {
     const { notices = [] } = this.props;

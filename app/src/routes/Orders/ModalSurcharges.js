@@ -9,14 +9,21 @@ const ModalSurcharges = Form.create()(
     class extends React.Component {
         render() {
             const { visible, onOK, data,loading } = this.props;
+            let dataFiltered={};
+            if(data){
+                dataFiltered=  data.length===undefined ? {} : data.filter((item)=>{return item.MARK==='X'})
+            }else{
+                dataFiltered=data;
+            }
+            
             const columns = [
 
-                {
+               /*  {
                     title: 'Selected',
                     dataIndex: 'MARK',
                     key: 'MARK',
 
-                },
+                }, */
                 {
                     title: 'Surcharge Type',
                     dataIndex: 'COND_TYP',
@@ -31,9 +38,15 @@ const ModalSurcharges = Form.create()(
                 {
                     title: 'Value',
                     dataIndex: 'COND_VAL',
-                    key: 'COND_VAL'
+                    key: 'COND_VAL',
+                    render: (record) => {
+                        return(<span>
+                            {parseFloat(Math.round(record * 100)/ 100).toFixed(2)}
+                        </span>);
+                    }
                 }
             ];
+            console.log(data);
 
             return (
                 <LocaleProvider locale={en_US}>
@@ -51,7 +64,7 @@ const ModalSurcharges = Form.create()(
                         
                             <Table
                                 columns={columns}
-                                dataSource={data}
+                                dataSource={dataFiltered}
                                 size="small"
                                 loading={loading}
                                 scroll={{ x: 800 }}

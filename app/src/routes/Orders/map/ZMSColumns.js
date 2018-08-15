@@ -31,7 +31,7 @@ export class ZMSColumns {
             key: 'COLOR'
         },
         {
-            title: 'Quantity',
+            title: 'Qty',
             dataIndex: 'QUANTITY',
             key: 'QUANTITY'
         },

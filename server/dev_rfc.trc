@@ -1250,3 +1250,41 @@ ERRNO       10054
 ERRNO TEXT  WSAECONNRESET: Connection reset by peer
 COUNTER     3
 
+
+**** Trace file opened at 2018-08-14, 17:30:28 Hora de verano central (México)
+ RFC library: 711, Current working directory: C:\Cogent\projects\skandia\portal-dealer-csr\server, Program: node
+ Hardware: PC with Windows NT 8x AMD64 Level 6 (Mod 158 Step 9), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.29, IP address_v6: 192.168.254.29
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Aug 14 17:30:28 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.29:54760
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.25:3300' broken
+TIME        Tue Aug 14 17:31:01 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.25:3300; L=192.168.254.29:54759
+SYSTEM CALL recv
+ERRNO       10054
+ERRNO TEXT  WSAECONNRESET: Connection reset by peer
+COUNTER     3
+

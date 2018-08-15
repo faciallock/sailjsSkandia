@@ -31,7 +31,7 @@ export class ZSHColumns {
             key: 'COLOR'
         },
         {
-            title: 'Quantity',
+            title: 'Qty',
             dataIndex: 'QUANTITY',
             key: 'QUANTITY'
         },
@@ -45,11 +45,7 @@ export class ZSHColumns {
             dataIndex: 'LENGTH',
             key: 'LENGTH'
         },
-        {
-            title: 'Plant',
-            dataIndex: 'PLANT',
-            key: 'PLANT'
-        },
+       
         {
             title: 'Frame',
             dataIndex: 'FRAME',
@@ -73,7 +69,13 @@ export class ZSHColumns {
         {
             title: 'Mount',
             dataIndex: 'BRACKET_SH',
-            key: 'BRACKET_SH'
+            key: 'BRACKET_SH',
+            render: (record) => {
+                let bracketMountFormatted=record === "Inside Mount" ? "IB":"OB";
+                return (
+                    <span>{ bracketMountFormatted }</span>
+                )
+            }
         },
         {
             title: 'Pre Drill Code',
@@ -90,7 +92,7 @@ export class ZSHColumns {
             dataIndex: 'PRICE_VINYL',
             key: 'PRICE_VINYL'
         },
-        {
+       /*  {
             title: 'Discount',
             dataIndex: 'BESTDISCOUNT',
             width: 160,
@@ -116,7 +118,7 @@ export class ZSHColumns {
                     <span>{ currentDiscount.substring(0, currentDiscount.length - 1)}</span>
                 )
             }
-        },
+        }, */
         {
             title: 'Price Per Line Item',
             dataIndex: 'ITEMPRICE',

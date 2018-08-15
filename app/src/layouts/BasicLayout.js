@@ -171,7 +171,11 @@ stepsEnabled: false,
       return;
     }
     if (key === 'logout') {
-      localStorage.clear();
+      //localStorage.clear();
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userType');
+
+
       this.props.dispatch({
         type: 'login/logout',
       });

@@ -36,7 +36,7 @@ export class ZHZColumns {
             key: 'COLOR'
         },
         {
-            title: 'Quantity',
+            title: 'Qty',
             dataIndex: 'QUANTITY',
             key: 'QUANTITY'
         },
@@ -50,20 +50,45 @@ export class ZHZColumns {
             dataIndex: 'LENGTH',
             key: 'LENGTH'
         },
+        
         {
-            title: 'Plant',
-            dataIndex: 'PLANT',
-            key: 'PLANT'
-        },
-        {
-            title: 'Bracket Mount',
+            title: 'Mount',
             dataIndex: 'BRACKET_SH',
-            key: 'BRACKET_SH'
+            key: 'BRACKET_SH',
+            render: (record) => {
+                let bracketMountFormatted=record === "Inside Mount" ? "IB":"OB";
+                return (
+                    <span>{ bracketMountFormatted }</span>
+                )
+            }
         },
         {
             title: 'Tilter',
             dataIndex: 'TILTER',
-            key: 'TILTER'
+            key: 'TILTER',
+            render: (record) => {
+                console.log(record)
+                let tilterFormatted="";
+                switch (record) {
+                    case "Wand Tilt - Left":
+                        tilterFormatted="Wand - L";
+                        break;
+                    case "Wand Tilt - Right":
+                        tilterFormatted="Wand - R";
+                        break;
+                    case "Cord Tilt - Left":
+                        tilterFormatted="Cord - L";
+                        break;
+                    case "Cord Tilt - Right":
+                        tilterFormatted="Cord - R";
+                        break;
+                    default:
+                        break;
+                }
+                return (
+                    <span>{ tilterFormatted }</span>
+                )
+            }
         },
         {
             title: 'Lift Cord',
@@ -71,12 +96,12 @@ export class ZHZColumns {
             key: 'CORDS'
         },
         {
-            title: 'Extension Brackets',
+            title: 'Ext Brackets',
             dataIndex: 'EXTB',
             key: 'EXTB'
         },
         {
-            title: '2 or 3 on 1 Headrail',
+            title: '2 on 1, 3 on 1',
             dataIndex: 'TWOONONE',
             key: 'TWOONONE'
         },
@@ -86,12 +111,7 @@ export class ZHZColumns {
             key: 'LADDER_TAPE'
         },
         {
-            title: 'CutDown Item#',
-            dataIndex: 'MSC_ITEM',
-            key: 'MSC_ITEM'
-        },
-        {
-            title: 'Gross price',
+            title: 'Retail Price',
             dataIndex: 'GROSSPRICE',
             key: 'GROSSPRICE',
             render: (record) => {

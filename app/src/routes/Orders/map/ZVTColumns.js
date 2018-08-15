@@ -31,7 +31,7 @@ export class ZVTColumns {
             key: 'COLOR'
         },
         {
-            title: 'Quantity',
+            title: 'Qty',
             dataIndex: 'QUANTITY',
             key: 'QUANTITY'
         },

@@ -38,21 +38,41 @@ export class ZHZColumns {
         {
             title: 'Qty',
             dataIndex: 'QUANTITY',
-            key: 'QUANTITY'
+            key: 'QUANTITY',
+            render: (record) => {
+                return (
+                    <span>{ parseInt(record) }</span>
+                )
+            }
         },
         {
             title: 'Width',
             dataIndex: 'WIDTH',
-            key: 'WIDTH'
+            key: 'WIDTH',
+            render: (record) => {
+                return (
+                    <span>{ parseFloat(record).toFixed(2) }</span>
+                )
+            }
         },
         {
             title: 'Length',
             dataIndex: 'LENGTH',
-            key: 'LENGTH'
+            key: 'LENGTH',
+            render: (record) => {
+                return (
+                    <span>{ parseFloat(record).toFixed(2) }</span>
+                )
+            }
+        },
+        {
+            title: 'Plant',
+            dataIndex: 'PLANT',
+            key: 'PLANT'
         },
         
         {
-            title: 'Mount',
+            title: 'Bracket Mount',
             dataIndex: 'BRACKET_SH',
             key: 'BRACKET_SH',
             render: (record) => {

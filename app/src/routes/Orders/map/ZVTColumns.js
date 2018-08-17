@@ -33,17 +33,33 @@ export class ZVTColumns {
         {
             title: 'Qty',
             dataIndex: 'QUANTITY',
-            key: 'QUANTITY'
+            key: 'QUANTITY',
+            render: (record) => {
+                return (
+                    <span>{ parseInt(record) }</span>
+                )
+            }
         },
         {
             title: 'Width',
             dataIndex: 'WIDTH',
-            key: 'WIDTH'
+            key: 'WIDTH',
+            render: (record) => {
+                return (
+                    <span>{ parseFloat(record).toFixed(2) }</span>
+                )
+            }
+        
         },
         {
             title: 'Length',
             dataIndex: 'LENGTH',
-            key: 'LENGTH'
+            key: 'LENGTH',
+            render: (record) => {
+                return (
+                    <span>{ parseFloat(record).toFixed(2) }</span>
+                )
+            }
         },
         {
             title: 'Plant',
@@ -53,7 +69,13 @@ export class ZVTColumns {
         {
             title: 'Bracket Mount',
             dataIndex: 'BRACKET_SH',
-            key: 'BRACKET_SH'
+            key: 'BRACKET_SH',
+            render: (record) => {
+                let bracketMountFormatted=record === "Inside Mount" ? "IB":"OB";
+                return (
+                    <span>{ bracketMountFormatted }</span>
+                )
+            }
         },
         {
             title: 'Stack',
@@ -81,7 +103,7 @@ export class ZVTColumns {
             key: 'TWOONONE'
         },
         {
-            title: 'Gross price',
+            title: 'Retail Price',
             dataIndex: 'GROSSPRICE',
             key: 'GROSSPRICE',
             render: (record) => {

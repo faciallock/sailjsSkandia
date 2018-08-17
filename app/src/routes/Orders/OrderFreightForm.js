@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Form, Input, Row, Col, Card, Select } from 'antd';
-import moment from 'moment';
 const { Option } = Select;
 
 const FormItem = Form.Item;
@@ -84,7 +83,7 @@ class OrderFreightForm extends Component {
                         <Col lg={12} md={24} sm={24}>
                             <Form.Item label="Shipment Date">
 
-                                <label ><b>{ data && data.EX_SHDATE && data.EX_SHDATE != "00000000" ? moment(data.EX_SHDATE).format("MM/DD/YYYY"): "" }</b></label>
+                                <label ><b>{data.EX_SHDATE}</b></label>
 
                             </Form.Item>
                         </Col>

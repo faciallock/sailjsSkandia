@@ -143,43 +143,6 @@ module.exports = {
         }
 
     },
-
-    printFile: async function (req, res) {
-        let data={};
-        try {
-            
-            client.invoke('Z_AKIL_TEST_PDF2',
-                //{ USER_ID: req.param('userId') },
-                //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
-                { },
-                function (err, response) {
-                    if (err) {
-                        //return console.error('Error invoking STFC_STRUCTURE:', err);
-                        client.close();
-                        client.connect(function (err) {
-                            if (err) {
-                                console.error('could not connect to server', err);
-                            } else {
-                                console.error('Connected');
-                            }
-                        });
-                    }
-
-                    console.log(response);
-
-
-                    return res.ok({ response })
-                    
-
-                });
-        }
-        catch (err) {
-            return res.serverError(err);
-        }
-
-    },
-
-
     currentUser: async function(req, res){
         const payload = {
             $desc: "",

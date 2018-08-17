@@ -520,7 +520,7 @@ class ViewOrder extends PureComponent {
                       {getFieldDecorator('url', {
                         rules: [{ required: true, message: 'Error' }],
                       })(
-                        <label >{shipmentDate != "00000000" ? moment(shipmentDate).format("MM/DD/YYYY") : "" }</label>
+                        <label >{shipmentDate}</label>
                       )}
                     </Form.Item>
                   </Col>

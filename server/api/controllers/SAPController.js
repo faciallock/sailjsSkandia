@@ -59,7 +59,7 @@ module.exports = {
             return res.badRequest({ err: 'bad request params missing' })
 
         }
-            client.invoke('ZSDJ_USER_VALIDATION_REACT',
+            client.invoke('ZSDJ_USER_VALIDATION_REACTX',
             { USER_ID: req.param('userId'), PASSWORD: req.param('password') },
             //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
             function (err, response) {
@@ -134,6 +134,73 @@ module.exports = {
                     }
                     data={user: response,roles};
                     return res.ok({ data })
+                    
+
+                });
+        }
+        catch (err) {
+            return res.serverError(err);
+        }
+
+    },
+
+    printFile: async function (req, res) {
+        let data={};
+        try {
+
+            if (!req.param('orderId') ) {
+             
+                return res.badRequest({ err: 'Params missing' })
+
+            }
+            
+            client.invoke('Z_AKIL_TEST_PDF2',
+                //{ USER_ID: req.param('userId') },
+                //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
+                { ORDER_ID: req.param('orderId') },
+                function (err, response) {
+                    if (err) {
+                        //return console.error('Error invoking STFC_STRUCTURE:', err);
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                    }
+
+                    console.log(response);
+
+                    if( response && response.FILE){
+
+                        console.log(response.FILE);
+
+                        var stream = require('stream');
+                        var fileContents = Buffer.from(response.FILE, 'base64'); // 
+
+                        
+
+                        var readStream = new stream.PassThrough();
+                        readStream.end(fileContents);
+
+                        res.set("Content-disposition", "attachment; filename='" + req.param('orderId') + ".pdf'");
+                        res.set('Content-Type', 'application/pdf');
+
+                        readStream.pipe(res);
+
+
+                        
+                        //res.pipe(binary, 'binary');
+                        //return res.ok({ response.FILE });
+
+                    }else{
+                        return res.ok({ data: "NO FILE FOUND" });
+                    }
+
+
+                    
                     
 
                 });

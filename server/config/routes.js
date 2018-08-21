@@ -40,7 +40,7 @@ module.exports.routes = {
   'GET /orders': 'OrderController.findOrdersByUser',
   'POST /orders/comment': 'OrderController.createComment',
   'GET /user/type': 'SAPController.fetchType',
-  
+  'GET /print': 'SAPController.printFile'
   
   
 

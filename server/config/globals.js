@@ -52,4 +52,6 @@ module.exports.globals = {
 
   sails: true,
 
+  dotenv: require('dotenv').config(),
+
 };

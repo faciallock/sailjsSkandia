@@ -5,14 +5,23 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 var rfc = require('node-rfc');
-var abapSystem = {
+/* var abapSystem = {
     user: 'amurugesan',
     passwd: 'amurugesan9',
     ashost: '10.0.0.25',
     sysnr: '00',
     client: '330',
     saprouter: ''
-};
+}; */
+var abapSystem = {
+    user: process.env.user,
+    passwd: process.env.passwd,
+    ashost: process.env.ashost,
+    sysnr: process.env.sysnr,
+    client: process.env.client,
+    saprouter: ''
+
+}
 
 // create new client
 var client = new rfc.Client(abapSystem);

@@ -65,7 +65,27 @@ export class ZSHColumns {
         {
             title: 'Plant',
             dataIndex: 'PLANT',
-            key: 'PLANT'
+            key: 'PLANT',
+            render: (record) => {
+                let plantDesc="";
+                switch (record) {
+                    case '1110':
+                        plantDesc="TLH";
+                        break;
+                    case '1115':
+                        plantDesc="TVL";
+                        break;
+                    case '1410':
+                        plantDesc="SD";
+                        break;
+                
+                    default:
+                        break;
+                }
+                return (
+                    <span>{ plantDesc }</span>
+                )
+            }
         },
        
         {

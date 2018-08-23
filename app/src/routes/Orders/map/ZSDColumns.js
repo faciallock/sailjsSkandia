@@ -33,22 +33,43 @@ export class ZSDColumns {
         {
             title: 'Qty',
             dataIndex: 'QUANTITY',
-            key: 'QUANTITY'
+            key: 'QUANTITY',
+            render: (record) => {
+                return (
+                    <span>{ parseInt(record) }</span>
+                )
+            }
         },
         {
             title: 'Width',
             dataIndex: 'WIDTH',
-            key: 'WIDTH'
+            key: 'WIDTH',
+            render: (record) => {
+                return (
+                    <span>{ parseFloat(record).toFixed(2) }</span>
+                )
+            }
         },
         {
             title: 'Length',
             dataIndex: 'LENGTH',
-            key: 'LENGTH'
+            key: 'LENGTH',
+            render: (record) => {
+                return (
+                    <span>{ parseFloat(record).toFixed(2) }</span>
+                )
+            }
         },
         {
             title: 'Bracket Mount',
-            dataIndex: 'BRACKETMOUNT',
-            key: 'BRACKETMOUNT'
+            dataIndex: 'BRACKET_SH',
+            key: 'BRACKET_SH',
+            render: (record) => {
+                let bracketMountFormatted=record === "Inside Mount" ? "IB":"OB";
+                return (
+                    <span>{ bracketMountFormatted }</span>
+                )
+            }
         },
         {
             title: 'LiftCord',
@@ -81,7 +102,7 @@ export class ZSDColumns {
             key: 'SPECIALSTWO'
         },
         {
-            title: 'Gross price',
+            title: 'Retail Price',
             dataIndex: 'GROSSPRICE',
             key: 'GROSSPRICE',
             render: (record) => {

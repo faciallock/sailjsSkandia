@@ -92,10 +92,22 @@ module.exports = {
                     
 
                 }else{
-                    const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
-                    console.log(response);
+
+                    if (response.EMESSAGE ==="No Sales Order Bom exist"){
+
+                        res.status(401);
+                        return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
+
+                    }
+                    else{
+                        const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
+                        console.log(response);
                     
-                    return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority: "admin" })
+                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority: "admin" })
+
+                    }
+                    
+                    
                 }
                 
             }); 

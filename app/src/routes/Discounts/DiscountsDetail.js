@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import { connect } from 'dva';
-import { Collapse , Card, Alert, Tabs, Row, Col, Radio, Input, Button, Icon, LocaleProvider } from 'antd';
+import { Collapse , Card, Alert, Tabs, Row, Col, Radio, Spin, Button, Icon, LocaleProvider } from 'antd';
 
 import StandardTable from '../../components/StandardTable';
 
@@ -112,7 +112,7 @@ export default class DiscountsDetail extends PureComponent {
 
     render() {
         console.log(this.props);
-        const {  discountDetail } = this.props;
+        const {  discountDetail, loading } = this.props;
         
         const { visibleSurcharges, visibleDiscountCustomer,  visibleNewComment, surchargesDetail,visibleBOM, visibleInventory } = this.state;
         let {sortedInfo }= this.state;
@@ -143,9 +143,21 @@ export default class DiscountsDetail extends PureComponent {
        
         return (
             <IntlProvider locale="en">
-            <PageHeaderLayout title="Promotion Discount Request"
-            
-            breadcrumbList={breadcrumbTitle} 
+            <PageHeaderLayout 
+                title="Promotion Discount Request"
+                content={
+                    <div style={{marginLeft:'1rem'}}>
+                       
+
+                        <Button 
+                            onClick={()=>{
+                                this.props.dispatch(routerRedux.push('/discounts/list'))
+                            }} 
+                            type="primary">
+                            <Icon type="left" />Go back
+                        </Button>
+                    </div>}
+                breadcrumbList={breadcrumbTitle} 
              >
                     
 
@@ -159,6 +171,7 @@ export default class DiscountsDetail extends PureComponent {
                     
                     <Card bordered={false}>
                         <LocaleProvider locale={en_US}>
+                            <Spin spinning={this.props.loading}  tip="Loading promotion...">
                                 
                             <Collapse defaultActiveKey={['1','2','3']} onChange={()=>{console.log("this")}}>
                                 <Panel header={<span><Icon type="user" /> Customer details</span>} key="1">
@@ -170,7 +183,7 @@ export default class DiscountsDetail extends PureComponent {
                                 <Panel header={<span><Icon type="profile" /> Promotion details</span>} key="3">
                                     <DiscountPromotionDetails data={discountDetail}/>
                                 </Panel>
-                                {
+                                {/* {
                                     discountDetail.LT_SHUTTERS &&
                                     <Panel header={<span><Icon type="bars" /> Shutters</span>} key="4">
                                         <DiscountsLTTable data={discountDetail.LT_SHUTTERS} />
@@ -228,7 +241,7 @@ export default class DiscountsDetail extends PureComponent {
                                         
                                     </Panel>
 
-                                }
+                                } */}
                                 
                                 
                                 
@@ -237,7 +250,7 @@ export default class DiscountsDetail extends PureComponent {
                                 
                             </Collapse>
                                     
-                               
+                            </Spin>
                             
                         </LocaleProvider>
                     </Card>

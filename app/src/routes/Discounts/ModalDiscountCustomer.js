@@ -43,14 +43,20 @@ const ModalDiscountCustomer = Form.create()(
                 <LocaleProvider locale={en_US}>
                 <Modal
                     visible={visible}
+                    closable={!loading}
                     title="Customers"
                     width="60%"
-                    onCancel={onOK}
-                        footer={[
-                            <Button key="submit" type="primary" loading={loading} onClick={onOK}>
-                                Ok
-            </Button>
-                        ]}
+                    onCancel={()=>{
+                        if(!loading){
+                            onOK();
+                        }
+                        
+                    }}
+                    footer={[
+                        <Button key="submit" type="primary" loading={loading} onClick={onOK}>
+                            Ok 
+                        </Button>
+                    ]}
                 >
                         
                             

@@ -20,7 +20,7 @@ const SearchForm = Form.create()(
     
             this.state = {
                 customerNumberIsDisabled:false,
-                customerNameIsDisabled:true
+                customerNameIsDisabled:true,
             };
         }
 
@@ -46,7 +46,7 @@ const SearchForm = Form.create()(
         onChange=(e)=> {
             console.log(`radio checked:${e.target.value}`);
 
-            
+            this.props.form.resetFields();
             
             if(e.target.value==='a'){
                 this.setState({
@@ -64,13 +64,15 @@ const SearchForm = Form.create()(
             if(e.target.value==='b'){
                 this.setState({
                     customerNumberIsDisabled:true,
-                    customerNameIsDisabled:false
+                    customerNameIsDisabled:false,
+                    customerName:''
                 })
 
                 
 
                 setTimeout(() => {
                     this.customerNameInp.focus();
+                    
                 }, 400);
             }
 
@@ -143,9 +145,9 @@ const SearchForm = Form.create()(
                                     rules: [{
                                         required: false,
                                         message: '',
-                                }],
+                                }]
                                 })(
-                                <Input ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>} placeholder="Customer Name" />
+                                <Input  ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>} placeholder="Customer Name" />
                                 )}
                                 </FormItem>
                         </Col>

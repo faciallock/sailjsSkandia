@@ -109,6 +109,12 @@ export const getRouterData = (app) => {
     '/orders': {
       component: dynamicWrapper(app, ['orders'], () => import('../routes/Orders/Orders')),
     },
+    '/discounts/list': {
+      component: dynamicWrapper(app, ['discounts'], () => import('../routes/Discounts/Discounts')),
+    },
+    '/discounts/main': {
+      component: dynamicWrapper(app, ['discounts'], () => import('../routes/Discounts/DiscountsDetail')),
+    },
     '/home': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Home/Home')),
     },

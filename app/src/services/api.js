@@ -82,6 +82,25 @@ export async function getOrderDetail({ orderId }) {
   console.log(orderId);
   return request(`/api/order/findOne?orderId=${orderId}`);
 }
+
+export async function getDiscountList({ iimKunnr }) {
+  console.log(iimKunnr);
+  return request(`/api/discounts/list?iimKunnr=${iimKunnr}`);
+}
+
+export async function getDiscountListByName({ iimName }) {
+  console.log(iimName);
+  return request(`/api/discounts/listByName?iimName=${iimName}`);
+}
+export async function getDiscountDetails({ promoNo, promoSeqNo }) {
+  console.log(promoNo);
+  console.log(promoSeqNo);
+  
+  return request(`/api/discounts/details?promoNo=${promoNo}&promoSeqNo=${promoSeqNo}`);
+}
+
+
+
 export async function getBOM({ orderId, lineItemNumber }) {
   return request(`/api/order/bom?orderId=${orderId}&lineItemNumber=${lineItemNumber}`);
 }

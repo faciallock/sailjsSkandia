@@ -131,6 +131,16 @@ const menuData = [{
     authority: 'admin',
     path: 'view-order',
   }], */
+},{
+  name: 'Discounts',
+  icon: 'tags-o',
+  path: '/discounts/list',
+  authority:'admin'
+  /* children: [{
+    name: 'View Order',
+    authority: 'admin',
+    path: 'view-order',
+  }], */
 }];
 
 /*

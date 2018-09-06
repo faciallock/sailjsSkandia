@@ -96,6 +96,99 @@ module.exports = {
         }
 
     },
+
+    
+    
+    getPromotionListByName: async function (req, res) {
+        try {
+            client.invoke('Z_GET_CUSTOMERLIST_BYNAME',
+                { IIM_NAME: req.query.iimName },
+                function (err, response) {
+                    if (err) {
+                        console.error('Error invoking STFC_STRUCTURE:', err);
+    
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                        return res.serverError({msg:"Error"});
+                    }
+                    else{
+                        return res.ok({ msg: response })
+    
+                    }
+                });
+        } catch (e) {
+            console.log(e);
+            return res.ok({ msg: e })
+        }
+
+    },
+    getPromotionList: async function (req, res) {
+        try {
+            client.invoke('Z_GET_PROMOTION_LIST',
+                { IIM_KUNNR: req.query.iimKunnr },
+                function (err, response) {
+                    if (err) {
+                        console.error('Error invoking STFC_STRUCTURE:', err);
+    
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                        return res.serverError({msg:"Error"});
+                    }
+                    else{
+                        return res.ok({ msg: response })
+    
+                    }
+                });
+        } catch (e) {
+            console.log(e);
+            return res.ok({ msg: e })
+        }
+
+    },
+    getPromotionDetails: async function (req, res) {
+        try {
+            client.invoke('Z_GET_PROMOTION_DETAILS',
+                { PROMO_NO: req.query.promoNo, PROMO_SEQ_NO:req.query.promoSeqNo },
+                function (err, response) {
+                    if (err) {
+                        console.error('Error invoking STFC_STRUCTURE:', err);
+    
+                        client.close();
+                        client.connect(function (err) {
+                            if (err) {
+                                console.error('could not connect to server', err);
+                            } else {
+                                console.error('Connected');
+                            }
+                        });
+                        return res.serverError({msg:"Error"});
+                    }
+                    else{
+                        return res.ok({ msg: response })
+    
+                    }
+                });
+        } catch (e) {
+            console.log(e);
+            return res.ok({ msg: e })
+        }
+
+    },
+
+
+    
     getInventory: async function (req, res) {
         try {
             client.invoke('ZSD_INV_LIST',

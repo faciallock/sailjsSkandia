@@ -1,0 +1,33 @@
+.discountSalesMarginContainer{
+    width: 100% !important;
+    padding:1rem !important; 
+    overflow-x: auto !important; 
+}
+.discountSteps{
+    width: 1500px !important;
+}
+::-webkit-scrollbar {
+  width: 4px;
+  height:10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f8f8f8;
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  /* 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);  */
+}
+
+
+@media only screen and (max-width: 480px) {
+    .discountSteps {
+        padding-left: 2rem;
+        width: 100% !important;
+    }
+}

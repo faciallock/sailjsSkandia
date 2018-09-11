@@ -88,9 +88,10 @@ export async function getDiscountList({ iimKunnr }) {
   return request(`/api/discounts/list?iimKunnr=${iimKunnr}`);
 }
 
-export async function getDiscountListByName({ iimName }) {
-  console.log(iimName);
-  return request(`/api/discounts/listByName?iimName=${iimName}`);
+export async function getDiscountListByName({ iimName, startSearch }) {
+  console.log(iimName, startSearch);
+  let sParam= !startSearch ? `?iimName=${iimName}`: `?iimName=${iimName}&startSearch='X'`;
+  return request(`/api/discounts/listByName${sParam}`);
 }
 export async function getDiscountDetails({ promoNo, promoSeqNo }) {
   console.log(promoNo);

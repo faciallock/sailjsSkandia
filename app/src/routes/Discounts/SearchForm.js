@@ -4,12 +4,14 @@ import en_US from 'antd/lib/locale-provider/en_US';
 import 'moment/locale/en-au';
 
 import {
-    Form, Divider,Icon, Button, LocaleProvider, Row, Col, Input, Radio , Card
+    Form, Divider,Icon, Button, LocaleProvider, Row, Col, Input, Radio , Card, Select
 } from 'antd';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
+const InputGroup = Input.Group;
+const Option = Select.Option;
 
 
 const SearchForm = Form.create()(
@@ -21,6 +23,7 @@ const SearchForm = Form.create()(
             this.state = {
                 customerNumberIsDisabled:false,
                 customerNameIsDisabled:true,
+                currentTypeNameSearch:'containsName'
             };
         }
 
@@ -78,15 +81,17 @@ const SearchForm = Form.create()(
 
             
           }
-          
 
-        
-
+        handleChange = (value)=> {
+            console.log(`selected ${value}`);
+            this.setState({currentTypeNameSearch:value});
+          }
 
         handleSearch = (e) => {
             e.preventDefault();
             this.props.form.validateFields((err, values) => {
               console.log('Received values of form: ', values);
+              values.typeSearch=this.state.currentTypeNameSearch;
 
               this.props.handleSearch(values);
 
@@ -147,7 +152,16 @@ const SearchForm = Form.create()(
                                         message: '',
                                 }]
                                 })(
-                                <Input  ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>} placeholder="Customer Name" />
+                                    <span>
+                                    <InputGroup style={{marginTop:'4px'}} compact>
+                                    <Select onChange={this.handleChange} disabled={ customerNameIsDisabled}  defaultValue="Contains">
+                                        <Option value="startsWithName">Starts with</Option>
+                                        <Option value="containsName">Contains</Option>
+                                    </Select>
+                                    <Input ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>}  style={{ width: '60%' }}  placeholder="Customer Name" />
+                                    </InputGroup>
+                                        {/* <Input  ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>} placeholder="Customer Name" /> */}
+                                    </span>
                                 )}
                                 </FormItem>
                         </Col>

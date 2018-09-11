@@ -101,8 +101,20 @@ module.exports = {
     
     getPromotionListByName: async function (req, res) {
         try {
+            
+
+            let objectSearch={}
+
+            if(req.query.startSearch){
+                objectSearch={ IIM_NAME: req.query.iimName,IIM_START_SEARCH:'X' };
+
+            }else{
+                objectSearch={ IIM_NAME: req.query.iimName };
+            }
+            console.log({objectSearch});
+
             client.invoke('Z_GET_CUSTOMERLIST_BYNAME',
-                { IIM_NAME: req.query.iimName },
+                    objectSearch,
                 function (err, response) {
                     if (err) {
                         console.error('Error invoking STFC_STRUCTURE:', err);

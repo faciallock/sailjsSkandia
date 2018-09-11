@@ -123,13 +123,25 @@ export default class Discounts extends PureComponent {
         if(payload.CustomerName!==""){
 
             this.setState({visibleDiscountCustomer:true});
+            let currentPayloadSearch={}
+
+            if(payload.typeSearch==="containsName"){
+                currentPayloadSearch={
+                    iimName: payload.CustomerName,
+                    
+                }
+            } else{
+                currentPayloadSearch={
+                    iimName: payload.CustomerName,
+                    startSearch:'X'
+                }
+
+            }
             
 
             this.props.dispatch({
                 type: 'discounts/fetchDiscountListByName',
-                payload: {
-                    iimName: payload.CustomerName,
-                },
+                payload: currentPayloadSearch,
             });
         }
 

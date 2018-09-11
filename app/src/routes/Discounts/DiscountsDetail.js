@@ -183,7 +183,7 @@ export default class DiscountsDetail extends PureComponent {
                                 <Panel header={<span><Icon type="profile" /> Promotion details</span>} key="3">
                                     <DiscountPromotionDetails data={discountDetail}/>
                                 </Panel>
-                                {/* {
+                                {
                                     discountDetail.LT_SHUTTERS &&
                                     <Panel header={<span><Icon type="bars" /> Shutters</span>} key="4">
                                         <DiscountsLTTable data={discountDetail.LT_SHUTTERS} />
@@ -241,7 +241,7 @@ export default class DiscountsDetail extends PureComponent {
                                         
                                     </Panel>
 
-                                } */}
+                                }
                                 
                                 
                                 

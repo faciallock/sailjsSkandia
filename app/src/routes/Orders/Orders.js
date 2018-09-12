@@ -544,7 +544,7 @@ export default class OrderView extends PureComponent {
                     return (
                         <div>
                         <a onClick={() => this.showModal(record,orderDetail)} className={"tour_eye_" + record.VBELN}><Icon type="eye-o" /> Show</a>&nbsp;
-                        <a href={'http://localhost:1337/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
+                        <a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
                         </div>
                     )
                 }
@@ -621,7 +621,7 @@ export default class OrderView extends PureComponent {
                     return (
                         <div>
                         <a onClick={() => this.showModal(record,orderDetail)}><Icon type="eye-o" /> Show</a> &nbsp;
-                        <a href={'http://localhost:1337/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
+                        <a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
                         </div>
                     )
                 }

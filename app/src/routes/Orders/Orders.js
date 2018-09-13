@@ -854,6 +854,7 @@ export default class OrderView extends PureComponent {
                                                         <List
                                                             bordered
                                                             size="small"
+                                                            locale={{ emptyText: 'No comments available' }}
                                                             dataSource={orderDetail.EX_USERLOG}
                                                             renderItem={item => (
                                                                 

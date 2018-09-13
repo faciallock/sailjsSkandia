@@ -231,7 +231,7 @@ module.exports = {
 
             }
             
-            client.invoke('Z_AKIL_TEST_PDF2',
+            client.invoke('Z_PRINT_ORDER_BY_ID',
                 //{ USER_ID: req.param('userId') },
                 //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
                 { ORDER_ID: req.param('orderId') },

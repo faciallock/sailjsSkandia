@@ -74,7 +74,7 @@ class OrderFreightForm extends Component {
                         <Col lg={12} md={24} sm={24}>
                             <Form.Item label="No. of Packages">
                                 
-                                <label ><b>{data.EX_NOPACK}</b></label>
+                                <label ><b>{data && data.EX_NOPACK && data.EX_NOPACK.replace(/^0+/, '')}</b></label>
                                 
                             </Form.Item>
                         </Col>
@@ -100,6 +100,7 @@ class OrderFreightForm extends Component {
                         </Col>
                         
                     </Row>
+                    { localStorage.getItem('userType') != "D" &&
                     <Row gutter={16}>
                         <Col lg={12} md={12} sm={24}>
                             <Form.Item label="Freight Override">
@@ -116,7 +117,7 @@ class OrderFreightForm extends Component {
                                 <label ><b>{data.EX_FREIGHTCOST}</b></label>
                             </Form.Item>
                         </Col>
-                    </Row>
+                    </Row> }
                 </Form>
             
         );

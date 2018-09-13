@@ -537,12 +537,15 @@ export default class OrderView extends PureComponent {
                 title: 'Action',
                 key: 'operation',
                 fixed: 'right',
-                width: 100,
+                width: 200,
                 render: (text, record) => {
                        
                     
                     return (
-                        <a onClick={() => this.showModal(record,orderDetail)} className={"tour_eye_" + record.VBELN}><Icon type="eye-o" /> Show</a>
+                        <div>
+                        <a onClick={() => this.showModal(record,orderDetail)} className={"tour_eye_" + record.VBELN}><Icon type="eye-o" /> Show</a>&nbsp;
+                        <a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
+                        </div>
                     )
                 }
             },
@@ -612,11 +615,14 @@ export default class OrderView extends PureComponent {
                 title: 'Action',
                 key: 'operation',
                 fixed: 'right',
-                width: 100,
+                width: 200,
                 render: (text, record) => {
                     
                     return (
-                        <a onClick={() => this.showModal(record,orderDetail)}><Icon type="eye-o" /> Show</a>
+                        <div>
+                        <a onClick={() => this.showModal(record,orderDetail)}><Icon type="eye-o" /> Show</a> &nbsp;
+                        <a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
+                        </div>
                     )
                 }
             },
@@ -749,6 +755,15 @@ export default class OrderView extends PureComponent {
                                             {localStorage.getItem('userType') !== "D" &&
                                                 <span><b>Order Status #2:</b> {orderDetail.EX_ORDSTATUS}</span>
                                             }
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col lg={8} md={12} sm={24}>
+                                                <b>Sales Territory:</b> {orderDetail.EX_VKGRP} 
+                                            </Col>
+                                            <Col lg={8} md={12} sm={24}>
+                                            </Col>
+                                            <Col lg={8} md={12} sm={24}>
                                             </Col>
                                         </Row>
                                     </div>

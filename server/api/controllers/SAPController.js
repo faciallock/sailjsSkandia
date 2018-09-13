@@ -102,9 +102,9 @@ module.exports = {
                     else{
                         const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
                         console.log(response);
-                        let currentAuthority="admin";
+                        let currentAuthority="user";
                         if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="C"){
-                            currentAuthority="user";
+                            currentAuthority="admin";
                         }
                     
                         return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
@@ -123,13 +123,14 @@ module.exports = {
     },
     getDealerSSO: async function (req, res) {
         let roles=[];
+        console.log(req.param('userId'));
         try{
-            if (!req.param('userId') && !req.param('password')) {
+            if (!req.param('userId')) {
             return res.badRequest({ err: 'bad request params missing' })
 
         }
-            client.invoke('ZSDJ_USER_VALIDATION_REACTX',
-            { USER_ID: req.param('userId'), PASSWORD: req.param('password') },
+            client.invoke('ZSDJ_USER_VALIDATION_SSO_REACT',
+            { USER_ID: req.param('userId')},
             //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
             function (err, response) {
                 if (err) {
@@ -145,6 +146,7 @@ module.exports = {
                     });
                     return res.serverError({msg:"Error"});
                 }
+                console.log(response);
                 
                 if (response.EMESSAGE ==="Authentication failed"){
                     res.status(401);

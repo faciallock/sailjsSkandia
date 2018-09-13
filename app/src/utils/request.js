@@ -15,7 +15,7 @@ const codeMessage = {
   406: 'The format of the request is not available.',
   410: 'The requested resource is permanently deleted and will not be retrieved.',
   422: 'A validation error occurred when creating an object.',
-  500: 'An error occurred on the server. Please check the server.',
+  500: 'Server error. ',
   502: 'Bad gateway',
   503: 'The service is unavailable and the server is temporarily overloaded or maintained.',
   504: 'The gateway timed out.',
@@ -24,15 +24,60 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-  const errortext = codeMessage[response.status] || response.statusText;
-  notification.error({
+  
+  
+  response.json().then(function(json){    
+
+   var errortext = codeMessage[response.status] || response.statusText;
+  
+   json.msg ? errortext = errortext + " " + json.msg : errortext;
+
+   notification.error({
     message: `Error ${response.status}: ${response.url}`,
     description: errortext,
-  });
-  const error = new Error(errortext);
-  error.name = response.status;
-  error.response = response;
-  throw error;
+   });
+
+  
+  
+    const error = new Error(errortext);
+    error.name = response.status;
+    error.response = response;
+
+
+      console.log(json);
+      throw error;
+
+     }).catch((e) => {
+
+      //console.log(e);
+
+      const { dispatch } = store;
+      const status = e.name;
+      if (status === 401) {
+        /* dispatch({
+          type: 'login/logout',
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000); */
+        dispatch(routerRedux.push('/'));
+        
+        return;
+      }
+      if (status === 403) {
+        dispatch(routerRedux.push('/exception/403'));
+        return;
+      }
+      if (status <= 504 && status >= 500) {
+        dispatch(routerRedux.push('/exception/500'));
+        return;
+      }
+      if (status >= 404 && status < 422) {
+        dispatch(routerRedux.push('/exception/404'));
+      }
+    });;
+
+  
   //return error;
 }
 
@@ -75,6 +120,9 @@ export default function request(url, options) {
       return response.json();
     })
     .catch((e) => {
+
+      //console.log(e);
+
       const { dispatch } = store;
       const status = e.name;
       if (status === 401) {

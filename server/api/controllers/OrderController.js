@@ -247,6 +247,11 @@ module.exports = {
                 // IM_TOTAL_PRICE Total price
                 // IM_STATUS Status
 
+           if(req.body.UserIndicator == ""){
+
+                    return res.serverError({msg:"There has been an error with the provided credentials, please log in again to continue."});
+
+           }
 
             client.invoke('ZGET_PENDING_SORDERS_CUSTOMERX',
                 {    
@@ -335,6 +340,16 @@ module.exports = {
     findOrdersByUser: async function (req, res){
         console.log(req.query.imInd);
         console.log(req.query.userName);
+
+
+        if(req.query.imInd == ""){
+
+            return res.serverError({msg:"There has been an error with the provided credentials, please log in again to continue."});
+
+       }
+
+
+
         try {
             client.invoke('ZGET_PENDING_SORDERS_CUSTOMERX',
             { IM_IND: req.query.imInd,IM_CUSTNO: '', IM_USERNAME: req.query.userName },

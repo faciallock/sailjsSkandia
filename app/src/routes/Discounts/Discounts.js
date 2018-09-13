@@ -207,8 +207,8 @@ export default class Discounts extends PureComponent {
             
             {
                 title: 'Start on',
-                dataIndex: 'PREDAT',
-                key: 'PREDAT',
+                dataIndex: 'PRSDAT',
+                key: 'PRSDAT',
                 render: (record) => {
                     let dateJS = new Date(parseInt(record.substring(0, 4)), parseInt(record.substring(4, 6))-1, parseInt(record.substring(6, 8)))  //date+time;
                    // console.log(dateJS)
@@ -222,8 +222,8 @@ export default class Discounts extends PureComponent {
             },
             {
                 title: 'End on',
-                dataIndex: 'PRSDAT',
-                key: 'PRSDAT',
+                dataIndex: 'PREDAT',
+                key: 'PREDAT',
                 render: (record) => {
                     let dateJS = new Date(parseInt(record.substring(0, 4)), parseInt(record.substring(4, 6))-1, parseInt(record.substring(6, 8)))  //date+time;
                    // console.log(dateJS)

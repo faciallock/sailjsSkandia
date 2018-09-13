@@ -110,7 +110,7 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['orders'], () => import('../routes/Orders/Orders')),
     },
     '/discounts/list': {
-      component: dynamicWrapper(app, ['discounts'], () => import('../routes/Discounts/Discounts')),
+      component: dynamicWrapper(app, ['discounts'], () => import('../routes/Discounts/Discounts')),authority: 'admin'
     },
     '/discounts/main': {
       component: dynamicWrapper(app, ['discounts'], () => import('../routes/Discounts/DiscountsDetail')),

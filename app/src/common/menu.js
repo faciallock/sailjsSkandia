@@ -124,8 +124,7 @@ const menuData = [{
 },{
   name: 'Orders',
   icon: 'form',
-  path: '/orders',
-  authority:'admin'
+  path: '/orders'
   /* children: [{
     name: 'View Order',
     authority: 'admin',

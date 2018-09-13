@@ -102,8 +102,12 @@ module.exports = {
                     else{
                         const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
                         console.log(response);
+                        let currentAuthority="admin";
+                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="C"){
+                            currentAuthority="user";
+                        }
                     
-                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority: "admin" })
+                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
 
                     }
                     

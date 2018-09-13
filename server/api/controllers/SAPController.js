@@ -117,6 +117,62 @@ module.exports = {
         }
        
     },
+    getDealerSSO: async function (req, res) {
+        let roles=[];
+        try{
+            if (!req.param('userId') && !req.param('password')) {
+            return res.badRequest({ err: 'bad request params missing' })
+
+        }
+            client.invoke('ZSDJ_USER_VALIDATION_REACTX',
+            { USER_ID: req.param('userId'), PASSWORD: req.param('password') },
+            //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
+            function (err, response) {
+                if (err) {
+                    console.error('Error invoking STFC_STRUCTURE:', err);
+
+                    client.close();
+                    client.connect(function (err) {
+                        if (err) {
+                            console.error('could not connect to server', err);
+                        } else {
+                            console.error('Connected');
+                        }
+                    });
+                    return res.serverError({msg:"Error"});
+                }
+                
+                if (response.EMESSAGE ==="Authentication failed"){
+                    res.status(401);
+                    return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
+                    
+
+                }else{
+
+                    if (response.EMESSAGE ==="No Sales Order Bom exist"){
+
+                        res.status(401);
+                        return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
+
+                    }
+                    else{
+                        const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
+                        console.log(response);
+                    
+                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority: "admin" })
+
+                    }
+                    
+                    
+                }
+                
+            }); 
+        }
+        catch (err) {
+            return res.serverError(err);
+        }
+       
+    },
     fetchType: async function (req, res) {
         let data={};
         try {

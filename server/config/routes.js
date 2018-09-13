@@ -42,6 +42,8 @@ module.exports.routes = {
   
   'POST /orders/search': 'OrderController.search',
   'POST /sap/Login': 'SAPController.login',
+  'POST /dealerSSO': 'SAPController.getDealerSSO',
+  
   'GET /currentUser': 'SAPController.currentUser',
   'GET /orders': 'OrderController.findOrdersByUser',
   'POST /orders/comment': 'OrderController.createComment',

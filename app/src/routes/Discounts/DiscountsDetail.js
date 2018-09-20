@@ -177,16 +177,16 @@ export default class DiscountsDetail extends PureComponent {
                                 <Panel header={<span><Icon type="user" /> Customer details</span>} key="1">
                                     <DiscountCustomerDetails data={discountDetail} />
                                 </Panel>
-                                <Panel header={<span>% Sales margin</span>} key="2">
+                                {/* <Panel header={<span>% Sales margin</span>} key="2">
                                     <DiscountSalesMargin data={discountDetail}/>
-                                </Panel>
+                                </Panel> */}
                                 <Panel header={<span><Icon type="profile" /> Promotion details</span>} key="3">
                                     <DiscountPromotionDetails data={discountDetail}/>
                                 </Panel>
                                 {
                                     discountDetail.LT_SHUTTERS &&
                                     <Panel header={<span><Icon type="bars" /> Shutters</span>} key="4">
-                                        <DiscountsLTTable data={discountDetail.LT_SHUTTERS} />
+                                        <DiscountsLTTable data={discountDetail.LT_SHUTTERS} isShutters={true} />
                                         <DiscountsPrevious data={discountDetail.LS_SHUTTERS_PREV} />
                                     </Panel>
 
@@ -209,7 +209,7 @@ export default class DiscountsDetail extends PureComponent {
                                 }
                                 {
                                     discountDetail.LT_ALUM &&
-                                    <Panel header={<span><Icon type="bars" /> Aluminum Blinds</span>} key="7">
+                                    <Panel header={<span><Icon type="bars" /> Horizontal Blinds</span>} key="7">
                                         <DiscountsLTTable data={discountDetail.LT_ALUM} />
                                         <DiscountsPrevious data={discountDetail.LS_ALUM_PREV} />
                                         

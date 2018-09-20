@@ -23,31 +23,57 @@ export default class DiscountsLTTable extends PureComponent {
         //let salesMarginData;
 
         const { data,loading } = this.props;
+        let columns =[];
+        if(this.props.isShutters){
+            columns = [
+                {
+                    title: 'Product Type',
+                    dataIndex: 'PRODUCT',
+                    key: 'PRODUCT',
+                    width: 150,
+                    fixed: 'left'          
+                },
+                {
+                    title: 'Subclass',
+                    dataIndex: 'SEQ_NO',
+                    key: 'SEQ_NO'          
+                },
+                {
+                    title: 'SqFt Price',
+                    dataIndex: 'PROMODISC1',
+                    key: 'PROMODISC1'          
+                }
+            ];
 
-        const columns = [
-            {
-                title: 'Product Type',
-                dataIndex: 'PRODUCT',
-                key: 'PRODUCT',
-                width: 150,
-                fixed: 'left'          
-            },
-            {
-                title: 'Sequence Number',
-                dataIndex: 'SEQ_NO',
-                key: 'SEQ_NO'          
-            },
-            {
-                title: 'Promo Disc 1',
-                dataIndex: 'PROMODISC1',
-                key: 'PROMODISC1'          
-            },
-            {
-                title: 'Promo Disc 2',
-                dataIndex: 'PROMODISC2',
-                key: 'PROMODISC2'          
-            }
-        ];
+        }else{
+            columns = [
+                {
+                    title: 'Product Type',
+                    dataIndex: 'PRODUCT',
+                    key: 'PRODUCT',
+                    width: 150,
+                    fixed: 'left'          
+                },
+                {
+                    title: 'Subclass',
+                    dataIndex: 'SEQ_NO',
+                    key: 'SEQ_NO'          
+                },
+                {
+                    title: 'Promo Disc 1',
+                    dataIndex: 'PROMODISC1',
+                    key: 'PROMODISC1'          
+                },
+                {
+                    title: 'Promo Disc 2',
+                    dataIndex: 'PROMODISC2',
+                    key: 'PROMODISC2'          
+                }
+            ];
+
+        }
+
+       
 
         console.log(data);
        

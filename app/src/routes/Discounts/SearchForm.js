@@ -110,29 +110,28 @@ const SearchForm = Form.create()(
                 <LocaleProvider locale={en_US}>
 
                 <div>
-                    <Divider/>
+                   
 
-                    <Row style={{textAlign:'center',margin:'1rem'}} gutter={12}>
-                Please select a search by: <RadioGroup onChange={this.onChange} defaultValue="a" buttonStyle="outline">
-                            <Radio.Button autoFocus value="a"># Number</Radio.Button>
-                            <Radio.Button value="b"><Icon type="user" style={{ color: '#1d2d5c' }}/> Name</Radio.Button>
-                        </RadioGroup>
-                </Row>
-                <Form
-                    className="ant-advanced-search-form"
-                    onSubmit={this.handleSearch}
-                >
+                    
+                
 
                 
 
                 <Card>
-
+                    <Row style={{textAlign:'left'}} gutter={12}>
+                        Please select a search by: <RadioGroup onChange={this.onChange} defaultValue="a" buttonStyle="outline">
+                                <Radio.Button autoFocus value="a"># Number</Radio.Button>
+                                <Radio.Button value="b"><Icon type="user" style={{ color: '#1d2d5c' }}/> Name</Radio.Button>
+                            </RadioGroup>
+                            <Divider/>
+                    </Row>
+                    <Form
+                        className="ant-advanced-search-form"
+                        onSubmit={this.handleSearch}
+                    >
                     <Row gutter={12}>
-                        <Col lg={6} md={6} sm={24} xs={24}>
-                        </Col>
-                        <Col lg={4} md={4} sm={12} xs={24} key="CustomerNumber">
-                        
-                            <FormItem>
+                        <Col lg={6} md={5} sm={24} xs={24} key="CustomerNumber">
+                            <FormItem  >
                                 {getFieldDecorator("CustomerNumber", {
                                     rules: [{
                                         required: false,
@@ -144,7 +143,7 @@ const SearchForm = Form.create()(
                                 )}
                                 </FormItem>
                         </Col>
-                        <Col lg={6} md={6} sm={12} xs={24} key="CustomerName">
+                        <Col style={{textAlign:'left'}} lg={11} md={11} sm={24} xs={24} key="CustomerName">
                             <FormItem>
                                 {getFieldDecorator("CustomerName", {
                                     rules: [{
@@ -153,28 +152,37 @@ const SearchForm = Form.create()(
                                 }]
                                 })(
                                     <span>
-                                    <InputGroup style={{marginTop:'4px'}} compact>
-                                    <Select onChange={this.handleChange} disabled={ customerNameIsDisabled}  defaultValue="Contains">
+                                    <InputGroup style={{marginTop:'4px', }} compact>
+                                    <Select style={{width:'40%'}}  onChange={this.handleChange} disabled={ customerNameIsDisabled}  defaultValue="Contains">
                                         <Option value="startsWithName">Starts with</Option>
                                         <Option value="containsName">Contains</Option>
                                     </Select>
-                                    <Input ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>}  style={{ width: '60%' }}  placeholder="Customer Name" />
+                                    <Input style={{width:'20%'}}  ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>}  style={{ width: '60%' }}  placeholder="Customer Name" />
                                     </InputGroup>
-                                        {/* <Input  ref={(ip) => this.customerNameInp = ip} disabled={ customerNameIsDisabled} prefix={<Icon type="user" style={{ color: '#1d2d5c' }}/>} placeholder="Customer Name" /> */}
                                     </span>
                                 )}
                                 </FormItem>
                         </Col>
-                        <Col style={{ textAlign: 'left', marginTop:'3px' }} lg={8} md={8} sm={12} xs={24}>
+                        <Col style={{ textAlign: 'left', marginTop:'3px' }} lg={7} md={8} sm={12} xs={24}>
+                            <Button type="primary" htmlType="submit"><Icon type="search" /> Search</Button>
+                            <Button style={{ marginLeft: 8 }} onClick={this.handleClear}> Clear </Button>
+                        </Col>
+                    </Row>
+
+                    </Form>
+
+                    {/* <Row gutter={12}>
+                        
+                        <Col style={{ textAlign: 'left', marginTop:'3px' }} lg={24} md={24} sm={12} xs={24}>
                             <Button type="primary" htmlType="submit"><Icon type="search" /> Search</Button>
                             <Button style={{ marginLeft: 8 }} onClick={this.handleClear}> Clear </Button>
                         </Col>
                         
-                    </Row>
+                    </Row> */}
 
                     </Card>
                 
-                </Form>
+                
                 </div>
                 </LocaleProvider>
 

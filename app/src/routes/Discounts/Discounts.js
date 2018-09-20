@@ -109,13 +109,15 @@ export default class Discounts extends PureComponent {
         
         if( typeof payload.CustomerName == "undefined"){payload.CustomerName = ""; };
         if( typeof payload.CustomerNumber == "undefined" ){ payload.CustomerNumber = "";};
+
+        
         
         if(payload.CustomerNumber!==""){
 
             this.props.dispatch({
                 type: 'discounts/fetchDiscountList',
                 payload: {
-                    iimKunnr: payload.CustomerNumber,
+                    iimKunnr: payload.CustomerNumber.padStart(10, '0'),
                 },
             });
         }
@@ -185,6 +187,7 @@ export default class Discounts extends PureComponent {
             {
                 title: 'Promo #',
                 dataIndex: 'PROMO_NO',
+                key:'PROMO_NO',
                 fixed: 'left',
                 width: 100,
                 render: (text, record) => {
@@ -195,20 +198,17 @@ export default class Discounts extends PureComponent {
             },
             {
                 title: 'Status',
-                dataIndex: 'PROMO_APPROVAL',
-                key: 'PROMO_APPROVAL'          
+                dataIndex: 'PROMO_APPROVAL'          
             },
             
             {
                 title: 'Salesman #',
-                dataIndex: 'PRSMAN',
-                key: 'PRSMAN'          
+                dataIndex: 'PRSMAN'        
             },
             
             {
                 title: 'Start on',
                 dataIndex: 'PRSDAT',
-                key: 'PRSDAT',
                 render: (record) => {
                     let dateJS = new Date(parseInt(record.substring(0, 4)), parseInt(record.substring(4, 6))-1, parseInt(record.substring(6, 8)))  //date+time;
                    // console.log(dateJS)
@@ -223,7 +223,6 @@ export default class Discounts extends PureComponent {
             {
                 title: 'End on',
                 dataIndex: 'PREDAT',
-                key: 'PREDAT',
                 render: (record) => {
                     let dateJS = new Date(parseInt(record.substring(0, 4)), parseInt(record.substring(4, 6))-1, parseInt(record.substring(6, 8)))  //date+time;
                    // console.log(dateJS)
@@ -238,13 +237,22 @@ export default class Discounts extends PureComponent {
             {
                 title: 'Customer #',
                 dataIndex: 'PROMO_KUNNR',
-                key: 'PROMO_KUNNR'          
+                render: (record) => {
+                    let value = record.replace(/^0+/, '');
+                    return (
+                        <span>{ value}</span>
+                    )
+
+                    
+
+                }     
+                
+                
             },
             
             {
                 title: 'Customer Name',
-                dataIndex: 'NAME',
-                key: 'NAME'          
+                dataIndex: 'NAME'      
             },
             {
                 title: 'Action',

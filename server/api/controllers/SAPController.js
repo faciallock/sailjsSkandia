@@ -123,6 +123,7 @@ module.exports = {
     },
     getDealerSSO: async function (req, res) {
         let roles=[];
+        console.log(req.connection.remoteAddress);
         console.log(req.param('userId'));
         try{
             if (!req.param('userId')) {
@@ -162,10 +163,14 @@ module.exports = {
 
                     }
                     else{
-                        const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
+                        const token = JWTService.issuer({ user: response.USER_ID }, '2 day');
                         console.log(response);
+                        let currentAuthority="user";
+                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="C"){
+                            currentAuthority="admin";
+                        }
                     
-                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority: "admin" })
+                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
 
                     }
                     

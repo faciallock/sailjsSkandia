@@ -15,9 +15,18 @@ const ModalDiscountCustomer = Form.create()(
 
             const columns = [
                 {
-                    title: 'Customer Number',
+                    title: 'Customer #',
                     dataIndex: 'KUNNR',
-                    key: 'KUNNR'          
+                    key: 'KUNNR',
+                    render: (record) => {
+                        let value = record.replace(/^0+/, '');
+                        return (
+                            <span>{ value}</span>
+                        )
+    
+                        
+    
+                    }               
                 },
                 {
                     title: 'Customer Name',

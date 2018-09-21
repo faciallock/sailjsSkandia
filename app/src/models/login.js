@@ -1,5 +1,5 @@
 import { routerRedux } from 'dva/router';
-import { fakeAccountLogin } from '../services/api';
+import { fakeAccountLogin, dealerSSO } from '../services/api';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
 /* import { CommonDataManager } from '../utils/CommonDataManager'; */
@@ -32,6 +32,35 @@ export default {
         
         
         //localStorage.setItem('roles', response.roles);
+        /* var commonData = CommonDataManager.getInstance();
+        commonData.setRoles(response.roles); */
+
+        reloadAuthorized();
+        //routerRedux.push('/')
+        yield put(routerRedux.push('/orders'));
+      }
+    },
+    *dealerSSO({ payload }, { call, put }) {
+      const response = yield call(dealerSSO, payload);
+      console.log(payload);
+     /*  yield put({
+        type: 'changeLoginStatus',
+        payload: response,
+      }); */
+      // Login successfully
+      console.log(response);
+      if(typeof response==='undefined'){
+        //reloadAuthorized();
+        //routerRedux.push('/')
+        yield put(routerRedux.push('/orders'));
+      }else if (response.token.length !==0) {
+        //console.log(response.token.length)
+        localStorage.setItem('userName', response.msg.USER_ID);
+        localStorage.setItem('userType', response.msg.USER_TYPE);
+        //localStorage.setItem('token', response.msg.USER_TYPE);
+        
+        
+        localStorage.setItem('roles', response.roles);
         /* var commonData = CommonDataManager.getInstance();
         commonData.setRoles(response.roles); */
 

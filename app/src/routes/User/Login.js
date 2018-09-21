@@ -45,8 +45,35 @@ export default class LoginPage extends Component {
       <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
     );
   }
+  getUrlParam=(param)=>{
+    var results = new RegExp('[\?&]' + param + '=([^&#]*)').exec(window.location.href);
+    if (results == null) {
+        return null;
+    }
+    else {
+        return decodeURI(results[1]) || 0;
+    }
+
+  }
+
+  componentDidMount() {
+    console.log(this.getUrlParam("token"));
+    let token= this.getUrlParam("token");
+    if(token){
+      this.props.dispatch({
+        type: 'login/dealerSSO',
+        payload: {
+            payload:{
+             token: token
+            }
+        },
+    });
+    }
+    
+  }
   componentWillMount = ()=> {
     UserName.defaultValue="Test";
+   // alert("")
   }
 
   render() {

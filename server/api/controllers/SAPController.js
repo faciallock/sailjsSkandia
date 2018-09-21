@@ -121,17 +121,20 @@ module.exports = {
         }
        
     },
-    getDealerSSO: async function (req, res) {
+    validateToken: async function (req, res) {
         let roles=[];
         console.log(req.connection.remoteAddress);
-        console.log(req.param('userId'));
+        console.log(req.param('token'));
         try{
-            if (!req.param('userId')) {
-            return res.badRequest({ err: 'bad request params missing' })
+            if (!req.param('token') ) {
+                return res.badRequest({ err: 'bad request params missing' })
 
-        }
-            client.invoke('ZSDJ_USER_VALIDATION_SSO_REACT',
-            { USER_ID: req.param('userId')},
+            }
+
+            //const token = JWTService.issuer({ user: req.param('userId') }, '2 day');
+
+            client.invoke('ZSDJ_USER_VAL_TOKEN_SSO_REACT',
+            { TOKEN_SSO:req.param('token')},
             //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
             function (err, response) {
                 if (err) {
@@ -171,6 +174,74 @@ module.exports = {
                         }
                     
                         return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
+                        //return res.ok({ token })
+
+                    }
+                    
+                    
+                }
+                
+            }); 
+        }
+        catch (err) {
+            return res.serverError(err);
+        }
+       
+    },
+    getDealerSSO: async function (req, res) {
+        let roles=[];
+        console.log(req.connection.remoteAddress);
+        console.log(req.param('userId'));
+        try{
+            if (!req.param('userId') ) {
+                return res.badRequest({ err: 'bad request params missing' })
+
+            }
+
+            const token = JWTService.issuer({ user: req.param('userId') }, '2 day');
+            console.log(token);
+            client.invoke('ZSDJ_USER_VALIDATION_SSO_REACT',
+            { USER_ID: req.param('userId'),TOKEN_SSO:token},
+            //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
+            function (err, response) {
+                if (err) {
+                    console.error('Error invoking STFC_STRUCTURE:', err);
+
+                    client.close();
+                    client.connect(function (err) {
+                        if (err) {
+                            console.error('could not connect to server', err);
+                        } else {
+                            console.error('Connected');
+                        }
+                    });
+                    return res.serverError({msg:"Error"});
+                }
+                console.log(response);
+                
+                if (response.EMESSAGE ==="Authentication failed"){
+                    res.status(401);
+                    return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
+                    
+
+                }else{
+
+                    if (response.EMESSAGE ==="No Sales Order Bom exist"){
+
+                        res.status(401);
+                        return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
+
+                    }
+                    else{
+                        const token = JWTService.issuer({ user: response.USER_ID }, '2 day');
+                        console.log(response);
+                        let currentAuthority="user";
+                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="C"){
+                            currentAuthority="admin";
+                        }
+                    
+                        //return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
+                        return res.ok({ token })
 
                     }
                     

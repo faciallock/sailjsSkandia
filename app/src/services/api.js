@@ -66,6 +66,13 @@ export async function fakeAccountLogin(params) {
     body: params,
   });
 }
+export async function dealerSSO(params) {
+  console.log(params.payload);
+  return request('/api/validateToken', {
+    method: 'POST',
+    body: params.payload,
+  });
+}
 
 export async function fakeRegister(params) {
   return request('/api/register', {

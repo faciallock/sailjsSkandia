@@ -55,6 +55,7 @@ export default {
         yield put(routerRedux.push('/orders'));
       }else if (response.token.length !==0) {
         //console.log(response.token.length)
+        localStorage.clear();
         localStorage.setItem('userName', response.msg.USER_ID);
         localStorage.setItem('userType', response.msg.USER_TYPE);
         //localStorage.setItem('token', response.msg.USER_TYPE);

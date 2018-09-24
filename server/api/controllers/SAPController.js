@@ -200,7 +200,7 @@ module.exports = {
 
             const token = JWTService.issuer({ user: req.param('userId') }, '2 day');
             console.log(token);
-            client.invoke('ZSDJ_USER_VALIDATION_SSO_REACT',
+            client.invoke('ZSDJ_DEAL_VALIDATION_SSO_REACT',
             { USER_ID: req.param('userId'),TOKEN_SSO:token},
             //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
             function (err, response) {

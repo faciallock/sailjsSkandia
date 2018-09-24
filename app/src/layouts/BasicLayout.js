@@ -173,6 +173,7 @@ stepsEnabled: false,
     if (key === 'logout') {
       //localStorage.clear();
       localStorage.removeItem('userName');
+      localStorage.removeItem('antd-pro-authority');
       localStorage.removeItem('userType');
 
 

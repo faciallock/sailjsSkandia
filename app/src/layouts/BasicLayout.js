@@ -172,6 +172,7 @@ stepsEnabled: false,
     }
     if (key === 'logout') {
       //localStorage.clear();
+      //localStorage
       localStorage.removeItem('userName');
       localStorage.removeItem('antd-pro-authority');
       localStorage.removeItem('userType');

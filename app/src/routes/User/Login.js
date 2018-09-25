@@ -14,6 +14,7 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 export default class LoginPage extends Component {
   state = {
     type: 'c',
+    isToken:false,
     autoLogin: true,
   }
 
@@ -60,6 +61,7 @@ export default class LoginPage extends Component {
     console.log(this.getUrlParam("token"));
     let token= this.getUrlParam("token");
     if(token){
+      this.setState({isToken:true})
       this.props.dispatch({
         type: 'login/dealerSSO',
         payload: {
@@ -83,36 +85,48 @@ export default class LoginPage extends Component {
     console.log(login);
     return (
       <div className={styles.main}>
-        <Login
-          defaultActiveKey={type}
-          onTabChange={this.onTabChange}
-          onSubmit={this.handleSubmit}
-        >
-          <Tab key="c" tab="User Account">
-            {
-              login.status === 'error' &&
-              login.type === 'c' &&
-              !login.submitting &&
-              this.renderMessage('Wrong account or password（admin/888888）')
-            }
-            <UserName name="userId" placeholder="User" />
-            <Password name="password" placeholder="Password" />
-          </Tab>
-         
-          <div>
-            {/* <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>Remember</Checkbox>
-            <a style={{ float: 'right' }} href="">Forgot Password?</a> */}
+        {
+          this.state.isToken &&
+          <div style={{textAlign:'center'}}>
+            <h2>Redirecting... Please wait</h2> 
           </div>
-          {/* <Submit loading={submitting}>Login</Submit> */}
-          <Submit loading={false} className={styles.login}>Login</Submit>
-          <div className={styles.other}>
-            {/* Other login methods */}
-            {/* <Icon className={styles.icon} type="alipay-circle" />
-            <Icon className={styles.icon} type="taobao-circle" />
-            <Icon className={styles.icon} type="weibo-circle" /> */}
-            {/* <Link className={styles.register} to="/user/login">Sign Up</Link> */}
-          </div>
-        </Login>
+        
+        }
+        {
+          !this.state.isToken &&
+            <Login
+            defaultActiveKey={type}
+            onTabChange={this.onTabChange}
+            onSubmit={this.handleSubmit}
+          >
+            <Tab key="c" tab="User Account">
+              {
+                login.status === 'error' &&
+                login.type === 'c' &&
+                !login.submitting &&
+                this.renderMessage('Wrong account or password（admin/888888）')
+              }
+              <UserName name="userId" placeholder="User" />
+              <Password name="password" placeholder="Password" />
+            </Tab>
+          
+            <div>
+              {/* <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>Remember</Checkbox>
+              <a style={{ float: 'right' }} href="">Forgot Password?</a> */}
+            </div>
+            {/* <Submit loading={submitting}>Login</Submit> */}
+            <Submit loading={false} className={styles.login}>Login</Submit>
+            <div className={styles.other}>
+              {/* Other login methods */}
+              {/* <Icon className={styles.icon} type="alipay-circle" />
+              <Icon className={styles.icon} type="taobao-circle" />
+              <Icon className={styles.icon} type="weibo-circle" /> */}
+              {/* <Link className={styles.register} to="/user/login">Sign Up</Link> */}
+            </div>
+          </Login>
+        }
+
+        
       </div>
     );
   }

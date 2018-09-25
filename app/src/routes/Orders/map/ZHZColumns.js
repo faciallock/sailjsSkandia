@@ -219,11 +219,7 @@ export class ZHZColumns {
             }];
 
             
-            if ( localStorage.getItem('userType') == "D"){
-
-                aColumns = aColumns.splice(13, 1);
-
-            }else{
+            if ( localStorage.getItem('userType') != "D"){
 
                 aColumns.push({
                     title: 'BOM',

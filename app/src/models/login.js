@@ -55,13 +55,15 @@ export default {
         yield put(routerRedux.push('/orders'));
       }else if (response.token.length !==0) {
         //console.log(response.token.length)
-        localStorage.clear();
+        localStorage.removeItem('userName');
+        localStorage.removeItem('antd-pro-authority');
+        localStorage.removeItem('userType');
         localStorage.setItem('userName', response.msg.USER_ID);
         localStorage.setItem('userType', response.msg.USER_TYPE);
         //localStorage.setItem('token', response.msg.USER_TYPE);
         
         
-        localStorage.setItem('roles', response.roles);
+        //localStorage.setItem('roles', response.roles);
         /* var commonData = CommonDataManager.getInstance();
         commonData.setRoles(response.roles); */
 

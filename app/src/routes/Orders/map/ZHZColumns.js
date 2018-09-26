@@ -51,7 +51,7 @@ export class ZHZColumns {
             key: 'WIDTH',
             render: (record) => {
                 return (
-                    <span>{ parseFloat(record).toFixed(2) }</span>
+                    <span>{ record===""? "": parseFloat(record).toFixed(2) }</span>
                 )
             }
         },
@@ -61,7 +61,7 @@ export class ZHZColumns {
             key: 'LENGTH',
             render: (record) => {
                 return (
-                    <span>{ parseFloat(record).toFixed(2) }</span>
+                    <span>{ record===""? "": parseFloat(record).toFixed(2) }</span>
                 )
             }
         },

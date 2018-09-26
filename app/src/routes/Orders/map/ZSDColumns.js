@@ -46,7 +46,7 @@ export class ZSDColumns {
             key: 'WIDTH',
             render: (record) => {
                 return (
-                    <span>{ parseFloat(record).toFixed(2) }</span>
+                    <span>{ record===""? "": parseFloat(record).toFixed(2) }</span>
                 )
             }
         },
@@ -56,7 +56,7 @@ export class ZSDColumns {
             key: 'LENGTH',
             render: (record) => {
                 return (
-                    <span>{ parseFloat(record).toFixed(2) }</span>
+                    <span>{ record===""? "": parseFloat(record).toFixed(2) }</span>
                 )
             }
         },

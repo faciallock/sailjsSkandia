@@ -81,7 +81,7 @@ export default class Discounts extends PureComponent {
             this.props.dispatch({
                 type: 'discounts/fetchDiscountList',
                 payload: {
-                    iimKunnr: localStorage.getItem('customerNumber'),
+                    iimKunnr: localStorage.getItem('customerNumber').padStart(10, '0'),
                 },
             });
         }

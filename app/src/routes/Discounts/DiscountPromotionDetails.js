@@ -56,10 +56,6 @@ export default class DiscountPromotionDetails extends PureComponent {
                                 
                             </Col>
                             <Col lg={8} md={12} sm={12} xs={24}>
-                                <span><b>Budget Code:</b> {customerData.BUD_CODE_TXT}</span>
-                                
-                            </Col>
-                            <Col lg={8} md={12} sm={12} xs={24}>
                                 <span><b>Business Location:</b> {customerData.BUSS_LOC_TXT}</span>
                             
                             </Col>
@@ -68,11 +64,16 @@ export default class DiscountPromotionDetails extends PureComponent {
                                 
                             </Col>
                             <Col lg={8} md={12} sm={12} xs={24}>
-                                <span><b>Business Type:</b> {customerData.BUSS_TYPE_TXT} </span>
+                                {/* <span><b>Budget Code:</b> {customerData.BUD_CODE_TXT}</span> */}
+                                
+                            </Col>
+                            
+                            <Col lg={8} md={12} sm={12} xs={24}>
+                                {/* <span><b>Business Type:</b> {customerData.BUSS_TYPE_TXT} </span> */}
                                 
                             </Col>
                             <Col lg={8} md={12} sm={12} xs={24}>
-                                <span><b>Web Referal:</b>{customerData.WEB_RFE_TXT}</span>
+                                {/* <span><b>Web Referal:</b>{customerData.WEB_RFE_TXT}</span> */}
                             
                             </Col>
                         </Row>

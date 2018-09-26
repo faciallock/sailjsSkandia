@@ -46,7 +46,7 @@ export default class DiscountCustomerDetails extends PureComponent {
                             <span><b>Address:</b> {customerData.STREET2}</span>
                         </Col>
                         <Col lg={8} md={12} sm={24}>
-                            <span><b>Qtr Profit:</b> {customerData.QTR_PROFIT}</span>
+                            {/* <span><b>Qtr Profit:</b> {customerData.QTR_PROFIT}</span> */}
                         </Col>
                         <Col lg={8} md={12} sm={24}>
                         </Col>

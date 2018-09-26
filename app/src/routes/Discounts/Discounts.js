@@ -76,6 +76,17 @@ export default class Discounts extends PureComponent {
             //routerRedux.push("");
             this.props.dispatch(routerRedux.push('/user/login'))
         }
+
+        if(localStorage.getItem('customerNumber')){
+            this.props.dispatch({
+                type: 'discounts/fetchDiscountList',
+                payload: {
+                    iimKunnr: localStorage.getItem('customerNumber'),
+                },
+            });
+        }
+
+        
         
 
 
@@ -282,11 +293,17 @@ export default class Discounts extends PureComponent {
             <PageHeaderLayout title=""
             content={
                 <div style={{textAlign: "right",position:'relative',top:'-20px'} }>
-                <Button  style={{ marginLeft: 8 }} onClick={this.toggleSearch} className="tour_button_hideSearch"><Icon type="search"  style={{ color: '#1d2d5c' }}/>
-                    Hide search <Icon type={this.state.showSearch ? 'up' : 'down'} />
-                    </Button>
-                    { this.state.showSearch &&                                                                             
-                    <SearchForm handleSearch={this.handleSearch}/> }
+                    {localStorage.getItem('userType') !== "D" &&
+                    <div>
+                        <Button  style={{ marginLeft: 8 }} onClick={this.toggleSearch} className="tour_button_hideSearch"><Icon type="search"  style={{ color: '#1d2d5c' }}/>
+                        Hide search <Icon type={this.state.showSearch ? 'up' : 'down'} />
+                        </Button>
+                        { this.state.showSearch &&                                                                             
+                        <SearchForm handleSearch={this.handleSearch}/> }
+                    </div>
+                    
+                    }
+                
                 </div>}
             breadcrumbList={breadcrumbTitle} 
              >

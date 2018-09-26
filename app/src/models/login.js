@@ -29,6 +29,7 @@ export default {
         console.log(response.token.length)
         localStorage.setItem('userName', response.msg.USER_ID);
         localStorage.setItem('userType', response.msg.USER_TYPE);
+        localStorage.setItem('customerNumber', response.msg.CUSTOMER);
         
         
         //localStorage.setItem('roles', response.roles);

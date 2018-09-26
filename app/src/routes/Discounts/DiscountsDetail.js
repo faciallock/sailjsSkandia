@@ -187,7 +187,10 @@ export default class DiscountsDetail extends PureComponent {
                                     discountDetail.LT_SHUTTERS &&
                                     <Panel header={<span><Icon type="bars" /> Shutters</span>} key="4">
                                         <DiscountsLTTable data={discountDetail.LT_SHUTTERS} isShutters={true} />
-                                        <DiscountsPrevious data={discountDetail.LS_SHUTTERS_PREV} />
+
+                                        {localStorage.getItem('userType') !== "D" &&
+                                            <DiscountsPrevious data={discountDetail.LS_SHUTTERS_PREV} />
+                                        }
                                     </Panel>
 
                                 }
@@ -195,7 +198,9 @@ export default class DiscountsDetail extends PureComponent {
                                     discountDetail.LT_SHADES &&
                                     <Panel header={<span><Icon type="bars" /> Shades</span>} key="5">
                                         <DiscountsLTTable data={discountDetail.LT_SHADES} />
+                                        {localStorage.getItem('userType') !== "D" &&
                                         <DiscountsPrevious data={discountDetail.LS_SHADES_PREV} />
+                                        }
                                     </Panel>
 
                                 }
@@ -203,7 +208,9 @@ export default class DiscountsDetail extends PureComponent {
                                     discountDetail.LT_VERT &&
                                     <Panel header={<span><Icon type="bars" /> Verticals</span>} key="6">
                                         <DiscountsLTTable data={discountDetail.LT_VERT} />
+                                        {localStorage.getItem('userType') !== "D" &&
                                         <DiscountsPrevious data={discountDetail.LS_VERT_PREV} />
+                                        }
                                     </Panel>
 
                                 }
@@ -211,7 +218,9 @@ export default class DiscountsDetail extends PureComponent {
                                     discountDetail.LT_ALUM &&
                                     <Panel header={<span><Icon type="bars" /> Horizontal Blinds</span>} key="7">
                                         <DiscountsLTTable data={discountDetail.LT_ALUM} />
+                                        {localStorage.getItem('userType') !== "D" &&
                                         <DiscountsPrevious data={discountDetail.LS_ALUM_PREV} />
+                                        }
                                         
 
                                     </Panel>
@@ -221,7 +230,9 @@ export default class DiscountsDetail extends PureComponent {
                                     discountDetail.LT_ROLLER_SHADES &&
                                     <Panel header={<span><Icon type="bars" /> Roller Shades</span>} key="8">
                                         <DiscountsLTTable data={discountDetail.LT_ROLLER_SHADES} />
+                                        {localStorage.getItem('userType') !== "D" &&
                                         <DiscountsPrevious data={discountDetail.LS_ROLLER_SHADES_PREV} />
+                                        }
                                     </Panel>
 
                                 }
@@ -229,7 +240,9 @@ export default class DiscountsDetail extends PureComponent {
                                     discountDetail.LT_WOVEN_WOODS &&
                                     <Panel header={<span><Icon type="bars" /> Woven Woods</span>} key="9">
                                         <DiscountsLTTable data={discountDetail.LT_WOVEN_WOODS} />
+                                        {localStorage.getItem('userType') !== "D" &&
                                         <DiscountsPrevious data={discountDetail.LS_WOVEN_WOODS_PREV} />
+                                        }
                                     </Panel>
 
                                 }
@@ -237,7 +250,9 @@ export default class DiscountsDetail extends PureComponent {
                                     discountDetail.LT_OTHERS &&
                                     <Panel header={<span><Icon type="bars" /> Others</span>} key="10">
                                         <DiscountsLTTable data={discountDetail.LT_OTHERS} />
+                                        {localStorage.getItem('userType') !== "D" &&
                                         <DiscountsPrevious data={discountDetail.LS_OTHERS_PREV} />
+                                        }
                                         
                                     </Panel>
 

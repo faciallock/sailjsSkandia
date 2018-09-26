@@ -103,7 +103,7 @@ module.exports = {
                         const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
                         console.log(response);
                         let currentAuthority="user";
-                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="C"){
+                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="D" || response.USER_TYPE==="C"){
                             currentAuthority="admin";
                         }
                     
@@ -169,7 +169,7 @@ module.exports = {
                         const token = JWTService.issuer({ user: response.USER_ID }, '2 day');
                         console.log(response);
                         let currentAuthority="user";
-                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="C"){
+                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="D" || response.USER_TYPE==="C"){
                             currentAuthority="admin";
                         }
                     
@@ -236,7 +236,7 @@ module.exports = {
                         const token = JWTService.issuer({ user: response.USER_ID }, '2 day');
                         console.log(response);
                         let currentAuthority="user";
-                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="C"){
+                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="D" || response.USER_TYPE==="C"){
                             currentAuthority="admin";
                         }
                     

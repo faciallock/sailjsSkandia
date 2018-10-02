@@ -336,7 +336,6 @@ export default class Discounts extends PureComponent {
                                         dataSource={discounts}
                                         size={"small"}
                                         columns={columns}
-                                        rowKey={record => record.PROMO_NO}
                                         pagination = {{pageSize: 15}}
                                         scroll={{ x: 900 }}
                                     />

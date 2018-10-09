@@ -40,8 +40,8 @@ export default class DiscountsLTTable extends PureComponent {
                 },
                 {
                     title: 'SqFt Price',
-                    dataIndex: 'PROMODISC1',
-                    key: 'PROMODISC1'          
+                    dataIndex: 'SHUT_SQFT_PR',
+                    key: 'SHUT_SQFT_PR'          
                 }
             ];
 

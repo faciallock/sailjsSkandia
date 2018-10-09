@@ -152,7 +152,7 @@ const SearchForm = Form.create()(
                                 }]
                                 })(
                                     <span>
-                                    <InputGroup style={{marginTop:'4px', }} compact>
+                                    <InputGroup style={{marginTop:'-3px', }} compact>
                                     <Select style={{width:'40%'}}  onChange={this.handleChange} disabled={ customerNameIsDisabled}  defaultValue="Contains">
                                         <Option value="startsWithName">Starts with</Option>
                                         <Option value="containsName">Contains</Option>

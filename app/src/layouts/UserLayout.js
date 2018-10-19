@@ -8,8 +8,8 @@ import logo from '../assets/logo.png';
 import { getRoutes } from '../utils/utils';
 
 const links = [{
-  key: 'help',
-  title: 'help',
+  key: '',
+  title: '',
   href: '',
 }];
 
@@ -35,11 +35,14 @@ class UserLayout extends React.PureComponent {
               <div className={styles.header}>
                 <Link to="/">
                   <img alt="logo" className={styles.logo} src={logo} />
-                  <span className={styles.title}>Login</span>
+                  <div>
+                  <span className={styles.title}>Welcome to Skandia orders</span>
+                  </div>
                 </Link>
               </div>
-              <div className={styles.desc}>Log into your personalized, secure web site by entering your user and password in the fields below.</div>
+              
             </div>
+            <div className={styles.desc}>Log into your personalized, secure web site by entering your user and password in the fields below.</div>
             <Switch>
               {getRoutes(match.path, routerData).map(item =>
                 (

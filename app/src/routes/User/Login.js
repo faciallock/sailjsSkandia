@@ -60,13 +60,19 @@ export default class LoginPage extends Component {
   componentDidMount() {
     console.log(this.getUrlParam("token"));
     let token= this.getUrlParam("token");
+    let redirect= this.getUrlParam("redirect");
+    if(redirect==="/discounts"){
+      redirect="/discounts/list"
+    }
+    
     if(token){
       this.setState({isToken:true})
       this.props.dispatch({
         type: 'login/dealerSSO',
         payload: {
             payload:{
-             token: token
+             token: token,
+             redirect:redirect
             }
         },
     });

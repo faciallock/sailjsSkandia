@@ -50,10 +50,18 @@ export default {
       }); */
       // Login successfully
       console.log(response);
+      console.log(payload.payload.redirect)
       if(typeof response==='undefined'){
         //reloadAuthorized();
         //routerRedux.push('/')
-        yield put(routerRedux.push('/orders'));
+
+        if(payload.payload.redirect){
+          yield put(routerRedux.push(payload.payload.redirect));
+        }
+        else{
+          yield put(routerRedux.push('/orders'));
+        }
+        
       }else if (response.token.length !==0) {
         //console.log(response.token.length)
         localStorage.removeItem('userName');
@@ -70,7 +78,12 @@ export default {
 
         reloadAuthorized();
         //routerRedux.push('/')
-        yield put(routerRedux.push('/orders'));
+       // yield put(routerRedux.push('/orders'));
+        if(payload.payload.redirect){
+          yield put(routerRedux.push(payload.payload.redirect));
+        }else{
+          yield put(routerRedux.push('/orders'));
+        }
       }
     },
     *logout(_, { put, select }) {

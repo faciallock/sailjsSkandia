@@ -67,8 +67,11 @@ export default {
         localStorage.removeItem('userName');
         localStorage.removeItem('antd-pro-authority');
         localStorage.removeItem('userType');
+        localStorage.removeItem('customerNumber');
+        
         localStorage.setItem('userName', response.msg.USER_ID);
         localStorage.setItem('userType', response.msg.USER_TYPE);
+        localStorage.setItem('customerNumber', response.msg.CUSTOMER);
         //localStorage.setItem('token', response.msg.USER_TYPE);
         
         

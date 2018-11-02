@@ -26,7 +26,7 @@ export class zsd extends React.PureComponent {
 
             item.WIDTH = itemExConfigWidth ? itemExConfigWidth.VALUE_CHAR: "";  
             item.LENGTH = itemExConfigLength ? itemExConfigLength.VALUE_CHAR: ""; 
-            item.BRACKETMOUNT = itemExConfigBracket? itemExConfigBracket.VALUE_DESC: ""; 
+            item.BRACKET_SH = itemExConfigBracket? itemExConfigBracket.VALUE_DESC: ""; 
             item.LIFTCORD = itemExConfigCords ? itemExConfigCords.VALUE_DESC: "";   
             
             //item.PANELS = itemExConfigPanelSize.VALUE_CHAR: "";

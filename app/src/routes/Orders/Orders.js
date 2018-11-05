@@ -329,6 +329,14 @@ export default class OrderView extends PureComponent {
         });
     }
 
+    getGrandTotal = (total,taxes) =>{
+      
+        return parseFloat(Math.round((total+taxes) * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g);
+     
+
+             
+    }
+
     toggleSearch = () =>{
 
     this.setState({
@@ -371,7 +379,7 @@ export default class OrderView extends PureComponent {
                         <Row gutter={12}>
                             <Col lg={8} md={8} sm={12}>
                                 <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false :   "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
-                            </Col>
+                            </Col>parse
                             <Col lg={8} md={8} sm={12}>
                                 <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : "$"+parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
                             </Col>
@@ -418,7 +426,7 @@ export default class OrderView extends PureComponent {
                                 <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : "$"+parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')  }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>
+                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {this.getGrandTotal(parseFloat(Math.round(orderDetail.EX_NETVAL* 100)/ 100),parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100))}/> </div>
                             </Col>
                         </Row>
                     </div>

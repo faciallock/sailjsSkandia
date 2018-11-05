@@ -139,7 +139,7 @@ const SearchForm = Form.create()(
                                         
                                 }]
                                 })(
-                                <Input ref={(ip) => this.customerNumberInp = ip} disabled={customerNumberIsDisabled}  prefix={<span style={{ color: '#1d2d5c' }} >#</span>} placeholder="Customer Number" />
+                                <Input ref={(ip) => this.customerNumberInp = ip} disabled={customerNumberIsDisabled}  prefix={<span style={{ color: '#1d2d5c' }} >#</span>} placeholder="112234455" />
                                 )}
                                 </FormItem>
                         </Col>

@@ -336,6 +336,25 @@ export default class OrderView extends PureComponent {
 
              
     }
+    sumTaxes = (JR1,JR2,JR3,JR4) =>{
+
+        let jr1Val,jr2Val,jr3Val,jr4Val;
+        jr1Val=(typeof JR1[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        jr2Val=(typeof JR2[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR2[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        jr3Val=(typeof JR3[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR3[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        jr4Val=(typeof JR4[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR4[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+        return  parseFloat(jr1Val)+parseFloat(jr2Val)+parseFloat(jr3Val)+parseFloat(jr4Val);
+      
+      //  return parseFloat(Math.round((total+taxes) * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g);
+
+
+     
+
+             
+    }
+
+    //(typeof JR1[0] === 'undefined') ? false : "$"+parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')  
 
     toggleSearch = () =>{
 
@@ -346,7 +365,7 @@ export default class OrderView extends PureComponent {
 
     }
 
-    renderFields = (userType, orderDetail, ZF00,ZCOD,JR1) => {
+    renderFields = (userType, orderDetail, ZF00,ZCOD,JR1,JR2,JR3,JR4) => {
         return (
             <div>
                 {
@@ -379,12 +398,12 @@ export default class OrderView extends PureComponent {
                         <Row gutter={12}>
                             <Col lg={8} md={8} sm={12}>
                                 <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false :   "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
-                            </Col>parse
-                            <Col lg={8} md={8} sm={12}>
-                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : "$"+parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {orderDetail.EX_NETVAL}/> </div>
+                                <b>Taxes:</b> {this.sumTaxes(JR1,JR2,JR3,JR4)}
+                            </Col>
+                            <Col lg={8} md={8} sm={12}>
+                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {this.getGrandTotal(parseFloat(Math.round(orderDetail.EX_NETVAL* 100)/ 100),this.sumTaxes(JR1,JR2,JR3,JR4))}/> </div>
                             </Col>
                         </Row>
                     </div>
@@ -423,10 +442,10 @@ export default class OrderView extends PureComponent {
                                 <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>Taxes:</b> {(typeof JR1[0] === 'undefined') ? false : "$"+parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')  }
+                                <b>Taxes:</b> {this.sumTaxes(JR1,JR2,JR3,JR4)}
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {this.getGrandTotal(parseFloat(Math.round(orderDetail.EX_NETVAL* 100)/ 100),parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100))}/> </div>
+                                <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {this.getGrandTotal(parseFloat(Math.round(orderDetail.EX_NETVAL* 100)/ 100),this.sumTaxes(JR1,JR2,JR3,JR4))}/> </div>
                             </Col>
                         </Row>
                     </div>
@@ -518,7 +537,7 @@ export default class OrderView extends PureComponent {
                     )
                 }
             },
-            {
+            /* {
                 title: 'Total Price',
                 dataIndex: 'NETWR',
                 key: 'NETWR',
@@ -528,7 +547,7 @@ export default class OrderView extends PureComponent {
                         <span>{ currentTotalPrice }</span>
                     )
                 }
-            },
+            }, */
             {
                 title: 'Status',
                 dataIndex: 'IND',
@@ -651,13 +670,16 @@ export default class OrderView extends PureComponent {
                 />
             </div>
         ); */
-        let ZF00 = [{ COND_VAL: "" }], ZCOD = [{ COND_VAL: "" }], JR1 = [{ COND_VAL: "" }];
+        let ZF00 = [{ COND_VAL: "" }], ZCOD = [{ COND_VAL: "" }], JR1 = [{ COND_VAL: "" }], JR2 = [{ COND_VAL: "" }], JR3 = [{ COND_VAL: "" }], JR4 = [{ COND_VAL: "" }];;
         
 
         if (orderDetail.EX_CONDITIONS !== undefined) {
             ZF00 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "ZF00" });
             ZCOD = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "ZCOD" });
             JR1 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "JR1" });
+            JR2 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "JR2" });
+            JR3 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "JR3" });
+            JR4 = _.filter(orderDetail.EX_CONDITIONS, { COND_TYP: "JR4" });
         }
 
         /* let commonData = CommonDataManager.getInstance();
@@ -781,7 +803,7 @@ export default class OrderView extends PureComponent {
                                 content={<div className="content">
                                     <Divider style={{margin:'12px 0',top:'-12px'}} />
 
-                                    {this.renderFields(localStorage.getItem('userType'), orderDetail, ZF00,ZCOD,JR1)}
+                                    {this.renderFields(localStorage.getItem('userType'), orderDetail, ZF00,ZCOD,JR1,JR2,JR3,JR4)}
 
                                     
                                     

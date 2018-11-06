@@ -331,20 +331,43 @@ export default class OrderView extends PureComponent {
 
     getGrandTotal = (total,taxes) =>{
       
-        return parseFloat(Math.round((total+taxes) * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g);
+        return parseFloat(Math.round((parseFloat(total)+parseFloat(taxes)) * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g);
      
 
              
     }
     sumTaxes = (JR1,JR2,JR3,JR4) =>{
 
-        let jr1Val,jr2Val,jr3Val,jr4Val;
-        jr1Val=(typeof JR1[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        
+        var jr1array= JR1.map((item)=>{return item.COND_VAL});
+        var jr2array= JR2.map((item)=>{return item.COND_VAL});
+        var jr3array= JR3.map((item)=>{return item.COND_VAL});
+        var jr4array= JR4.map((item)=>{return item.COND_VAL});
+        var jr1sum=0;
+        var jr2sum=0;
+        var jr3sum=0;
+        var jr4sum=0;
+        jr1array.forEach(element => {
+            jr1sum=jr1sum+parseFloat(element);
+        });
+        jr2array.forEach(element => {
+            jr2sum=jr2sum+parseFloat(element);
+        });
+        jr3array.forEach(element => {
+            jr3sum=jr3sum+parseFloat(element);
+        });
+        jr4array.forEach(element => {
+            jr4sum=jr4sum+parseFloat(element);
+        });
+        
+
+
+       /*  jr1Val=(typeof JR1[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR1[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         jr2Val=(typeof JR2[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR2[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         jr3Val=(typeof JR3[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR3[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-        jr4Val=(typeof JR4[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR4[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        jr4Val=(typeof JR4[0] === 'undefined') ? 0 :  parseFloat(Math.round(JR4[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); */
 
-        return  parseFloat(jr1Val)+parseFloat(jr2Val)+parseFloat(jr3Val)+parseFloat(jr4Val);
+        return  parseFloat(jr1sum)+parseFloat(jr2sum)+parseFloat(jr3sum)+parseFloat(jr4sum);
       
       //  return parseFloat(Math.round((total+taxes) * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g);
 
@@ -442,7 +465,7 @@ export default class OrderView extends PureComponent {
                                 <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>Taxes:</b> {this.sumTaxes(JR1,JR2,JR3,JR4)}
+                                <b>Taxes:</b> ${this.sumTaxes(JR1,JR2,JR3,JR4)}
                             </Col>
                             <Col lg={8} md={8} sm={12}>
                                 <b>Grand Total:</b><div style={{color:"#e24c02"}}><FormattedNumber style="currency" currency="USD"  value= {this.getGrandTotal(parseFloat(Math.round(orderDetail.EX_NETVAL* 100)/ 100),this.sumTaxes(JR1,JR2,JR3,JR4))}/> </div>

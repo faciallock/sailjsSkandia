@@ -329,6 +329,35 @@ export default class OrderView extends PureComponent {
         });
     }
 
+    
+    getSHCharges=(ZF00)=>{
+        
+        var ZF00rray= ZF00.map((item)=>{return item.COND_VAL});
+        console.log(ZF00rray)
+        var ZF00sum=0;
+
+        ZF00rray.forEach(element => {
+            ZF00sum=ZF00sum+parseFloat(element);
+        });
+        return ZF00sum;// "$"+parseFloat(Math.round(ZCODsum * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
+    }
+
+    getCODCharges=(ZCOD)=>{
+        
+        var ZCODrray= ZCOD.map((item)=>{return item.COND_VAL});
+        console.log(ZCODrray)
+        var ZCODsum=0;
+
+        ZCODrray.forEach(element => {
+            ZCODsum=ZCODsum+parseFloat(element);
+        });
+        return ZCODsum;// "$"+parseFloat(Math.round(ZCODsum * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
+    }
+
+    
+
     getGrandTotal = (total,taxes) =>{
       
         return total+taxes;
@@ -420,7 +449,8 @@ export default class OrderView extends PureComponent {
                         {/* </Row> */}
                         <Row gutter={12}>
                             <Col lg={8} md={8} sm={12}>
-                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false :   "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
+                                <b>COD Charges:</b> <FormattedNumber style="currency" currency="USD"  value= { this.getCODCharges(ZCOD) }/>
+                                
                             </Col>
                             <Col lg={8} md={8} sm={12}>
                                 <b>Taxes:</b> {this.sumTaxes(JR1,JR2,JR3,JR4)}
@@ -457,12 +487,13 @@ export default class OrderView extends PureComponent {
                                 <b>Rush Charges Cat.:</b> {orderDetail.EX_PRODRUSH ? orderDetail.EX_PRODRUSH.split("-")[1]: ""}
                             </Col>
                             <Col lg={8} md={8} sm={12}>
-                                <b>S/H Charges:</b> {(typeof ZF00[0] === 'undefined') ? false : "$"+parseFloat(Math.round(ZF00[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')  }
+                                <b>S/H Charges:</b> <FormattedNumber style="currency" currency="USD"  value= { this.getSHCharges(ZF00) }/>
+                                
                             </Col>
                         </Row>
                         <Row gutter={12}>
                             <Col lg={8} md={8} sm={12}>
-                                <b>COD Charges:</b> {(typeof ZCOD[0] === 'undefined') ? false : "$"+parseFloat(Math.round(ZCOD[0].COND_VAL * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }
+                                <b>COD Charges:</b> <FormattedNumber style="currency" currency="USD"  value= { this.getCODCharges(ZCOD) }/>
                             </Col>
                             <Col lg={8} md={8} sm={12}>
                                 <b>Taxes:</b> ${this.sumTaxes(JR1,JR2,JR3,JR4)}

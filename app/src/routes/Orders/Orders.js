@@ -331,7 +331,7 @@ export default class OrderView extends PureComponent {
 
     getGrandTotal = (total,taxes) =>{
       
-        return parseFloat(Math.round((parseFloat(total)+parseFloat(taxes)) * 100)/ 100).toFixed(2).replace(/\d(?=(\d{3})+\.)/g);
+        return total+taxes;
      
 
              

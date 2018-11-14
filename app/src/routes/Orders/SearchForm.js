@@ -133,7 +133,7 @@ const SearchForm = Form.create()(
                                                 message: '',
                                         }],
                                         })(
-                                        <Input prefix={<Icon type="solution" style={{ color: '#1d2d5c' }} />} placeholder="11222114555" />
+                                        <Input prefix={<Icon type="solution" style={{ color: '#1d2d5c' }} />} placeholder="Customer number" />
                                         )}
                                         </FormItem>
                                 </Col>

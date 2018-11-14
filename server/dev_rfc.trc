@@ -1448,3 +1448,108 @@ COUNTER     3
  Hostname: DESKTOP-N6PIQF4, IP address: 192.168.254.34, IP address_v6: 192.168.254.34
 
 Program SAPLZINTERFACES was modified during the run.
+
+**** Trace file opened at 2018-09-27, 14:11:27 Eastern Daylight Time
+ RFC library: 711, Current working directory: E:\skandia-portal\server, Program: node
+ Hardware: PC with Windows NT AMD64 Level 6 (Mod 63 Step 2), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: TLHDO1, IP address: 10.0.0.44, IP address_v6: 10.0.0.44
+
+The function module is not active or contains no code.
+
+**** Trace file opened at 2018-10-02, 14:13:02 Eastern Daylight Time
+ RFC library: 711, Current working directory: E:\skandia-portal\server, Program: node
+ Hardware: PC with Windows NT AMD64 Level 6 (Mod 63 Step 2), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: TLHDO1, IP address: 10.0.0.44, IP address_v6: 10.0.0.44
+
+Program SAPLZINTERFACES was modified during the run.
+Program SAPLZINTERFACES was modified during the run.
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.27:3300' broken
+TIME        Sun Oct 07 18:08:33 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4702
+DETAIL      NiIRead: P=10.0.0.27:3300; L=10.0.0.44:58532
+SYSTEM CALL recv
+COUNTER     3
+
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.27:3300' broken
+TIME        Sun Oct 07 18:09:06 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.27:3300; L=10.0.0.44:58536
+SYSTEM CALL recv
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     3
+
+Exception condition "VALUE_NOT_FOUND" raised.
+Overflow during an arithmetic operation (type P) in program SAPLZ_DISPLAY_PROMO                     .
+
+**** Trace file opened at 2018-10-23, 14:53:15 Eastern Daylight Time
+ RFC library: 711, Current working directory: E:\skandia-portal\server, Program: node
+ Hardware: PC with Windows NT AMD64 Level 6 (Mod 63 Step 2), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: TLHDO1, IP address: 10.0.0.44, IP address_v6: 10.0.0.44
+
+Exception condition "VALUE_NOT_FOUND" raised.
+Exception condition "VALUE_NOT_FOUND" raised.
+Exception condition "VALUE_NOT_FOUND" raised.
+Exception condition "VALUE_NOT_FOUND" raised.
+Exception condition "VALUE_NOT_FOUND" raised.
+Exception condition "VALUE_NOT_FOUND" raised.
+Exception condition "VALUE_NOT_FOUND" raised.
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.0.0.27:3300' broken
+TIME        Sun Oct 28 15:18:11 201
+RELEASE     711
+COMPONENT   NI (network interface)
+VERSION     39
+RC          -6
+MODULE      nixxi.cpp
+LINE        4939
+DETAIL      NiIRead: P=10.0.0.27:3300; L=10.0.0.44:57274
+SYSTEM CALL recv
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     3
+
+
+**** Trace file opened at 2018-10-30, 19:59:02 Eastern Daylight Time
+ RFC library: 711, Current working directory: E:\skandia-portal\server, Program: node
+ Hardware: PC with Windows NT AMD64 Level 6 (Mod 63 Step 2), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: TLHDO1, IP address: 10.0.0.44, IP address_v6: 10.0.0.44
+
+Error in address output (address not found).
+Error in address output (address not found).
+
+**** Trace file opened at 2018-11-11, 13:53:36 Eastern Standard Time
+ RFC library: 711, Current working directory: E:\skandia-portal\server, Program: node
+ Hardware: PC with Windows NT AMD64 Level 6 (Mod 63 Step 2), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: TLHDO1, IP address: 10.0.0.44, IP address_v6: 10.0.0.44
+
+connection closed without message (CM_NO_DATA_RECEIVED)
+
+**** Trace file opened at 2018-11-11, 14:27:48 Eastern Standard Time
+ RFC library: 711, Current working directory: E:\skandia-portal\server, Program: node
+ Hardware: PC with Windows NT AMD64 Level 6 (Mod 63 Step 2), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: TLHDO1, IP address: 10.0.0.44, IP address_v6: 10.0.0.44
+
+The function module is not active or contains no code.
+
+**** Trace file opened at 2018-11-14, 12:40:07 Eastern Standard Time
+ RFC library: 711, Current working directory: E:\skandia-portal\server, Program: node
+ Hardware: PC with Windows NT AMD64 Level 6 (Mod 63 Step 2), Operating_system: Windows NT 10.0, Kernel_release: 711 patchlevel 10
+ Hostname: TLHDO1, IP address: 10.0.0.44, IP address_v6: 10.0.0.44
+
+connection closed without message (CM_NO_DATA_RECEIVED)

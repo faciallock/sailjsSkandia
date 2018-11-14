@@ -591,17 +591,17 @@ export default class OrderView extends PureComponent {
                     )
                 }
             },
-            /* {
+             {
                 title: 'Total Price',
-                dataIndex: 'NETWR',
-                key: 'NETWR',
+                dataIndex: 'GRAND_TOTAL',
+                key: 'GRAND_TOTAL',
                 render: (record) => {
                     let currentTotalPrice=record!=="" ? "$"+parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
                     return (
                         <span>{ currentTotalPrice }</span>
                     )
                 }
-            }, */
+            }, 
             {
                 title: 'Status',
                 dataIndex: 'IND',

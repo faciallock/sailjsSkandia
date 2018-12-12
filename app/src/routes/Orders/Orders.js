@@ -607,9 +607,10 @@ export default class OrderView extends PureComponent {
                 dataIndex: 'IND',
                 key: 'IND',
                 render: (text, record) => {
-                    
-                    let value = text === 'C'? "Confirmed":"Pending";
-       
+
+                    let value = text === 'C'? "Confirmed":text === 'I'? "Invoiced":text === 'B'? "Batched":text === 'S'? "Shipped":text === 'P'?"Pending":"pend";
+                  
+                   
                     return (
                         <span>{value}</span>
                     )

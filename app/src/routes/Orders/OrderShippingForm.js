@@ -176,7 +176,7 @@ class OrderShippingForm extends Component {
                     <Row gutter={12}>
                         <Col lg={8} md={24} sm={24}>
                             <Form.Item label="Packed Date">
-                                <label ></label>
+                                <label ><b>{data.EX_PACKDATE}</b></label>
                             </Form.Item>
                         </Col>
                         <Col lg={8} md={24} sm={24}>

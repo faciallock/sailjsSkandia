@@ -608,7 +608,7 @@ export default class OrderView extends PureComponent {
                 key: 'IND',
                 render: (text, record) => {
 
-                    let value = text === 'C'? "Confirmed":text === 'I'? "Invoiced":text === 'B'? "Batched":text === 'S'? "Shipped":text === 'P'?"Pending":"pend";
+                    let value = text === 'A'? "Not Batched":text === 'B'? "Partially Batched":text === 'C'? "Completely Batched":text === 'D'? "Not relavent for shipping":text === 'E'?"Partially shipped":text === 'F'?"Shipped Completely":text === 'G'?"Not Relavant for Invoice":text === 'H'?"Partially invoiced":text === 'I'?"Fully Invoiced":text === 'J'?"Credit Hold":text === 'K'?"Customer Service Hold":text === 'L'?"Inventory Hold":"Pending";
                   
                    
                     return (

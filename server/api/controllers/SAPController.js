@@ -344,7 +344,7 @@ module.exports = {
                         var readStream = new stream.PassThrough();
                         readStream.end(fileContents);
 
-                        res.set("Content-disposition", "attachment; filename='" + req.param('orderId') + ".pdf'");
+                        res.set("Content-disposition", "attachment; filename=" + req.param('orderId') + ".pdf");
                         res.set('Content-Type', 'application/pdf');
 
                         readStream.pipe(res);

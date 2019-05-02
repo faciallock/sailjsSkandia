@@ -572,6 +572,18 @@ export default class OrderView extends PureComponent {
 
             },
             {
+                title: 'Shipped Date',
+                dataIndex: 'WADAT_IST',
+                key: 'WADAT_IST',
+                render: (text, record) => {
+                                       
+                    return (
+                        <span>{text!=="00000000"? moment(text).format("MM/DD/YYYY"): ""}</span> 
+                    )
+                }
+
+            },
+            {
                 title: 'Name',
                 dataIndex: 'NAME1',
                 key: 'NAME1'
@@ -664,6 +676,18 @@ export default class OrderView extends PureComponent {
                                        
                     return (
                         <span>{moment(text).format("MM/DD/YYYY")}</span> 
+                    )
+                }
+
+            },
+            {
+                title: 'Shipped Date',
+                dataIndex: 'WADAT_IST',
+                key: 'WADAT_IST',
+                render: (text, record) => {
+                                       
+                    return (
+                        <span>{text!=="00000000"? moment(text).format("MM/DD/YYYY"): ""}</span> 
                     )
                 }
 

@@ -102,7 +102,7 @@ export default class OrderView extends PureComponent {
                 userType: localStorage.getItem('userType'), 
             },
         });
-
+        
         this.props.dispatch({
             type: 'orders/getUserType',
             payload: {

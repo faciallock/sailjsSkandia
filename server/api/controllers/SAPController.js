@@ -4,395 +4,411 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-var rfc = require('node-rfc');
-/* var abapSystem = {
-    user: 'amurugesan',
-    passwd: 'amurugesan9',
-    ashost: '10.0.0.25',
-    sysnr: '00',
-    client: '330',
-    saprouter: ''
-}; */
-var abapSystem = {
-    user: process.env.user,
-    passwd: process.env.passwd,
-    ashost: process.env.ashost,
-    sysnr: process.env.sysnr,
-    client: process.env.client,
-    saprouter: ''
-
-}
-
-// create new client
-var client = new rfc.Client(abapSystem);
-client.connect(function (err) {
-    if (err) { // check for login/connection errors
-        return console.error('could not connect to server', err);
-    } else {
-        return console.error('Connected');
-    }
+let client = SAPAdapter.getClient();
 
 
+function getRoles(userType) {
+  switch (userType) {
+    case "C":
+      return {
+        orders: {
+            c: true,
+            r: true,
+            u: true,
+            d: true
+          },
+          comments: {
+            c: true,
+            r: true,
+            u: true,
+            d: true
+          }
+      }
 
-});
-function getRoles(userType){
-    switch (userType) {
-        case "C":
-        return {
-            orders:{
-                c:true,
-                r:true,
-                u:true,
-                d:true
-            },
-            comments:{
-                c: true,
-                r: true,
-                u: true,
-                d: true
-            }
-        }
-            
-            break;
-    
-        default:
-            break;
-    }
-    return [{ test: 'test' }]
+      break;
+
+    default:
+      break;
+  }
+  return [{
+    test: 'test'
+  }]
 }
 module.exports = {
-    login: async function (req, res) {
-        let roles=[];
-        try{
-            if (!req.param('userId') && !req.param('password')) {
-            return res.badRequest({ err: 'bad request params missing' })
+  login: async function (req, res) {
+    let roles = [];
 
-        }
-            client.invoke('ZSDJ_USER_VALIDATION_REACTX',
-            { USER_ID: req.param('userId'), PASSWORD: req.param('password') },
-            //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
-            function (err, response) {
-                if (err) {
-                    console.error('Error invoking STFC_STRUCTURE:', err);
+    try {
+      if (!req.param('userId') && !req.param('password')) {
+        return res.badRequest({
+          err: 'bad request params missing'
+        })
 
-                    client.close();
-                    client.connect(function (err) {
-                        if (err) {
-                            console.error('could not connect to server', err);
-                        } else {
-                            console.error('Connected');
-                        }
-                    });
-                    return res.serverError({msg:"Error"});
-                }
-                
-                if (response.EMESSAGE ==="Authentication failed"){
-                    res.status(401);
-                    return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
-                    
+      }
+      await client.open();
+      let isAlive = await client.ping();
+      if (isAlive) {
+        let response = await client.call(
+          'ZSDJ_USER_VALIDATION_REACTX', {
+            USER_ID: req.param('userId'),
+            PASSWORD: req.param('password')
+          }
+        );
 
-                }else{
 
-                    if (response.EMESSAGE ==="No Sales Order Bom exist"){
+        if (response.EMESSAGE === "Authentication failed") {
+          res.status(401);
+          return res.send({
+            err: 'unauthorized',
+            token: "",
+            currentAuthority: "admin"
+          });
 
-                        res.status(401);
-                        return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
 
-                    }
-                    else{
-                        const token = JWTService.issuer({ user: response.USER_ID }, '1 day');
-                        console.log(response);
-                        let currentAuthority="user";
-                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="D" || response.USER_TYPE==="C"){
-                            currentAuthority="admin";
-                        }
-                    
-                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
+        } else {
 
-                    }
-                    
-                    
-                }
-                
-            }); 
-        }
-        catch (err) {
-            return res.serverError(err);
-        }
-       
-    },
-    validateToken: async function (req, res) {
-        let roles=[];
-        console.log(req.connection.remoteAddress);
-        console.log(req.param('token'));
-        try{
-            if (!req.param('token') ) {
-                return res.badRequest({ err: 'bad request params missing' })
+          if (response.EMESSAGE === "No Sales Order Bom exist") {
 
+            res.status(401);
+            return res.send({
+              err: 'unauthorized',
+              token: "",
+              currentAuthority: "admin"
+            });
+
+          } else {
+            const token = JWTService.issuer({
+              user: response.USER_ID
+            }, '1 day');
+            console.log(response);
+            let currentAuthority = "user";
+            if (response.USER_TYPE === "S" || response.USER_TYPE === "M" || response.USER_TYPE === "D" || response.USER_TYPE === "C") {
+              currentAuthority = "admin";
             }
 
-            //const token = JWTService.issuer({ user: req.param('userId') }, '2 day');
+            return res.ok({
+              msg: response,
+              roles: getRoles(response.USER_TYPE),
+              token: token,
+              currentAuthority
+            })
 
-            client.invoke('ZSDJ_USER_VAL_TOKEN_SSO_REACT',
-            { TOKEN_SSO:req.param('token')},
-            //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
-            function (err, response) {
-                if (err) {
-                    console.error('Error invoking STFC_STRUCTURE:', err);
+          }
 
-                    client.close();
-                    client.connect(function (err) {
-                        if (err) {
-                            console.error('could not connect to server', err);
-                        } else {
-                            console.error('Connected');
-                        }
-                    });
-                    return res.serverError({msg:"Error"});
-                }
-                console.log(response);
-                
-                if (response.EMESSAGE ==="Authentication failed"){
-                    res.status(401);
-                    return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
-                    
 
-                }else{
-
-                    if (response.EMESSAGE ==="No Sales Order Bom exist"){
-
-                        res.status(401);
-                        return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
-
-                    }
-                    else{
-                        const token = JWTService.issuer({ user: response.USER_ID }, '2 day');
-                        console.log(response);
-                        let currentAuthority="user";
-                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="D" || response.USER_TYPE==="C"){
-                            currentAuthority="admin";
-                        }
-                    
-                        return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
-                        //return res.ok({ token })
-
-                    }
-                    
-                    
-                }
-                
-            }); 
-        }
-        catch (err) {
-            return res.serverError(err);
-        }
-       
-    },
-    getDealerSSO: async function (req, res) {
-        let roles=[];
-        console.log(req.connection.remoteAddress);
-        console.log(req.param('userId'));
-        try{
-            if (!req.param('userId') ) {
-                return res.badRequest({ err: 'bad request params missing' })
-
-            }
-
-            const token = JWTService.issuer({ user: req.param('userId') }, '2 day');
-            console.log(token);
-            client.invoke('ZSDJ_DEAL_VALIDATION_SSO_REACT',
-            { USER_ID: req.param('userId'),TOKEN_SSO:token},
-            //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
-            function (err, response) {
-                if (err) {
-                    console.error('Error invoking STFC_STRUCTURE:', err);
-
-                    client.close();
-                    client.connect(function (err) {
-                        if (err) {
-                            console.error('could not connect to server', err);
-                        } else {
-                            console.error('Connected');
-                        }
-                    });
-                    return res.serverError({msg:"Error"});
-                }
-                console.log(response);
-                
-                if (response.EMESSAGE ==="Authentication failed"){
-                    res.status(401);
-                    return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
-                    
-
-                }else{
-
-                    if (response.EMESSAGE ==="No Sales Order Bom exist"){
-
-                        res.status(401);
-                        return res.send({ err: 'unauthorized', token: "", currentAuthority: "admin"});
-
-                    }
-                    else{
-                        const token = JWTService.issuer({ user: response.USER_ID }, '2 day');
-                        console.log(response);
-                        let currentAuthority="user";
-                        if(response.USER_TYPE==="S" || response.USER_TYPE==="M" || response.USER_TYPE==="D" || response.USER_TYPE==="C"){
-                            currentAuthority="admin";
-                        }
-                    
-                        //return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
-                        return res.ok({ token })
-
-                    }
-                    
-                    
-                }
-                
-            }); 
-        }
-        catch (err) {
-            return res.serverError(err);
-        }
-       
-    },
-    fetchType: async function (req, res) {
-        let data={};
-        try {
-            if (!req.param('userId') && !req.param('password')) {
-                return res.badRequest({ err: 'bad request params missing' })
-
-            }
-            client.invoke('ZSDJ_USER_TYPE_REACT',
-                { USER_ID: req.param('userId') },
-                //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
-                function (err, response) {
-                    if (err) {
-                        //return console.error('Error invoking STFC_STRUCTURE:', err);
-                        client.close();
-                        client.connect(function (err) {
-                            if (err) {
-                                console.error('could not connect to server', err);
-                            } else {
-                                console.error('Connected');
-                            }
-                        });
-                    }
-                    console.log(response);
-                    //console.log(response.USER_TYPE);
-                    let roles={};
-                    let userType= (typeof response !== undefined) ? "" : response.USER_TYPE;  
-                    switch (userType) {
-                        case "C":
-                            roles = { comments: { c: false, r: true, u: true, d: true } };
-                            break;
-                        case "D":
-                            roles = { comments: { c: true, r: true, u: true, d: true } };
-                            break;
-                        default:
-                            break;
-                    }
-                    data={user: response,roles};
-                    return res.ok({ data })
-                    
-
-                });
-        }
-        catch (err) {
-            return res.serverError(err);
         }
 
-    },
-
-    printFile: async function (req, res) {
-        let data={};
-        try {
-
-            if (!req.param('orderId') ) {
-             
-                return res.badRequest({ err: 'Params missing' })
-
-            }
-            
-            client.invoke('Z_PRINT_ORDER_BY_ID',
-                //{ USER_ID: req.param('userId') },
-                //{ USER_ID: 'BOVERTON', PASSWORD: 'SAPTEST', IM_CSR: 'C' },
-                { ORDER_ID: req.param('orderId') },
-                function (err, response) {
-                    if (err) {
-                        //return console.error('Error invoking STFC_STRUCTURE:', err);
-                        client.close();
-                        client.connect(function (err) {
-                            if (err) {
-                                console.error('could not connect to server', err);
-                            } else {
-                                console.error('Connected');
-                            }
-                        });
-                    }
-
-                    console.log(response);
-
-                    if( response && response.FILE){
-
-                        console.log(response.FILE);
-
-                        var stream = require('stream');
-                        var fileContents = Buffer.from(response.FILE, 'base64'); // 
-
-                        
-
-                        var readStream = new stream.PassThrough();
-                        readStream.end(fileContents);
-
-                        res.set("Content-disposition", "attachment; filename=" + req.param('orderId') + ".pdf");
-                        res.set('Content-Type', 'application/pdf');
-
-                        readStream.pipe(res);
 
 
-                        
-                        //res.pipe(binary, 'binary');
-                        //return res.ok({ response.FILE });
+      } else {
+        return res.serverError({
+          msg: "Backend is down!"
+        });
+      }
 
-                    }else{
-                        return res.ok({ data: "NO FILE FOUND" });
-                    }
-
-
-                    
-                    
-
-                });
-        }
-        catch (err) {
-            return res.serverError(err);
-        }
-
-    },
-    currentUser: async function(req, res){
-        const payload = {
-            $desc: "",
-            $params: {
-                pageSize: {
-                    desc: 'test',
-                    exp: 2,
-                },
-            },
-            $body: {
-                name: 'Serati Ma',
-                avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
-                userid: '00000001',
-                notifyCount: 12,
-            },
-            name: 'Skandia User',
-            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
-            userid: '00000001',
-            notifyCount: 12
-        };
-        return res.ok(payload);
-
+    } catch (e) {
+      SAPAdapter.showError(e);
+      return res.serverError({
+        msg: e.key
+      })
     }
+
+
+  },
+  validateToken: async function (req, res) {
+    let roles = [];
+    //console.log(req.connection.remoteAddress);
+    console.log(req.param('token'));
+    try {
+      if (!req.param('token')) {
+        return res.badRequest({
+          err: 'bad request params missing'
+        })
+
+      }
+      await client.open();
+      let isAlive = await client.ping();
+      if (isAlive) {
+        let response = await client.call(
+          'ZSDJ_USER_VAL_TOKEN_SSO_REACT', {
+            TOKEN_SSO: req.param('token')
+          }
+        );
+        if (response.EMESSAGE === "Authentication failed") {
+          res.status(401);
+          return res.send({
+            err: 'unauthorized',
+            token: "",
+            currentAuthority: "admin"
+          });
+
+
+        } else {
+
+          if (response.EMESSAGE === "No Sales Order Bom exist") {
+
+            res.status(401);
+            return res.send({
+              err: 'unauthorized',
+              token: "",
+              currentAuthority: "admin"
+            });
+
+          } else {
+            const token = JWTService.issuer({
+              user: response.USER_ID
+            }, '2 day');
+            console.log(response);
+            let currentAuthority = "user";
+            if (response.USER_TYPE === "S" || response.USER_TYPE === "M" || response.USER_TYPE === "D" || response.USER_TYPE === "C") {
+              currentAuthority = "admin";
+            }
+
+            return res.ok({
+              msg: response,
+              roles: getRoles(response.USER_TYPE),
+              token: token,
+              currentAuthority
+            })
+            //return res.ok({ token })
+
+          }
+
+
+        }
+      } else {
+        return res.serverError({
+          msg: "Backend is down!"
+        });
+      }
+
+    } catch (e) {
+      SAPAdapter.showError(e);
+      return res.serverError({
+        msg: e.key
+      })
+    }
+
+
+
+  },
+  getDealerSSO: async function (req, res) {
+    console.log(req.param('userId'));
+    try {
+      if (!req.param('userId')) {
+        return res.badRequest({
+          err: 'bad request params missing'
+        })
+
+      }
+      const token = JWTService.issuer({
+        user: req.param('userId')
+      }, '2 day');
+      await client.open();
+      let isAlive = await client.ping();
+      if (isAlive) {
+        let response = await client.call(
+          'ZSDJ_DEAL_VALIDATION_SSO_REACT', {
+            USER_ID: req.param('userId'),
+            TOKEN_SSO: token
+          }
+        );
+        if (response.EMESSAGE === "Authentication failed") {
+          res.status(401);
+          return res.send({
+            err: 'unauthorized',
+            token: "",
+            currentAuthority: "admin"
+          });
+
+
+        } else {
+
+          if (response.EMESSAGE === "No Sales Order Bom exist") {
+
+            res.status(401);
+            return res.send({
+              err: 'unauthorized',
+              token: "",
+              currentAuthority: "admin"
+            });
+
+          } else {
+            const token = JWTService.issuer({
+              user: response.USER_ID
+            }, '2 day');
+            console.log(response);
+            let currentAuthority = "user";
+            if (response.USER_TYPE === "S" || response.USER_TYPE === "M" || response.USER_TYPE === "D" || response.USER_TYPE === "C") {
+              currentAuthority = "admin";
+            }
+
+            //return res.ok({ msg: response, roles: getRoles(response.USER_TYPE), token: token, currentAuthority })
+            return res.ok({
+              token
+            })
+
+          }
+
+
+        }
+      } else {
+        return res.serverError({
+          msg: "Backend is down!"
+        });
+      }
+
+    } catch (e) {
+      SAPAdapter.showError(e);
+      return res.serverError({
+        msg: e.key
+      })
+    }
+
+  },
+  fetchType: async function (req, res) {
+      let data;
+    try {
+        if (!req.param('userId') && !req.param('password')) {
+            return res.badRequest({
+              err: 'bad request params missing'
+            })
+    
+          }
+        await client.open();
+        let isAlive = await client.ping();
+        if (isAlive) {
+          let response = await client.call(
+            'ZSDJ_USER_TYPE_REACT', {
+                USER_ID: req.param('userId')
+              }
+          );
+          let roles = {};
+          let userType = (typeof response !== undefined) ? "" : response.USER_TYPE;
+          switch (userType) {
+            case "C":
+              roles = {
+                comments: {
+                  c: false,
+                  r: true,
+                  u: true,
+                  d: true
+                }
+              };
+              break;
+            case "D":
+              roles = {
+                comments: {
+                  c: true,
+                  r: true,
+                  u: true,
+                  d: true
+                }
+              };
+              break;
+            default:
+              break;
+          }
+          data = {
+            user: response,
+            roles
+          };
+          return res.ok({
+            data
+          });
+        } else {
+          return res.serverError({
+            msg: "Backend is down!"
+          });
+        }
   
+      } catch (e) {
+        SAPAdapter.showError(e);
+        return res.serverError({
+          msg: e.key
+        })
+      }
+
+  },
+
+  printFile: async function (req, res) {
+    try {
+        if (!req.param('orderId')) {
+            return res.badRequest({
+              err: 'Params missing'
+            })
+          }
+        await client.open();
+        let isAlive = await client.ping();
+        if (isAlive) {
+          let response = await client.call(
+            'Z_PRINT_ORDER_BY_ID', {
+                ORDER_ID: req.param('orderId')
+              }
+          );
+          if (response && response.FILE) {
+
+            console.log(response.FILE);
+
+            var stream = require('stream');
+            var fileContents = Buffer.from(response.FILE, 'base64'); // 
+
+
+
+            var readStream = new stream.PassThrough();
+            readStream.end(fileContents);
+
+            res.set("Content-disposition", "attachment; filename=" + req.param('orderId') + ".pdf");
+            res.set('Content-Type', 'application/pdf');
+
+            readStream.pipe(res);
+
+
+
+            //res.pipe(binary, 'binary');
+            //return res.ok({ response.FILE });
+
+          } else {
+            return res.ok({
+              data: "NO FILE FOUND"
+            });
+          }
+        } else {
+          return res.serverError({
+            msg: "Backend is down!"
+          });
+        }
+  
+      } catch (e) {
+        SAPAdapter.showError(e);
+        return res.serverError({
+          msg: e.key
+        })
+      }
+  },
+  currentUser: async function (req, res) {
+    const payload = {
+      $desc: "",
+      $params: {
+        pageSize: {
+          desc: 'test',
+          exp: 2,
+        },
+      },
+      $body: {
+        name: 'Serati Ma',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+        userid: '00000001',
+        notifyCount: 12,
+      },
+      name: 'Skandia User',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+      userid: '00000001',
+      notifyCount: 12
+    };
+    return res.ok(payload);
+
+  }
+
 
 };
-

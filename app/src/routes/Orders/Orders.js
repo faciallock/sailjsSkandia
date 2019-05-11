@@ -1015,7 +1015,7 @@ export default class OrderView extends PureComponent {
                                 dataSource={orders}
                                 columns={columns}
                                 size="small"
-                                scroll={{ x: 1200 }}
+                                scroll={{ x: 1400 }}
                                 rowKey={record => record.VBELN}
                                 pagination = {{pageSize: 15}}
                             />

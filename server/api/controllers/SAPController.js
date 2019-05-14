@@ -119,7 +119,7 @@ module.exports = {
   validateToken: async function (req, res) {
     let roles = [];
     //console.log(req.connection.remoteAddress);
-    console.log(req.param('token'));
+    console.log({"token":req.param('token')});
     try {
       if (!req.param('token')) {
         return res.badRequest({
@@ -160,7 +160,8 @@ module.exports = {
             const token = JWTService.issuer({
               user: response.USER_ID
             }, '2 day');
-            console.log(response);
+            //console.log(response);
+            console.log({"validated":response.CUSTOMER});
             let currentAuthority = "user";
             if (response.USER_TYPE === "S" || response.USER_TYPE === "M" || response.USER_TYPE === "D" || response.USER_TYPE === "C") {
               currentAuthority = "admin";

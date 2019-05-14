@@ -24,6 +24,7 @@ module.exports = {
         });
 
       }
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -53,6 +54,7 @@ module.exports = {
   getBOM: async function (req, res) {
 
     try {
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -104,6 +106,7 @@ module.exports = {
       console.log({
         objectSearch
       });
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -130,6 +133,7 @@ module.exports = {
   },
   getPromotionList: async function (req, res) {
     try {
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -158,6 +162,7 @@ module.exports = {
   },
   getPromotionDetails: async function (req, res) {
     try {
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -192,6 +197,7 @@ module.exports = {
   getInventory: async function (req, res) {
 
     try {
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -229,6 +235,7 @@ module.exports = {
         });
       
       }
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -281,6 +288,7 @@ module.exports = {
         })
 
       }
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -321,6 +329,7 @@ module.exports = {
         });
 
       }
+      let client = SAPAdapter.getClient();
       await client.open();
 
       let isAlive = await client.ping();
@@ -340,10 +349,7 @@ module.exports = {
 
     } catch (e) {
       SAPAdapter.showError(e);
-      if(e.key=="RFC_COMMUNICATION_FAILURE"){
-        let test= await SAPAdapter.resetConn(client);
-        console.log(test)
-      }
+      
       return res.serverError({
         msg: e.key
       })

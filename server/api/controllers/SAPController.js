@@ -161,7 +161,9 @@ module.exports = {
               user: response.USER_ID
             }, '2 day');
             //console.log(response);
-            console.log({"validated":response.CUSTOMER});
+            //console.log({"validated":response.CUSTOMER});
+
+            SAPAdapter.showMessage("validated", response.CUSTOMER)
             let currentAuthority = "user";
             if (response.USER_TYPE === "S" || response.USER_TYPE === "M" || response.USER_TYPE === "D" || response.USER_TYPE === "C") {
               currentAuthority = "admin";
@@ -241,7 +243,9 @@ module.exports = {
             const token = JWTService.issuer({
               user: response.USER_ID
             }, '2 day');
-            console.log({"authenticated":response.CUSTOMER});
+           // console.log({"authenticated":response.CUSTOMER});
+
+            SAPAdapter.showMessage("authenticated", response.CUSTOMER)
             let currentAuthority = "user";
             if (response.USER_TYPE === "S" || response.USER_TYPE === "M" || response.USER_TYPE === "D" || response.USER_TYPE === "C") {
               currentAuthority = "admin";
@@ -355,6 +359,7 @@ module.exports = {
           if (response && response.FILE) {
 
             console.log({"Order ID Downloaded": response.ORDER_ID});
+            
 
             var stream = require('stream');
             var fileContents = Buffer.from(response.FILE, 'base64'); // 

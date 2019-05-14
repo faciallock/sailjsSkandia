@@ -32,3 +32,10 @@ module.exports.showError= function (exception) {
     let error=moment().utc().tz('America/Detroit').toString() +" | "+exception.key;
     console.log({error});
 }
+module.exports.showMessage= function (label, msg) {
+   // let error= +" | "+exception.key;
+   let info=`{"${label}": "${msg}","time":"${moment().utc().tz('America/Detroit').toString()}"}`;
+
+    console.log(JSON.parse(info));
+    //console.log({error});
+}

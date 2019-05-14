@@ -45,6 +45,7 @@ module.exports = {
         })
 
       }
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -126,6 +127,7 @@ module.exports = {
         })
 
       }
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -204,6 +206,7 @@ module.exports = {
       const token = JWTService.issuer({
         user: req.param('userId')
       }, '2 day');
+      let client = SAPAdapter.getClient();
       await client.open();
       let isAlive = await client.ping();
       if (isAlive) {
@@ -237,7 +240,7 @@ module.exports = {
             const token = JWTService.issuer({
               user: response.USER_ID
             }, '2 day');
-            console.log(response);
+            console.log({"authenticated":response.CUSTOMER});
             let currentAuthority = "user";
             if (response.USER_TYPE === "S" || response.USER_TYPE === "M" || response.USER_TYPE === "D" || response.USER_TYPE === "C") {
               currentAuthority = "admin";
@@ -275,7 +278,8 @@ module.exports = {
             })
     
           }
-        await client.open();
+        let client = SAPAdapter.getClient();
+          await client.open();
         let isAlive = await client.ping();
         if (isAlive) {
           let response = await client.call(
@@ -338,7 +342,8 @@ module.exports = {
               err: 'Params missing'
             })
           }
-        await client.open();
+        let client = SAPAdapter.getClient();
+          await client.open();
         let isAlive = await client.ping();
         if (isAlive) {
           let response = await client.call(
@@ -348,7 +353,7 @@ module.exports = {
           );
           if (response && response.FILE) {
 
-            console.log(response.FILE);
+            console.log({"Order ID Downloaded": response.ORDER_ID});
 
             var stream = require('stream');
             var fileContents = Buffer.from(response.FILE, 'base64'); // 

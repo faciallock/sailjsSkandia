@@ -322,8 +322,9 @@ module.exports = {
 
       }
       await client.open();
+
       let isAlive = await client.ping();
-      if (isAlive) {
+      if (isAlive && client.isAlive) {
         let result = await client.call(
           'ZGET_PENDING_SORDERS_CUSTOMERX', { IM_IND: req.query.imInd, IM_CUSTNO: '', IM_USERNAME: req.query.userName}
         );
@@ -331,6 +332,7 @@ module.exports = {
           msg: result
         });
       } else {
+        
         return res.serverError({
           msg: "Backend is down!"
         });
@@ -338,6 +340,10 @@ module.exports = {
 
     } catch (e) {
       SAPAdapter.showError(e);
+      if(e.key=="RFC_COMMUNICATION_FAILURE"){
+        let test= await SAPAdapter.resetConn(client);
+        console.log(test)
+      }
       return res.serverError({
         msg: e.key
       })

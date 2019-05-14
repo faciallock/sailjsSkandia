@@ -534,7 +534,7 @@ export default class OrderView extends PureComponent {
                 dataIndex: 'VBELN',
                 key: 'VBELN',
                 fixed: 'left',
-                width: 110,
+                width: 80,
 				render: (text, record) => {
                     
                     let value = text.replace(/^0+/, '');
@@ -631,7 +631,7 @@ export default class OrderView extends PureComponent {
                 title: 'Action',
                 key: 'operation',
                 fixed: 'right',
-                width: 160,
+                width: 125,
                 render: (text, record) => {
                        
                     
@@ -654,7 +654,7 @@ export default class OrderView extends PureComponent {
                 dataIndex: 'VBELN',
                 key: 'VBELN',
                 fixed: 'left',
-                width: 110,
+                width: 80,
                 render: (text, record) => {
                     
                     let value = text.replace(/^0+/, '');
@@ -721,7 +721,7 @@ export default class OrderView extends PureComponent {
                 title: 'Action',
                 key: 'operation',
                 fixed: 'right',
-                width: 160,
+                width: 125,
                 render: (text, record) => {
                     
                     return (

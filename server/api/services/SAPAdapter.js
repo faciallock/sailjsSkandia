@@ -14,6 +14,19 @@ const abapSystem = {
 module.exports.getClient= function () {
     return new rfc(abapSystem);
 }
+module.exports.resetConn= function (client) {
+    return new Promise(function (resolve, reject) {
+        client.connect((err)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(client);
+    
+          });
+    });
+    
+}
+
 
 module.exports.showError= function (exception) {
     let error=moment().utc().tz('America/Detroit').toString() +" | "+exception.key;

@@ -3,20 +3,20 @@ export class zhz extends React.PureComponent {
 
     
     static renderLineItems=(data)=>{
-        data.EX_ITEMS.map((item) => {
+        data.EX_ITEMS.map((item,index) => {
             let aType = ["HZB"]
 
-            let itemExConfigColor = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_COLOR` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigWidth = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_WIDTH` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigLength = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LENGTH` && itemConfig.ITEMNO === item.ITEMNO });
+            let itemExConfigColor = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_COLOR` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigWidth = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_WIDTH` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigLength = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LENGTH` && parseInt(itemConfig.ITEMNO) === (index + 1) });
 
-            let itemExConfigBracketMount = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_BRACKET_SH` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigBracketTilter = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_TILTER` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigBracketLiftCords = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_CORDS` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigExtensionBrackets = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_EXTB` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfig2or3 = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_2ON1` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigLadder = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LADDER_TAPE` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigCutDownItem = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_CUT` && itemConfig.ITEMNO === item.ITEMNO });
+            let itemExConfigBracketMount = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_BRACKET_SH` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigBracketTilter = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_TILTER` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigBracketLiftCords = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_CORDS` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigExtensionBrackets = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_EXTB` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfig2or3 = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_2ON1` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigLadder = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LADDER_TAPE` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigCutDownItem = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_CUT` && parseInt(itemConfig.ITEMNO) === (index + 1) });
 
             
             let itemExCondGrossPrice = data.EX_CONDITIONS.find((itemCond) => { return itemCond.COND_TYP == `ZPR0` && itemCond.ITEMNO === parseInt(item.ITEMNO) });

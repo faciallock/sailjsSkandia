@@ -3,21 +3,21 @@ export class zsh extends React.PureComponent {
 
     
     static renderLineItems=(data)=>{
-        data.EX_ITEMS.map((item) => {
+        data.EX_ITEMS.map((item,index) => {
             let aType = item.CLASS.split('_')
 
-            let itemExConfigColor = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_COLOR` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigWidth = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_WIDTH` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigLength = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LENGTH` && itemConfig.ITEMNO === item.ITEMNO });
+            let itemExConfigColor = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_COLOR` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigWidth = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_WIDTH` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigLength = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LENGTH` && parseInt(itemConfig.ITEMNO) === (index + 1) });
 
-            let itemExConfigFrame = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_FRAME` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigArch = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_ARCH` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigLouerSize = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LOUVER_SIZE` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigHinges = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_HINGES` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigMount = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_BRACKET_SH` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigPreDrill = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_SHUT_PRE_MAGNET_DRILL` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigClearView = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_CLEAR_VIEW` && itemConfig.ITEMNO === item.ITEMNO });
-            let itemExConfigSquareFeet = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_PRICE_VINYL` && itemConfig.ITEMNO === item.ITEMNO });
+            let itemExConfigFrame = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_FRAME` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigArch = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_ARCH` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigLouerSize = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_LOUVER_SIZE` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigHinges = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_HINGES` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigMount = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_BRACKET_SH` && parseInt(itemConfig.ITEMNO) ===(index + 1) });
+            let itemExConfigPreDrill = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_SHUT_PRE_MAGNET_DRILL` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigClearView = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_CLEAR_VIEW` && parseInt(itemConfig.ITEMNO) === (index + 1) });
+            let itemExConfigSquareFeet = data.EX_CONFIG.find((itemConfig) => { return itemConfig.CHAR_NAME == `${aType[0]}_PRICE_VINYL` && parseInt(itemConfig.ITEMNO) === (index + 1) });
             
             let itemExCondGrossPrice = data.EX_CONDITIONS.find((itemCond) => { return itemCond.COND_TYP == `ZPR0` && itemCond.ITEMNO === parseInt(item.ITEMNO) });
             //let aDiscount=data.EX_CONDITIONS.filter((itemCond) => { return itemCond.COND_TYP === "ZBD1" || itemCond.COND_TYP === "ZBD2" || itemCond.COND_TYP === "ZBD3" || itemCond.COND_TYP === "ZBD4" })

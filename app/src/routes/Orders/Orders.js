@@ -608,6 +608,64 @@ export default class OrderView extends PureComponent {
                     key: 'BSTNK'
                 },
                 {
+                    title: 'Credits Issued',
+                    dataIndex: 'VBTYP',
+                    key: 'VBTYP',
+                    render: (text, record) => {
+                        let value = "";
+
+                        // if (text !== "") {
+                        //     console.log("no empty value ")
+                        // }
+                        switch (text) {
+                            case "A":
+                                value = "Inquiry";
+                                break;
+                            case "B":
+                                value = "Quotation";
+                                break;
+                            case "C":
+                                value = "Order";
+                                break;
+                            case "D":
+                                value = "Item proposal";
+                                break;
+                            case "E":
+                                value = "Scheduling agreement";
+                                break;
+                            case "F":
+                                value = "Scheduling agreement with external servic";
+                                break;
+                            case "G":
+                                value = "Contrast";
+                                break;
+                            case "H":
+                                value = "Returns";
+                                break;
+                            case "I":
+                                value = "Order w/o charge";
+                                break;
+                            case "K":
+                                value = "Credit memo request";
+                                break;
+                            case "L":
+                                value = "Debit memo request";
+                                break;
+                            case "W":
+                                value = "Independents reqts plan";
+                                break;
+                            case "0":
+                                value = "Master contact";
+                                break;
+                            default:
+                                break;
+                        }
+                        return (
+                            <span>{value}</span>
+                        )
+                    }
+                },
+                {
                     title: 'Cust No',
                     dataIndex: 'KUNNR',
                     key: 'KUNNR',
@@ -727,6 +785,65 @@ export default class OrderView extends PureComponent {
                     title: 'Sidemark/PO',
                     dataIndex: 'BSTNK',
                     key: 'BSTNK'
+                },
+                {
+                    title: 'Credits Issued',
+                    dataIndex: 'VBTYP',
+                    key: 'VBTYP',
+                    render: (text, record) => {
+                        let value = "";
+
+                        if (text !== "") {
+                            console.log("no empty value ")
+                        }
+                        switch (text) {
+                            case "A":
+                                value = "Inquiry";
+                                break;
+                            case "B":
+                                value = "Quotation";
+                                break;
+                            case "C":
+                                value = "Order";
+                                break;
+                            case "D":
+                                value = "Item proposal";
+                                break;
+                            case "E":
+                                value = "Scheduling agreement";
+                                break;
+                            case "F":
+                                value = "Scheduling agreement with external servic";
+                                break;
+                            case "G":
+                                value = "Contrast";
+                                break;
+                            case "H":
+                                value = "Returns";
+                                break;
+                            case "I":
+                                value = "Order w/o charge";
+                                break;
+                            case "K":
+                                value = "Credit memo request";
+                                break;
+                            case "L":
+                                value = "Debit memo request";
+                                break;
+                            case "W":
+                                value = "Independents reqts plan";
+                                break;
+                            case "0":
+                                value = "Master contact";
+                                break;
+                            default:
+                                value = text;
+                                break;
+                        }
+                        return (
+                            <span>{value}</span>
+                        )
+                    }
                 },
                 {
                     title: 'Date',

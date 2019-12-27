@@ -608,7 +608,7 @@ export default class OrderView extends PureComponent {
                     key: 'BSTNK'
                 },
                 {
-                    title: 'Credits Issued',
+                    title: 'Order Type',
                     dataIndex: 'VBTYP',
                     key: 'VBTYP',
                     render: (text, record) => {
@@ -660,6 +660,20 @@ export default class OrderView extends PureComponent {
                             default:
                                 break;
                         }
+                        return (
+                            <span>{value}</span>
+                        )
+                    }
+                },
+                {
+                    title: 'Status',
+                    dataIndex: 'IND',
+                    key: 'IND',
+                    render: (text, record) => {
+
+                        let value = text === 'Y' ? "Pending" : text === 'B' ? "In Production" : text === 'C' ? "In Production" : text === 'E' ? "Shipped" : text === 'F' ? "Shipped" : text === 'H' ? "Invoiced" : text === 'I' ? "Invoiced" : "Pending";
+
+
                         return (
                             <span>{value}</span>
                         )
@@ -733,19 +747,6 @@ export default class OrderView extends PureComponent {
                     }
                 },
                 {
-                    title: 'Status',
-                    dataIndex: 'IND',
-                    key: 'IND',
-                    render: (text, record) => {
-
-                        let value = text === 'Y' ? "Pending" : text === 'B' ? "In Production" : text === 'C' ? "In Production" : text === 'E' ? "Shipped" : text === 'F' ? "Shipped" : text === 'H' ? "Invoiced" : text === 'I' ? "Invoiced" : "Pending";
-
-
-                        return (
-                            <span>{value}</span>
-                        )
-                    }
-                }, {
                     title: 'Action',
                     key: 'operation',
                     fixed: 'right',
@@ -787,7 +788,7 @@ export default class OrderView extends PureComponent {
                     key: 'BSTNK'
                 },
                 {
-                    title: 'Credits Issued',
+                    title: 'Order Type',
                     dataIndex: 'VBTYP',
                     key: 'VBTYP',
                     render: (text, record) => {
@@ -846,6 +847,19 @@ export default class OrderView extends PureComponent {
                     }
                 },
                 {
+                    title: 'Status',
+                    dataIndex: 'IND',
+                    key: 'IND',
+                    render: (text, record) => {
+
+                        let value = text === 'C' ? "Confirmed" : "Pending";
+
+                        return (
+                            <span>{value}</span>
+                        )
+                    }
+                }, 
+                {
                     title: 'Date',
                     dataIndex: 'ERDAT',
                     key: 'ERDAT',
@@ -882,19 +896,7 @@ export default class OrderView extends PureComponent {
                         )
                     }
                 },
-                {
-                    title: 'Status',
-                    dataIndex: 'IND',
-                    key: 'IND',
-                    render: (text, record) => {
-
-                        let value = text === 'C' ? "Confirmed" : "Pending";
-
-                        return (
-                            <span>{value}</span>
-                        )
-                    }
-                }, {
+               {
                     title: 'Action',
                     key: 'operation',
                     fixed: 'right',

@@ -11,6 +11,7 @@ class OrderShippingForm extends Component {
         this.state = {
             visible: false,
             exShipTo:"",
+            exShipTo2:"",
             city:"",
             region:"",
             postCode:""
@@ -63,22 +64,26 @@ class OrderShippingForm extends Component {
         } else {
             data = this.props.data;
             console.log(data.EX_SHIP_TO);
-            let exShipTo,city,region,postCode ="";
+            let exShipTo,exShipTo2,city,region,postCode ="";
             var postCodeTemp;
 
-            if (data.EX_SHIP_TO.length != 0) {
+            if (data.EX_ADDRESS.length != 0) {
 
                 /// extract correct ship to
-                let itemShipTo = data.EX_SHIP_TO.find((itemShipTo) => { return itemShipTo.KUNNR == data.EX_SHIPTOID });
+                let itemShipTo = data.EX_ADDRESS.find((itemShipTo) => { return itemShipTo.KUNNR == data.EX_SHIPTOID && (itemShipTo.PARTNR_ROLE == "WE" || itemShipTo.PARTNR_ROLE == "SH")});
 
                 exShipTo = itemShipTo.STREET;
-                city = itemShipTo.CITY1;
-                region = itemShipTo.REGION;
-                postCodeTemp = itemShipTo.POST_CODE1;
-                postCode = postCodeTemp.split("-")[0];
+                exShipTo2 = itemShipTo.STR_SUPPL1;
+                city = itemShipTo.CITY;
+                // city = itemShipTo.CITY1;
+
+                region = itemShipTo.STATE;
+                postCode = itemShipTo.POST_CODE;
+                // postCodeTemp = itemShipTo.POST_CODE1;
+                // postCode = postCodeTemp.split("-")[0];
                 
-                data.EX_SHIP_TO=[];
-                this.setState({ exShipTo, region, postCode, city });
+                data.EX_ADDRESS=[];
+                this.setState({ exShipTo,exShipTo2, region, postCode, city });
             }
             
         }
@@ -110,7 +115,8 @@ class OrderShippingForm extends Component {
                                 label="Address 2"
                             >
                                 {
-                                    <label ><b></b></label>
+                                    // <label ><b></b></label>
+                                    <label for=""><b>{this.state.exShipTo2}</b></label>
                                 }
                             </Form.Item>
                         </Col>

@@ -217,7 +217,7 @@ export class ZVTColumns {
 
 
 
-        if ( localStorage.getItem('userType') != "D"){
+        // if ( localStorage.getItem('userType') != "D"){
         aColumns.push({
             title: 'BOM',
             dataIndex: 'BOM',
@@ -256,7 +256,7 @@ export class ZVTColumns {
         });
 
 
-    }
+    // }
 
     return aColumns;
         

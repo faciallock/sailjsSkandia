@@ -752,13 +752,23 @@ export default class OrderView extends PureComponent {
                     fixed: 'right',
                     width: 125,
                     render: (text, record) => {
-
-
+                        let showPrint = true;
+                        if (record.IND === "P") {
+                            showPrint = false;
+                        }
+                        if(record.VBELN.indexOf("003") === 0){
+                            showPrint = true;
+                        }
+                        console.log("pending--->")
+                        console.log(record)
                         return (
                             <div>
                                 <a onClick={() => this.showModal(record, orderDetail)} className={"tour_eye_" + record.VBELN}><Icon type="eye-o" /> Show</a>&nbsp;
-                        <a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
-                            </div>
+                                {showPrint &&
+                                    < a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
+                                }
+
+                            </div >
                         )
                     }
                 },
@@ -858,7 +868,7 @@ export default class OrderView extends PureComponent {
                             <span>{value}</span>
                         )
                     }
-                }, 
+                },
                 {
                     title: 'Date',
                     dataIndex: 'ERDAT',
@@ -896,7 +906,7 @@ export default class OrderView extends PureComponent {
                         )
                     }
                 },
-               {
+                {
                     title: 'Action',
                     key: 'operation',
                     fixed: 'right',
@@ -906,7 +916,7 @@ export default class OrderView extends PureComponent {
                         return (
                             <div>
                                 <a onClick={() => this.showModal(record, orderDetail)}><Icon type="eye-o" /> Show</a> &nbsp;
-                        <a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
+                                <a href={'/api/print?orderId=' + record.VBELN} className={"tour_eye_" + record.VBELN}><Icon type="printer" /> Print</a>
                             </div>
                         )
                     }

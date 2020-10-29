@@ -155,7 +155,7 @@ export class ZMSColumns {
         }];
 
 
-        if ( localStorage.getItem('userType') != "D"){
+        // if ( localStorage.getItem('userType') != "D"){
 
 
             aColumns.push({
@@ -199,7 +199,7 @@ export class ZMSColumns {
         
 
 
-    }
+    // }
 
     return aColumns;
         

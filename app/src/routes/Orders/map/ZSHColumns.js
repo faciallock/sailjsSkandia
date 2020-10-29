@@ -97,12 +97,12 @@ export class ZSHColumns {
             title: 'Arch',
             dataIndex: 'ARCH',
             key: 'ARCH',
-            render: (record) => {
-                let archFormatted=record === "" ? "N/A":"";
-                return (
-                    <span>{ archFormatted }</span>
-                )
-            }
+            // render: (record) => {
+            //     let archFormatted=record === "" ? "N/A":"";
+            //     return (
+            //         <span>{ archFormatted }</span>
+            //     )
+            // }
             
         },
         {
@@ -222,7 +222,7 @@ export class ZSHColumns {
                 }
             }];
 
-            if ( localStorage.getItem('userType') != "D"){
+            // if ( localStorage.getItem('userType') != "D"){
             
             
             aColumns.push({
@@ -260,7 +260,7 @@ export class ZSHColumns {
                 }
             });
 
-        }
+        // }
 
         return aColumns;
         

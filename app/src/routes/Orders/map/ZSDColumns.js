@@ -3,7 +3,7 @@ import { Icon, Modal, List, Button } from 'antd';
 import { ModalInfo } from '../components/ModalInfo';
 export class ZSDColumns {
 
-    static getColumns(onSurchargesClick,onBestDiscountClick,onBomClick, onInventoryClick) {
+    static getColumns(onSurchargesClick, onBestDiscountClick, onBomClick, onInventoryClick) {
         var aColumns = [{
             title: 'Line',
             width: 80,
@@ -11,12 +11,12 @@ export class ZSDColumns {
             key: 'ITEMNO',
             fixed: 'left',
             render: (text, record) => {
-                    
+
                 let value = text.replace(/^0+/, '');
                 return (
-                    <span>{value}</span> 
+                    <span>{value}</span>
                 )
-            } 
+            }
         },
         {
             title: 'Product',
@@ -36,7 +36,7 @@ export class ZSDColumns {
             key: 'QUANTITY',
             render: (record) => {
                 return (
-                    <span>{ parseInt(record) }</span>
+                    <span>{parseInt(record)}</span>
                 )
             }
         },
@@ -46,7 +46,7 @@ export class ZSDColumns {
             key: 'WIDTH',
             render: (record) => {
                 return (
-                    <span>{ record===""? "": parseFloat(record).toFixed(2) }</span>
+                    <span>{record === "" ? "" : parseFloat(record).toFixed(2)}</span>
                 )
             }
         },
@@ -56,7 +56,7 @@ export class ZSDColumns {
             key: 'LENGTH',
             render: (record) => {
                 return (
-                    <span>{ record===""? "": parseFloat(record).toFixed(2) }</span>
+                    <span>{record === "" ? "" : parseFloat(record).toFixed(2)}</span>
                 )
             }
         },
@@ -65,9 +65,9 @@ export class ZSDColumns {
             dataIndex: 'BRACKET_SH',
             key: 'BRACKET_SH',
             render: (record) => {
-                let bracketMountFormatted=record === "Inside Mount" ? "IB":"OB";
+                let bracketMountFormatted = record === "Inside Mount" ? "IB" : "OB";
                 return (
-                    <span>{ bracketMountFormatted }</span>
+                    <span>{bracketMountFormatted}</span>
                 )
             }
         },
@@ -106,9 +106,9 @@ export class ZSDColumns {
             dataIndex: 'GROSSPRICE',
             key: 'GROSSPRICE',
             render: (record) => {
-                let currentGrossprice=record!=="" ? "$"+parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
+                let currentGrossprice = record !== "" ? "$" + parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
                 return (
-                    <span>{ currentGrossprice }</span>
+                    <span>{currentGrossprice}</span>
                 )
             }
         },
@@ -119,23 +119,23 @@ export class ZSDColumns {
             key: 'BESTDISCOUNT',
             render: (record) => {
                 console.log(record);
-                let currentDiscount="";
+                let currentDiscount = "";
 
                 record.map((item) => {
-                    let currentNumber= parseFloat(Math.round(item.COND_VAL * 100)/ 100).toFixed(0);
-                    console.log("cond_val"+item.COND_VAL)
-                   // let currentValue = currentNumber + "%";
-                    currentDiscount= currentDiscount+currentNumber+"/";
-                    console.log({currentDiscount})
+                    let currentNumber = parseFloat(Math.round(item.COND_VAL * 100) / 100).toFixed(0);
+                    console.log("cond_val" + item.COND_VAL)
+                    // let currentValue = currentNumber + "%";
+                    currentDiscount = currentDiscount + currentNumber + "/";
+                    console.log({ currentDiscount })
                     item.VALUE = currentDiscount;
                     return item;
 
                 });
                 return (
-                    
-                    
 
-                    <span>{ currentDiscount.substring(0, currentDiscount.length - 1)}</span>
+
+
+                    <span>{currentDiscount.substring(0, currentDiscount.length - 1)}</span>
                 )
             }
         },
@@ -144,9 +144,9 @@ export class ZSDColumns {
             dataIndex: 'ITEMPRICE',
             key: 'ITEMPRICE',
             render: (record) => {
-                let currentLineItem=record!=="" ? "$"+parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
+                let currentLineItem = record !== "" ? "$" + parseFloat(record).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "";
                 return (
-                    <span>{ currentLineItem }</span>
+                    <span>{currentLineItem}</span>
                 )
             }
         },
@@ -193,7 +193,26 @@ export class ZSDColumns {
             }
         }];
 
-        if ( localStorage.getItem('userType') != "D"){
+        // if ( localStorage.getItem('userType') != "D"){
+        // aColumns.push({
+        //     title: 'BOM',
+        //     dataIndex: 'BOM',
+        //     key: 'BOM',
+        //     render: (record) => {
+        //         return (
+
+
+        //             <Button
+        //                 onClick={() => {
+        //                     console.log(record);
+        //                     onBomClick(record.orderId, record.lineItemNumber);
+        //                     // { }
+        //                 }}
+        //                 type="default" icon="eye-o">View</Button>
+        //         )
+        //     }
+        // });
+
         aColumns.push({
             title: 'BOM',
             dataIndex: 'BOM',
@@ -206,9 +225,8 @@ export class ZSDColumns {
                         onClick={() => {
                             console.log(record);
                             onBomClick(record.orderId, record.lineItemNumber);
-                           {}
                         }}
-                        type="default" icon="eye-o">View</Button>
+                        type="default" icon="eye-o"> View</Button>
                 )
             }
         });
@@ -224,15 +242,15 @@ export class ZSDColumns {
                         onClick={() => {
 
                             onInventoryClick(record.orderId)
-                            {}
+                            { }
                         }}
                         type="default" icon="eye-o">View</Button>
                 )
             }
         });
-      }
+        //   }
 
-      return aColumns;
-        
+        return aColumns;
+
     }
 }

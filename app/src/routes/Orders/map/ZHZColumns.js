@@ -219,7 +219,7 @@ export class ZHZColumns {
             }];
 
             
-            if ( localStorage.getItem('userType') != "D"){
+            // if ( localStorage.getItem('userType') != "D"){
 
                 aColumns.push({
                     title: 'BOM',
@@ -256,7 +256,7 @@ export class ZHZColumns {
                     }
                 });
 
-            }
+            // }
 
             return aColumns;
 
